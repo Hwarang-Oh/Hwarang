@@ -1,0 +1,15 @@
+
+public class Movie {
+	String isbn;
+	String title;
+	String author;
+	String publisher;
+	String desc;
+	int price;
+	Movie(String isbn, String title, String author, String publisher, String desc, int price) {
+		
+	}
+	Movie() {
+		
+	}
+}

@@ -1,0 +1,26 @@
+package com.ssafy.day3.a_inheritance;
+
+public class SpiderMan extends Person{// is a 관계
+	boolean isSpider;
+	Spider spider; // has a 관계, Reference Type -> NULL
+	
+	public SpiderMan() {
+		this.spider = new Spider();
+	}
+	
+	void fireWeb() {
+		if (isSpider) {
+			spider.fireWeb();
+		}
+		else
+			System.out.println("되겠노");
+	}
+	
+	void jump() {
+		if (isSpider) {
+			spider.jump();
+		}
+		else
+			System.out.println("폴짝");
+	}
+}

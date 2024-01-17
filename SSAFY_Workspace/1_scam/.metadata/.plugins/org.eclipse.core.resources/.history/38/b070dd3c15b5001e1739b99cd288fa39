@@ -1,0 +1,15 @@
+
+public class Book {
+	String isbn;
+	String title;
+	String author;
+	String publisher;
+	String desc;
+	int price;
+	Book(String isbn, String title, String author, String publisher, String desc, int price) {
+		
+	}
+	Book() {
+		
+	}
+}
