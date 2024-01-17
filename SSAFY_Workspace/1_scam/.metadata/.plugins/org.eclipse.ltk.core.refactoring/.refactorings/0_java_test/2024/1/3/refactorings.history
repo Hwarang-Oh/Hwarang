@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename compilation unit &apos;Java_Basic.java&apos; to &apos;DigitTest1.java&apos;&#x0D;&#x0A;- Original project: &apos;0_java_test&apos;&#x0D;&#x0A;- Original element: &apos;Java_Basic.java&apos;&#x0D;&#x0A;- Renamed element: &apos;DigitTest1.java&apos;" description="Rename compilation unit &apos;Java_Basic.java&apos;" flags="2" id="org.eclipse.jdt.ui.rename.compilationunit" input="/src&lt;{Java_Basic.java" name="DigitTest1.java" references="false" stamp="1705300215525" version="1.0"/>
+</session>

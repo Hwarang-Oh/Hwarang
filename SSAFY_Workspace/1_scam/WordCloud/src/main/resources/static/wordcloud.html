@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="author" content="hissam" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SSAFY 11기 스타트캠프</title>
+    <link rel="shortcut icon" href="img/favicon.ico" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- data 시각화 (wordcloud) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="./js/jqcloud.min.js"></script>
+    <link rel="stylesheet" href="js/jqcloud.min.css" />
+    <!--  data 차트 관련 코드 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+  </head>
+  <body>
+    <!-- header 영역 start -->
+    <header
+      class="w-full fixed top-0 left-0 z-30 text-gray-700 bg-white border-t border-gray-100 shadow-sm body-font"
+    >
+      <div class="flex flex-col items-center justify-between p-6 mx-auto md:flex-row">
+        <a
+          href="./index.html"
+          class="flex items-center mb-4 font-medium text-gray-900 title-font md:mb-0"
+        >
+          <img src="./img/logo_square.png" class="inline h-8 v-8" />
+        </a>
+        <nav
+          class="flex flex-wrap items-center justify-center pl-6 ml-6 text-base border-l border-gray-200"
+        >
+          <a href="./wordcloud.html" class="mr-5 font-medium hover:text-gray-900">관심사보기</a>
+        </nav>
+        <nav
+          class="flex flex-wrap items-center justify-center pl-6 ml-6 text-base border-l border-gray-200 md:mr-auto"
+        >
+          <a href="./chatGPT.html" class="mr-5 font-medium hover:text-gray-900"
+            >Chat GPT에게 물어보기</a
+          >
+        </nav>
+        <div class="flex-shrink-0 mr-3">
+          <img
+            class="relative inline-block h-8 w-8 rounded-full object-cover object-center"
+            alt=""
+            src="./img/profile.png"
+          />
+        </div>
+        <div class="items-center h-full">
+          <a href="#" class="mr-5 font-medium hover:text-gray-900">로그인</a>
+        </div>
+        <div class="items-center h-full">
+          <a
+            href="#_"
+            class="px-4 py-2 text-xs font-bold text-white uppercase transition-all duration-150 bg-blue-400 rounded shadow-lg shadow-blue-500/50 outline-none active:bg-teal-600 hover:shadow-md focus:outline-none ease"
+          >
+            회원가입
+          </a>
+        </div>
+      </div>
+    </header>
+    <!-- header 영역 end -->
+
+    <!-- center 영역 start -->
+    <div class="flex flex-col w-full min-h-screen items-center justify-start bg-white mt-24">
+      <div class="flex justify-center rounded-xl bg-white bg-clip-border text-slate-500 shadow-sm">
+        <div class="p-3 text-center">
+          <h2
+            class="w-128 font-sans text-4xl font-semibold leading-snug tracking-normal antialiased"
+          >
+            싸피 11기의 관심사
+          </h2>
+        </div>
+      </div>
+      <div class="w-full grid grid-cols-12 gap-4 mt-5">
+        <div class="col-start-2 col-span-5">
+          <canvas id="myChart" width="100%" height="100%"></canvas>
+        </div>
+        <div class="col-start-7 col-end-12">
+          <!-- <h3>
+            WordCloud
+            <button
+              class="rounded-lg bg-pink-500 py-2 px-3 font-sans text-xs font-bold text-white shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+              onclick="location.reload();"
+              data-ripple-light="true"
+            >
+              새로고침
+            </button>
+          </h3> -->
+<!--           <div id="comments" style="width: 100%; height: 100%; border: 1px solid #ccc"></div> -->
+          <div id="comments" class="w-full h-full border border-slate-300" style="width:40vw; height:70vh"></div>
+        </div>
+      </div>
+    </div>
+    <!-- center 영역 end -->
+
+    <!-- footer 영역 start -->
+    <footer
+      class="p-4 w-full xl:fixed xl:w-full xl:bottom-0 xl:left-0 xl:z-30 bg-white rounded-lg shadow md:flex md:items-center md:justify-between md:p-6"
+    >
+      <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400"
+        >© 2024 <a href="https://www.ssafy.com" class="hover:underline" target="_blank">SSAFY</a>.
+        Copyright &copy; SAMSUNG All Rights Reserved.
+      </span>
+      <ul class="flex flex-wrap items-center mt-3 sm:mt-0">
+        <li>
+          <a href="#" class="mr-4 text-sm text-gray-500 hover:underline dark:text-gray-400"
+            >지원하기</a
+          >
+        </li>
+        <li>
+          <a href="#" class="mr-4 text-sm text-gray-500 hover:underline md:mr-6 dark:text-gray-400"
+            >이용문의</a
+          >
+        </li>
+        <li>
+          <a href="#" class="mr-4 text-sm text-gray-500 hover:underline md:mr-6 dark:text-gray-400"
+            >이용약관</a
+          >
+        </li>
+        <li>
+          <a href="#" class="mr-4 text-sm text-gray-500 hover:underline md:mr-6 dark:text-gray-400"
+            >개인정보처리방침</a
+          >
+        </li>
+      </ul>
+    </footer>
+    <!-- footer 영역 end -->
+    <script>
+    axios
+    .get("http://localhost:8080/word")
+    .then((response) => {
+      console.log(response);
+      makeWordCloud(response);
+    })
+    .catch((error) => {
+      console.error(error);
+    });    
+
+      function makeWordCloud(response) {
+        let word_list = [];
+        response.data.forEach((data) => {
+          let wc = new Object();
+          wc.text = data.text;
+          wc.weight = data.weight;
+          wc.link = "javascript:updateCount('" + data.text + "');";
+          word_list.push(wc);
+        });
+        
+        $("#comments").jQCloud("destroy");
+        $("#comments").jQCloud(word_list, {
+            autoResize: true,
+            delay: 50
+          });
+        makeChart(word_list);
+      }
+
+      function updateCount(word) {
+        axios
+          .post(`http://localhost:8080/word/${word}`)
+          .then((response) => {
+            console.log(response);
+
+            makeWordCloud(response);
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      }
+
+      function makeChart(datas) {
+        datas.sort((a, b) => parseFloat(b.weight) - parseFloat(a.weight));
+        let label = [];
+        let data = [];
+        for (let i = 0; i < 6; i++) {
+          label.push(datas[i].text);
+          data.push(datas[i].weight);
+        }
+        let ctx = document.getElementById("myChart").getContext("2d");
+        let myChart = new Chart(ctx, {
+          type: "bar",
+          data: {
+            labels: label,
+            datasets: [
+              {
+                label: "# of Votes",
+                data: data,
+                backgroundColor: [
+                  "rgba(255, 99, 132, 0.2)",
+                  "rgba(54, 162, 235, 0.2)",
+                  "rgba(255, 206, 86, 0.2)",
+                  "rgba(75, 192, 192, 0.2)",
+                  "rgba(153, 102, 255, 0.2)",
+                  "rgba(255, 159, 64, 0.2)",
+                ],
+                borderColor: [
+                  "rgba(255, 99, 132, 1)",
+                  "rgba(54, 162, 235, 1)",
+                  "rgba(255, 206, 86, 1)",
+                  "rgba(75, 192, 192, 1)",
+                  "rgba(153, 102, 255, 1)",
+                  "rgba(255, 159, 64, 1)",
+                ],
+                borderWidth: 1,
+              },
+            ],
+          },
+          options: {
+            scales: {
+              yAxes: [
+                {
+                  ticks: {
+                    beginAtZero: true,
+                  },
+                },
+              ],
+            },
+          },
+        });
+      }
+    </script>
+  </body>
+</html>

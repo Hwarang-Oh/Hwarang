@@ -1,0 +1,32 @@
+import java.util.Scanner;
+
+public class LastDayTest {
+
+	public static void main(String[] args) {
+		// 년, 월 입력 받아 해당 월의 마지막 날짜를 구하시오
+		// 반복적으로 입력 받아 처리
+		Scanner scan = new Scanner(System.in);
+		int year = scan.nextInt();
+		int month = scan.nextInt(); 
+		
+		while (true) {
+			boolean isLeap;
+			if (year % 4 == 0) {
+			
+				if (year % 400 == 0) {
+					isLeap = true;
+				}
+				else if (year % 100 == 0) {
+					isLeap = false;
+				}
+				else 
+					isLeap = true;
+			}
+			else 
+				isLeap = false;
+			System.out.println("dd");
+			year = scan.nextInt();
+			month = scan.nextInt(); 
+		}
+	}
+}

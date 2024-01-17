@@ -1,0 +1,25 @@
+
+public class LastDayTest {
+
+	public static void main(String[] args) {
+		// 년, 월 입력 받아 해당 월의 마지막 날짜를 구하시오
+		// 반복적으로 입력 받아 처리
+		
+		int year = 500;
+		int month;
+		int day;
+		
+		if (year % 4 == 0) {
+			if (year % 400 == 0) {
+				System.out.println("Leap");
+			}
+			else if (year % 100 == 0) {
+				System.out.println("Not Leap");
+			}
+			else 
+				System.out.println("Leap");
+		}
+		else 
+			System.out.println("Not Leap");
+	}
+}
