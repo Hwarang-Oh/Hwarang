@@ -1,0 +1,28 @@
+
+public class Manager extends Employee {
+	private String department;
+
+	public Manager(String name) {
+		super(name);
+		// TODO Auto-generated constructor stub
+	}
+
+	public Manager(String name, int salary) {
+		super(name, salary);
+		// TODO Auto-generated constructor stub
+	}
+
+	public String getDepartment() {
+		return department;
+	}
+
+	public void setDepartment(String department) {
+		this.department = department;
+	}
+
+	@Override
+	public String toString() {
+		return super.toString() + "Manager [department=" + department + "]";
+	}
+
+}

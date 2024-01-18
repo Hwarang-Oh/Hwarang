@@ -1,3 +1,0 @@
-INDEX VERSION 1.134+C:\SSAFY\workspace\1_scam\java_live_11th.zip_expanded\.metadata\.plugins\org.eclipse.jdt.core
-2021857403.index
-1865797976.index

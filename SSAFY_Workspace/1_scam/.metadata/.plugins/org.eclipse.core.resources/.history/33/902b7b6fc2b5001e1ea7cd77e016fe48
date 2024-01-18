@@ -1,0 +1,42 @@
+
+public class Employee {
+	private String name;
+	private int salary;
+	
+	public Employee(String name, int salary) {
+		super();
+		this.name = name;
+		this.salary = salary;
+	}
+	
+	public Employee() {
+		super();
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public int getSalary() {
+		return salary;
+	}
+	public void setSalary(int salary) {
+		if (salary <= 0) throw new IllegalArgumentException("연봉은 음수X");
+		this.salary = salary;
+	}
+	
+	public String getInfo() {
+		return "name : " + name + ", salary : " + salary + "원";
+	}
+
+	@Override
+	public String toString() {
+		return "Employee [name=" + name + ", salary=" + salary + "]";
+	}
+	
+}
+
+
+// private으로 접근을 막아놔서, 관려된 메소드를 설정해서 접근할 수 있게 설정함.
+// 내부 동작을 생각해서, 메소드를 만들어줘야 한다.
