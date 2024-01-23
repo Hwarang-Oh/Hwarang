@@ -1,9 +1,0 @@
-
-public class Company {
-	
-	public void increaseSalary(Employee e) { // 받을 수 있는 매개변수의 특성은 Emplyoee
-		System.out.println("연봉 인상 전 정보 : " + e.toString());
-		e.setSalary(e.getSalary() + (int)(e.getSalary()*0.1));
-		System.out.println("연봉 인상 후 정보 : " + e.toString());
-	}
-}

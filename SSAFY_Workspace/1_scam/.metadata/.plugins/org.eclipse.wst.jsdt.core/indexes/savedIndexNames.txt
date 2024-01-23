@@ -1,6 +1,0 @@
-INDEX VERSION 1.4+C:\Users\SSAFY\Desktop\Hwarang\SSAFY_Workspace\1_scam\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
-2328201251.index
-2510530803.index
-1187436384.index
-1656418895.index
-1252406590.index
