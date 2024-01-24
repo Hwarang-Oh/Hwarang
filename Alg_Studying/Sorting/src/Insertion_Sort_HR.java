@@ -12,16 +12,21 @@ public class Insertion_Sort_HR {
             num_list.add(Integer.parseInt(ST.nextToken()));
         }
         System.out.println(num_list.toString());
-        int min_index = 0;
+        int insertIndex;
+        int standardNum;
         for (int i = 1 ; i < num_list.size() ; i++){
-            min_index = i
+        	insertIndex = i;
+        	standardNum = num_list.get(i);
             for (int j = i - 1 ; j >= 0 ; j--) {
-                if (num_list.get(i) < num_list.get(i))
+                if (num_list.get(j) < standardNum)
                     break;
                 else {
-                    min_index = j
+                	insertIndex = j;
                 }
             }
+            num_list.remove(i);
+            num_list.add(insertIndex, standardNum);
         }
+        System.out.println(num_list.toString());
     }
 }
