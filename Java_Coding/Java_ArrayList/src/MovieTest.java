@@ -1,5 +1,6 @@
 public class MovieTest {
     public static void main(String[] args) {
+    	
         Movie myMovie1 = new Movie(1_000_001,"너의이름은", "신카이 마코토", "애니메이션", 190);
         Movie myMovie2 = new Movie(1_000_002,"날씨의아이", "신카이 마코토", "애니메이션", 210);
         Movie myMovie3 = new SeriesMovie(1_000_003,"초속 5cm미터", "신카이 마코토", "애니메이션", 205, 1, "벚꽃 이야기");
@@ -11,29 +12,30 @@ public class MovieTest {
         movieManager.add(myMovie2);
         movieManager.add(myMovie3);
         movieManager.add(myMovie4);
+        movieManager.saveData();
 
         // getList() Method Test
         for (Movie eachMovie : movieManager.getList()) {
             if (eachMovie != null)
-                System.out.println(eachMovie.toString());
+                System.out.println(eachMovie);
         }
         System.out.println("============================================");
 
         // getMovies() Method Test
         for (Movie eachMovie : movieManager.getMovies()) {
-            System.out.println(eachMovie.toString());
+            System.out.println(eachMovie);
         }
         System.out.println("============================================");
 
         // getSeriesMovies() Method Test
         for (Movie eachMovie : movieManager.getSeriesMovies()) {
-            System.out.println(eachMovie.toString());
+            System.out.println(eachMovie);
         }
         System.out.println("============================================");
 
         try {
 	        for (Movie eachMovie : movieManager.searchByTitle("이")) {
-	                System.out.println(eachMovie.toString());
+	                System.out.println(eachMovie);
 	            }
         } catch (TitleNotFoundException e) {
         	System.out.println(e.getMessage());
@@ -41,7 +43,7 @@ public class MovieTest {
         
         try {
         	for (Movie eachMovie : movieManager.searchByTitle("안녕")) {
-	                System.out.println(eachMovie.toString());
+	                System.out.println(eachMovie);
         	}
         } catch (TitleNotFoundException e) {
         	System.out.println(e.getMessage());

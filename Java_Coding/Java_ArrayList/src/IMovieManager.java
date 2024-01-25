@@ -8,4 +8,5 @@ public interface IMovieManager {
     ArrayList<Movie> getMovies();
     ArrayList<Movie> getSeriesMovies();
     double getRunningTimeAvg();
+    void saveData();
 }

@@ -10,18 +10,11 @@ public class SeriesMovie extends Movie{
         this.seriesNum = seriesNum;
         this.episode = episode;
     }
-    public int getSeriesNum() {
-        return seriesNum;
-    }
-    public void setSeriesNum(int seriesNum) {
-        this.seriesNum = seriesNum;
-    }
-    public String getEpisode() {
-        return episode;
-    }
-    public void setEpisode(String episode) {
-        this.episode = episode;
-    }
+    public int getSeriesNum() { return seriesNum; }
+    public void setSeriesNum(int seriesNum) { this.seriesNum = seriesNum; }
+    
+    public String getEpisode() { return episode; }
+    public void setEpisode(String episode) { this.episode = episode; }
 
     public String toString() {
         return super.toString() + ", SeriesNum='" + seriesNum + '\''  + ", episode='" + episode + '\'';

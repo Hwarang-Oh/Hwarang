@@ -7,5 +7,4 @@ public class TitleNotFoundException extends Exception{
     public String getTitle(){
         return this.title;
     }
-
 }
