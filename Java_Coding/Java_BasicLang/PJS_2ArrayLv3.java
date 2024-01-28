@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Solution {
+public class PJS_2ArrayLv3 {
     public static int maxBuildingCheck(int[][] area, int dim) {
         int nearGreenCount;
         int currentBuilding;

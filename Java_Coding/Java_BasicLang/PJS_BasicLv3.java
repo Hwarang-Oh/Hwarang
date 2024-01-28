@@ -1,35 +1,36 @@
 import java.io.*;
 
-public class JavaLang_3 {
+public class PJS_BasicLv3 {
 	public static void main(String[] args) throws IOException {
 		// DigitTest1
-//		for (int num = 1 ; num <= 15 ; num++) {
-//			System.out.printf("%d\t", num);
-//			if (num == 5 || num == 9 || num == 12 || num == 14)
-//				System.out.println();
-//			switch (num) {
-//			case 14 :
-//				System.out.printf(" \t");
-//			case 12 :
-//				System.out.printf(" \t");
-//			case 9 :
-//				System.out.printf(" \t");
-//			case 5 :
-//				System.out.printf(" \t");			
-//			}
-//		}
+		for (int num = 1 ; num <= 15 ; num++) {
+			System.out.printf("%d\t", num);
+			if (num == 5 || num == 9 || num == 12 || num == 14)
+				System.out.println();
+			switch (num) {
+			case 14 :
+				System.out.printf(" \t");
+			case 12 :
+				System.out.printf(" \t");
+			case 9 :
+				System.out.printf(" \t");
+			case 5 :
+				System.out.printf(" \t");
+			}
+		}
+		System.out.println();
 		// DigitTest2
-//		for (int num = 1 ; num <= 17 ; num++) {
-//			System.out.printf("%d\t", num);
-//			if (num == 5 || num == 8 || num == 9 || num == 12)
-//				System.out.println();
-//			switch (num) {
-//				case 8:
-//					System.out.print(" \t");
-//				case 5: case 9:
-//					System.out.print(" \t");
-//			}
-//		}
+		for (int num = 1 ; num <= 17 ; num++) {
+			System.out.printf("%d\t", num);
+			if (num == 5 || num == 8 || num == 9 || num == 12)
+				System.out.println();
+			switch (num) {
+				case 8:
+					System.out.print(" \t");
+				case 5: case 9:
+					System.out.print(" \t");
+			}
+		}
 		
 		BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
 		System.out.println("가위바위보 게임을 시작합니다. 아래 보기 중 하나를 고르시오"); System.out.println();
@@ -39,10 +40,10 @@ public class JavaLang_3 {
 		int cpuToWin = 1;
 		int humanToWin = 1;
 		int maxGame = 1;
-		
+
 		String humanChoice;
 		int cpuChoice;
-		
+
 		System.out.print("번호를 입력하세요. >> ");
 		switch (gameMode) {
 		case 1 :
@@ -58,11 +59,11 @@ public class JavaLang_3 {
 			System.out.print("가위/바위/보 중 하나 입력 : ");
 			humanChoice = input.readLine();
 			cpuChoice = (int)(Math.random()*3) + 1;
-			
+
 			if (humanChoice.equals("가위")) {
 				System.out.printf("사용자 : %s ",humanChoice);
 				switch (cpuChoice) {
-				case 1 : 
+				case 1 :
 					System.out.printf("컴퓨터 : %s => 비겼습니다.\n", "가위");
 					break;
 				case 2 :
@@ -76,7 +77,7 @@ public class JavaLang_3 {
 			else if (humanChoice.equals("바위")) {
 				System.out.printf("사용자 : %s ",humanChoice);
 				switch (cpuChoice) {
-				case 1 : 
+				case 1 :
 					System.out.printf("컴퓨터 : %s => 이겼습니다.\n", "가위");
 					humanToWin--; break;
 				case 2 :
@@ -90,7 +91,7 @@ public class JavaLang_3 {
 			else {
 				System.out.printf("사용자 : %s ",humanChoice);
 				switch (cpuChoice) {
-				case 1 : 
+				case 1 :
 					System.out.printf("컴퓨터 : %s => 졌습니다.\n", "가위");
 					cpuToWin--; break;
 				case 2 :
@@ -111,7 +112,7 @@ public class JavaLang_3 {
 			System.out.println("### 당신의 승!!!");
 		else if (cpuToWin < humanToWin)
 			System.out.println("### 컴퓨터 승!!!");
-		else 
+		else
 			System.out.println("### 비겼습니다!!!");
 	}
 }
