@@ -15,9 +15,9 @@ public class Hanoi_Tower {
 		hanoi(cnt - 1, from, to, temp);
 		result.append(cnt + " : " + from + " -> " + to + "\n");
 		hanoi(cnt - 1, temp, from, to);
-//		if(cnt > 1)hanoi(cnt - 1, from, to, temp);
-//		result.append(cnt + " : " + from + " -> " + to + "\n");
-//		if(cnt > 1)hanoi(cnt - 1, temp, from, to);
+		if(cnt > 1)hanoi(cnt - 1, from, to, temp);
+		result.append(cnt + " : " + from + " -> " + to + "\n");
+		if(cnt > 1)hanoi(cnt - 1, temp, from, to);
 		
 	}
 }
