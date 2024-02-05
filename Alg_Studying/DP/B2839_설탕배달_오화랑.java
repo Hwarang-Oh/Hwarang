@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class BOJ_2839_HR {
+public class B2839_설탕배달_오화랑 {
 	static int[] weightList = {3,5};
 	static int[] madeList;
 

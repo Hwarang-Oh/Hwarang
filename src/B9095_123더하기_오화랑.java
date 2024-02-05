@@ -1,6 +1,6 @@
 import java.io.*;
 
-public class BOJ_9095_HR {
+public class B9095_123더하기_오화랑 {
     public static void main(String[] args) throws IOException {
         BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
         StringBuilder sb = new StringBuilder();
