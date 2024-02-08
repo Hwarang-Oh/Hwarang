@@ -6,12 +6,12 @@ public class S1861_SquareRoom_¿ÀÈ­¶û {
 	static int[][] searchMethod = {
 			{-1,0}, {0,-1}, {1,0}, {0,1}
 	};
-	static int maxMove;
-	static int currMove = 0;
-	static int minValue;
+	static ArrayList<int[]> result;
+	static int currMove;
  	
 	public static void main(String[] args) throws IOException {
 		BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+		StringBuilder sb = new StringBuilder();
 		StringTokenizer st;
 		int testCase = Integer.parseInt(input.readLine());
 		int size;
@@ -26,19 +26,27 @@ public class S1861_SquareRoom_¿ÀÈ­¶û {
 					rooms[i][j] = Integer.parseInt(st.nextToken());
 			}
 			
-			maxMove = Integer.MIN_VALUE;
-			minValue = Integer.MAX_VALUE;
+			result = new ArrayList<int[]>();
+			int [] temp;
 			for (int i = 0 ; i < size ; i++) {
 				for (int j = 0 ; j < size ; j++) {
-					currMove = 1; check(i,j,1);
-					if(maxMove <= currMove && minValue > rooms[i][j]) {
-						maxMove = currMove;
-						minValue = rooms[i][j];
-					}
+					temp = new int[2];
+					currMove = 1; check(i, j, 1);
+					temp[0] = currMove;
+					temp[1] = rooms[i][j];
+					result.add(temp);
 				}
 			}
-			System.out.printf("#%d %d %d%n", tc, minValue, maxMove);
+			
+			Collections.sort(result, new Comparator<int[]>() {
+				@Override
+				public int compare(int[] o1, int[] o2) {
+					int diff = Integer.compare(o2[0], o1[0]);
+					return diff != 0 ? diff : Integer.compare(o1[1], o2[1]);
+				}});
+			sb.append("#").append(tc).append(" ").append(result.get(0)[1]).append(" ").append(result.get(0)[0]).append("\n");
 		}
+		System.out.println(sb);
 	}
 	
 	public static void check(int x, int y, int moveCnt) {
@@ -48,11 +56,8 @@ public class S1861_SquareRoom_¿ÀÈ­¶û {
 		for (int[] search : searchMethod) {
 			tempx = x + search[0];
 			tempy = y + search[1];
-			if (tempx < 0 | tempy < 0 | tempx >= rooms.length | tempy >= rooms.length)
-				continue;
-			if (rooms[tempx][tempy] - rooms[x][y] != 1)
-				continue;
-			check(tempx, tempy, moveCnt + 1);
+			if (tempx < 0 | tempy < 0 | tempx >= rooms.length | tempy >= rooms.length) continue;
+			if (rooms[tempx][tempy] - rooms[x][y] == 1) check(tempx, tempy, moveCnt + 1);
 		}
 	}
 }
