@@ -21,7 +21,7 @@ public class Main {
             int[] temp = {Integer.parseInt(st.nextToken()), Integer.parseInt(st.nextToken())};
             jewList.offer(temp);
         }
-
+        
         for (int i = 0; i < bagNum; i++)
             bagList.add(Integer.parseInt(input.readLine()));
         bagList.add(0); // for 방지 -1 Index Problem in BT

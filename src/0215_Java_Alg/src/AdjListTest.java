@@ -1,4 +1,6 @@
+import java.util.ArrayDeque;
 import java.util.Arrays;
+import java.util.Queue;
 import java.util.Scanner;
 
 // 무향 그래프 : 연결리스트 버전
@@ -35,8 +37,32 @@ public class AdjListTest {
 			adjList[to] = new Node(from, adjList[to]);
 		}
 		
-		for (Node node : adjList) {
-			System.out.println(node);
+//		for (Node node : adjList) {
+//			System.out.println(node);
+//		}
+		bfs(adjList, 0);
+	}
+	static void bfs(Node[] adjList, int start) {
+		int V = adjList.length;
+		Queue<Integer> queue = new ArrayDeque<>();
+		boolean[] visited = new boolean[V];
+		
+		// 시작정점( 정점 start )큐에 넣고 방문 체크
+		queue.offer(start);
+		visited[start] = true;
+		
+		// 방문관리
+		while (!queue.isEmpty()) {
+			int current = queue.poll(); // 탐색해야 하는 정점 꺼내기
+			// 탐색 정점에 관련된 로직 처리
+			System.out.print((char)(current + 65) + " ");
+			
+			for (Node temp = adjList[current] ; temp != null ; temp = temp.next) {
+				if (!visited[temp.to]) { // 방문체크만!
+					queue.offer(temp.to);
+					visited[temp.to] = true;
+				}
+			}
 		}
 	}
 }
