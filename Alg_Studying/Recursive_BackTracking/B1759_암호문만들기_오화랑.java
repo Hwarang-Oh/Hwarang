@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class B1759_암호문_오화랑 {
+public class B1759_암호문만들기_오화랑 {
 	static boolean[] isSelected;
 	static String[] possiblePassWord;
 	static StringBuilder sb;
