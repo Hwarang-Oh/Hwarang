@@ -2,124 +2,119 @@ import java.io.*;
 import java.util.*;
 
 public class S5644_무선충전_오화랑 {
-    static ArrayList<ArrayList<PriorityQueue<int[]>>> Map;
     static int[] aWay, bWay;
-    static int aRow, aCol, bRow, bCol;
-    static int totalCharge;
-
-    public static void main(String[] args) throws IOException {
+    static PriorityQueue<int[]>[][] Map = new PriorityQueue [11][11];
+    static int totalCharge, aRow, aCol, bRow, bCol;
+    public static void main(String[] args) throws IOException{
         BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st, temp = null;
+        StringTokenizer st1, st2;
         int testCase = Integer.parseInt(input.readLine());
+
         for (int t = 1 ; t <= testCase ; t++) {
-            st = new StringTokenizer(input.readLine());
-            int mNum = Integer.parseInt(st.nextToken());
-            int bcNum = Integer.parseInt(st.nextToken());
-            aWay = new int[mNum] ; bWay = new int[mNum];
-            totalCharge = 0;
-            aRow = aCol = 1; bRow = bCol = 10;
+            st1 = new StringTokenizer(input.readLine());
+            int moveNum = Integer.parseInt(st1.nextToken());
+            int bcNum = Integer.parseInt(st1.nextToken());
 
-            st = new StringTokenizer(input.readLine());
-            temp = new StringTokenizer(input.readLine());
-
-            for (int i = 0 ; i < mNum ; i++) {
-                aWay[i] = Integer.parseInt(st.nextToken());
-                bWay[i] = Integer.parseInt(temp.nextToken());
+            st1 = new StringTokenizer(input.readLine());
+            st2 = new StringTokenizer(input.readLine());
+            aWay = new int[moveNum];
+            bWay = new int[moveNum];
+            for (int i = 0 ; i < moveNum ; i++) {
+                aWay[i] = Integer.parseInt(st1.nextToken());
+                bWay[i] = Integer.parseInt(st2.nextToken());
             }
 
-            Map = new ArrayList<>();
-            for (int i = 0 ; i <= 10 ; i++) {
-                Map.add(new ArrayList<>());
-                for (int j = 0 ; j <= 10 ; j++) {
-                    Map.get(i).add(new PriorityQueue<int[]>(new Comparator<int[]>() {
+            for (int i = 1 ; i <= 10 ; i++) {
+                for (int j = 1 ; j <= 10 ; j++) {
+                    Map[i][j] = new PriorityQueue<>(new Comparator<int[]>() {
                         @Override
                         public int compare(int[] o1, int[] o2) {
                             return Integer.compare(o2[1], o1[1]);
                         }
-                    }));
+                    });
                 }
             }
 
             int r, c, a, p;
             for (int i = 0 ; i < bcNum ; i++) {
-                st = new StringTokenizer(input.readLine());
-                r = Integer.parseInt(st.nextToken());
-                c = Integer.parseInt(st.nextToken());
-                a = Integer.parseInt(st.nextToken());
-                p = Integer.parseInt(st.nextToken());
+                st1 = new StringTokenizer(input.readLine());
+                r = Integer.parseInt(st1.nextToken());
+                c = Integer.parseInt(st1.nextToken());
+                a = Integer.parseInt(st1.nextToken());
+                p = Integer.parseInt(st1.nextToken());
+                for (int j = r - a ; j <= r + a; j++) {
+                    for (int k = c - a ; k <= c + a ; k++) {
+                        if (j < 1 || k < 1 || j > 10 || k > 10) continue;
+                        if ( Math.abs(j - r) + Math.abs(k - c) > a) continue;
+                        Map[j][k].offer(new int[] {i, p});
+                    }
+                }
+            }
 
-                for (int j = r - a ; j <= r + a ; j++) {
-                    for (int k = c - a; k <= c + a ; k++) {
-                        if(j < 1 || k < 1 || j > 10 || k > 10) continue;
-                        if((Math.abs(j - r) + Math.abs(k - c)) > a) continue;
-                        Map.get(j).get(k).offer(new int[] {i, p});
-                    }
+            for (int i = 1 ; i <= 10 ; i++) {
+                for (int  j = 1 ; j <= 10 ; j++) {
+                    System.out.print(Arrays.toString(Map[i][j].peek()) + "\t");
+                }
+                System.out.println();
+            }
+
+            aRow = aCol = 1; bRow = bCol = 10;
+            for (int i = 0 ; i <= moveNum ; i++) {
+                if (i == 0) countPoint(aRow, aCol, bRow, bCol);
+                else {
+                    ABwalk(i);
+                    countPoint(aRow,aCol,bRow,bCol);
                 }
             }
-            for (int i = 0 ; i <= mNum ; i++) {
-                if (i == 0) countPoint(Map.get(aRow).get(aCol), Map.get(bRow).get(bCol)); // 처음 위치
-                else { // 이동하고 나서, 계산
-                    aWalk(i); bWalk(i);
-                    if(aRow == bRow && aCol == bCol) {
-                        int[] sameLoc = Map.get(aRow).get(aCol).poll();
-                        if(!Map.get(aRow).get(aCol).isEmpty()) {
-                            totalCharge += Map.get(aRow).get(aCol).peek()[1];
-                        }
-                        totalCharge += sameLoc[1];
-                        Map.get(aRow).get(aCol).offer(sameLoc);
-                    }
-                    else countPoint(Map.get(aRow).get(aCol), Map.get(bRow).get(bCol));
-                }
-                System.out.println(totalCharge);
+            System.out.println(totalCharge);
+        }
+    }
+    public static void ABwalk(int time) {
+        switch (aWay[time - 1]) {
+            case 0: break;
+            case 1: aRow--; break;
+            case 2: aCol++; break;
+            case 3: aRow++; break;
+            case 4: aCol--; break;
+        }
+
+        switch (bWay[time - 1]) {
+            case 0: break;
+            case 1: bRow--; break;
+            case 2: bCol++; break;
+            case 3: bRow++; break;
+            case 4: bCol--; break;
+        }
+    }
+
+    public static void countPoint(int aR, int aC, int bR, int bC) {
+        PriorityQueue<int []> currA = Map[aR][aC];
+        PriorityQueue<int []> currB = Map[bR][bC];
+
+        if (currA.isEmpty() || currB.isEmpty()) case1_Count(currA, currB);
+        else case2_Count(currA, currB);
+    }
+    public static void case1_Count(PriorityQueue<int []> currA, PriorityQueue<int []> currB ) {
+        if (currA.isEmpty() && currB.isEmpty()) return;
+        else if (currA.isEmpty()) totalCharge += currB.peek()[1];
+        else totalCharge += currA.peek()[1];
+    }
+
+    public static void case2_Count(PriorityQueue<int []> currA, PriorityQueue<int []> currB) {
+        if (currA.peek()[0] == currB.peek()[0]) {
+            int[] temp = currA.poll(); currB.poll();
+            if (currA.isEmpty() || currB.isEmpty()) {
+                case1_Count(currA, currB);
+                totalCharge += temp[1];
             }
-//            System.out.println(totalCharge);
-        }
-    }
-    public static void aWalk(int time) {
-        switch(aWay[time - 1]) {
-            case 0: break; case 1: aRow--; break; case 2: aCol++; break;
-            case 3: aRow++; break; case 4: aCol--; break;
-        }
-    }
-    public static void bWalk(int time) {
-        switch(bWay[time - 1]) {
-            case 0: break; case 1: bRow--; break; case 2: bCol++; break;
-            case 3: bRow++; break; case 4: bCol--; break;
-        }
-    }
-    public static void countPoint(PriorityQueue<int []> a, PriorityQueue<int []> b) {
-        if (a.isEmpty()) {
-            if (!b.isEmpty()) totalCharge += b.peek()[1];
-        }
-        else {
-            if (b.isEmpty()) totalCharge += a.peek()[1];
             else {
-                if (a.peek()[0] == b.peek()[0]) tieCount(a,b);
-                else totalCharge += (a.peek()[1] + b.peek()[1]);
+                if (currA.peek()[1] >= currB.peek()[1]) totalCharge += currA.peek()[1];
+                else totalCharge += currB.peek()[1];
+                totalCharge += temp[1];
             }
+            currA.offer(temp); currB.offer(temp);
         }
-    }
-    public static void tieCount(PriorityQueue<int []> a, PriorityQueue<int []> b) {
-        int[] temp = a.poll(); b.poll();
-        if (a.isEmpty() && b.isEmpty()) {
-            totalCharge += temp[1];
-            a.offer(temp); b.offer(temp);
-            return;
-        }
-        if (a.isEmpty() && !b.isEmpty()) {
-            totalCharge += temp[1];
-            totalCharge += b.peek()[1];
-            a.offer(temp); b.offer(temp);
-            return;
-        }
-        if (!a.isEmpty() && b.isEmpty()) {
-            totalCharge += temp[1];
-            totalCharge += a.peek()[1];
-            a.offer(temp); b.offer(temp);
-            return;
-        }
-        if (!a.isEmpty() && !b.isEmpty() && a.peek()[1] >= b.peek()[1]) totalCharge += (temp[1] + a.peek()[1]);
-        else if ((!a.isEmpty() && !b.isEmpty() && a.peek()[1] < b.peek()[1])) totalCharge += (temp[1] + b.peek()[1]);
-        a.offer(temp); b.offer(temp);
+        else totalCharge += ( currA.peek()[1] + currB.peek()[1]);
     }
 }
+
