@@ -19,24 +19,26 @@ public class S2383_점심식사시간_오화랑 {
         public person(int pRow, int pCol) {
             this.pRow = pRow;
             this.pCol = pCol;
-            this.isDone = false;
         }
         public void getTime(int sRow, int sCol) {
             timeToS = Math.abs(pRow - sRow) + Math.abs(pCol -sCol);
+            isDone = false;
         }
     }
-    static stair[] stairs = new stair[2];
-    static ArrayList<person> people = new ArrayList<>();
-    static int minTime = Integer.MAX_VALUE;
+    static stair[] stairs;
+    static ArrayList<person> people;
+    static int minTime;
     public static void main(String[] args) throws IOException{
         BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = null;
         int testCase = Integer.parseInt(input.readLine());
-
         int size, num, sIndex;
         for (int t = 1 ; t <= testCase ; t++) {
             size = Integer.parseInt(input.readLine());
             sIndex = 0;
+            stairs = new stair[2];
+            people = new ArrayList<>();
+            minTime = Integer.MAX_VALUE;
             for (int i = 0 ; i < size ; i++) {
                 st = new StringTokenizer(input.readLine());
                 for (int j = 0 ; j < size ; j++) {
@@ -46,25 +48,21 @@ public class S2383_점심식사시간_오화랑 {
                 }
             }
             boolean[] selected = new boolean[people.size()]; // 여러개 testCase에서는 초기화 필수!!
-            selectStair(0,selected,people);
+            selectStair(0,selected);
             System.out.println(minTime);
-            minTime = Integer.MAX_VALUE;
-            people = new ArrayList<>();
         }
     }
-    public static void selectStair(int cnt, boolean[] selected, ArrayList<person> people){ // 먼저 사람들은 계단을 선택한다.
+    public static void selectStair(int cnt, boolean[] selected){ // 먼저 사람들은 계단을 선택한다.
         if (cnt == selected.length) { // 부분집합 Case 완성에 도달하면
             ArrayList<person> stair1Go = new ArrayList<>(); // 계단 1로 이동
             ArrayList<person> stair2Go = new ArrayList<>(); // 계단 2로 이동
             for (int i = 0 ; i < selected.length ; i++) {
                 if (selected[i] == true) { // 만약 계단 1로 선택되었다면
                     people.get(i).getTime(stairs[0].sRow, stairs[0].sCol); // 해당 계단을 향한 경로값 계산
-                    people.get(i).isDone = false; // 도착 X 상태로 설정
                     stair1Go.add(people.get(i));
                 }
                 else {
                     people.get(i).getTime(stairs[1].sRow, stairs[1].sCol);
-                    people.get(i).isDone = false;
                     stair2Go.add(people.get(i));
                 }
             }
@@ -72,9 +70,9 @@ public class S2383_점심식사시간_오화랑 {
             return;
         }
         selected[cnt] = true;
-        selectStair(cnt + 1, selected, people);
+        selectStair(cnt + 1, selected);
         selected[cnt] = false;
-        selectStair(cnt + 1, selected, people);
+        selectStair(cnt + 1, selected);
     }
 
     public static int countTime(ArrayList<person> stair1Go, ArrayList<person> stair2Go){ // 선택된 조합으로 시간을 계산한다.
@@ -83,12 +81,15 @@ public class S2383_점심식사시간_오화랑 {
         int time = 0;
         while (true) {
             for (person p : stair1Go) {
-                if (stairs[0].haveToGo == stairs[0].haveGone) break;
+                if (stairs[0].haveGone == stairs[0].haveToGo) break;
                 if (p.isDone) continue;
                 if (p.timeToS > 0) p.timeToS--;
-                else if (p.timeToS == 0) p.waitCount++;
+                else if (p.timeToS == 0) {
+                    p.waitCount++;
+                }
                 else {
-                    if (p.goDownTime++ == stairs[0].goTime) { // 계단 이동시간 + 1 == 계단 경로 -> 도착한 경우
+                    p.goDownTime++;
+                    if (p.goDownTime == stairs[0].goTime) { // 계단 이동시간 + 1 == 계단 경로 -> 도착한 경우
                         stairs[0].goingNum--; // 계단 이용자 --
                         stairs[0].haveGone++; // 도착한 사람 ++
                         p.isDone = true; // 해당 사람은 완료
@@ -99,7 +100,7 @@ public class S2383_점심식사시간_오화랑 {
             for (person p : stair1Go) {
                 if (stairs[0].haveToGo == stairs[0].haveGone) break;
                 if (p.isDone) continue;
-                if (p.timeToS == 0 && p.waitCount > 1) {
+                if (p.timeToS == 0 && p.waitCount >= 1) {
                     if (stairs[0].goingNum < 3) { // 현재 계단을 3명 이하로 이용 중이면 -> 내가 이동할 준비 -> p.timeToS = -1;
                         p.timeToS--; // -1
                         p.goDownTime = 0; // 현재 계단 이동시간 0
@@ -107,14 +108,14 @@ public class S2383_점심식사시간_오화랑 {
                     }
                 }
             }
-
             for (person p : stair2Go) {
                 if (stairs[1].haveToGo == stairs[1].haveGone) break;
                 if (p.isDone) continue;
                 if (p.timeToS > 0) p.timeToS--;
                 else if (p.timeToS == 0) p.waitCount++;
                 else {
-                    if (p.goDownTime++ == stairs[1].goTime) { // 계단 이동시간 + 1 == 계단 경로 -> 도착한 경우
+                    p.goDownTime++;
+                    if (p.goDownTime == stairs[1].goTime) { // 계단 이동시간 + 1 == 계단 경로 -> 도착한 경우
                         stairs[1].goingNum--; // 계단 이용자 --
                         stairs[1].haveGone++; // 도착한 사람 ++
                         p.isDone = true; // 해당 사람은 완료
@@ -125,7 +126,7 @@ public class S2383_점심식사시간_오화랑 {
             for (person p : stair2Go) {
                 if (stairs[1].haveToGo == stairs[1].haveGone) break;
                 if (p.isDone) continue;
-                if (p.timeToS == 0 && p.waitCount > 1) {
+                if (p.timeToS == 0 && p.waitCount >= 1) {
                     if (stairs[1].goingNum < 3) { // 현재 계단을 3명 이하로 이용 중이면 -> 내가 이동할 준비 -> p.timeToS = -1;
                         p.timeToS--; // -1
                         p.goDownTime = 0; // 현재 계단 이동시간 0
@@ -133,9 +134,8 @@ public class S2383_점심식사시간_오화랑 {
                     }
                 }
             }
-
-            if (stairs[0].haveToGo == stairs[0].haveGone && stairs[1].haveToGo == stairs[1].haveGone) break;
             time++;
+            if (stairs[0].haveToGo == stairs[0].haveGone && stairs[1].haveToGo == stairs[1].haveGone) break;
         }
         return time;
     }
