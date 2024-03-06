@@ -1,0 +1,130 @@
+/* Header Part CSS */
+header {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  box-shadow: 0 4px 4px -2px gray; /* Add a shadow effect to the container */
+}
+header .container {
+  display: flex;
+  justify-content: space-around;
+}
+header .nav {
+  display: flex;
+}
+header .brandBox {
+  position: relative;
+  bottom: 8px;
+}
+header .brand {
+  color: gray;
+  font-size: 40px;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  text-decoration: none;
+  padding: 10px;
+}
+.menu {
+  color: gray;
+  font-size: 20px;
+  text-decoration: none;
+  padding: 10px;
+}
+/* Main Part CSS */
+main {
+  display: flex;
+  justify-content: center;
+}
+main .asideContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-block-start: 1em;
+}
+main aside {
+  display: flex;
+  flex-direction: column;
+}
+aside .sideIMG {
+  border-radius: 15%;
+  margin-bottom: 15px;
+}
+aside .sideBar {
+  background-color: gray;
+}
+main section {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+}
+main h3 {
+  padding-inline-start: 40px;
+}
+main .PBookList {
+  display: flex;
+  list-style-type: none;
+}
+main .EssayList {
+  display: flex;
+  list-style-type: none;
+}
+main .bookBox {
+  box-shadow: 0 4px 4px gray; /* Add a shadow effect to the container */
+  margin: 10px;
+}
+main .bookBox figure {
+  margin-inline: 10px;
+}
+main .bookBox figcaption {
+  text-align: center;
+}
+main .book {
+  width: 200px;
+  height: 280px;
+  border-radius: 5%;
+  border: solid 1px rgb(218, 216, 216);
+  /* margin-bottom: 10px; */
+}
+main .Bulletin {
+  display: flex;
+  justify-content: space-between;
+  padding-inline-start: 40px;
+}
+main .Bulletin h3 {
+  padding-inline-start: 0px;
+}
+main .pop {
+  text-align: start;
+  vertical-align: middle;
+  table-layout: fixed;
+  width: 450px;
+  height: 150px;
+  border-collapse: collapse;
+}
+main .pop tbody tr:nth-child(2n + 1) {
+  background-color: whitesmoke;
+}
+main .recent {
+  text-align: start;
+  vertical-align: middle;
+  table-layout: fixed;
+  width: 450px;
+  height: 150px;
+  border-collapse: collapse;
+}
+main .recent tbody tr td {
+  border: 2px solid;
+  border-color: whitesmoke;
+}
+footer {
+  display: flex;
+  justify-content: start;
+}
+footer .footNav {
+  display: flex;
+  list-style-type: none;
+}
+footer .navBox {
+  font-size: 20px;
+  text-decoration: none;
+  margin-right: 10px;
+  margin-left: 10px;
+}
