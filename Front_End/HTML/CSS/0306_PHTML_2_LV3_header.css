@@ -1,0 +1,15 @@
+header .container{
+    display: flex;
+    justify-content: space-around;
+    box-shadow: inset;
+    border-bottom: solid;
+    border-bottom-color: gray;
+    border-bottom-style: groove;
+}
+header .nav{
+    display: flex;
+}
+header .name{
+    color: gray;
+    font: bold 25px 맑은고딕;
+}
