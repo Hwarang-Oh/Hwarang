@@ -82,43 +82,42 @@
           height="150"
         />
         <div class="sideBar"><p>전국 매장 펼치기</p></div>
-        <div><p>전국 매장 접기</p></div>
         <div>
-          <ul>
-            <li>
+          <ul class="locationList">
+            <li class="locationBox">
               서울
-              <ul>
+              <ul class="loc_component">
                 <li>역삼점</li>
                 <li>선릉점</li>
               </ul>
             </li>
-            <li>
+            <li class="locationBox">
               대전
-              <ul>
+              <ul class="loc_component">
                 <li>학하점</li>
                 <li>봉명점</li>
               </ul>
             </li>
-            <li>
+            <li class="locationBox">
               구미
-              <ul>
+              <ul class="loc_component">
                 <li>인동점</li>
                 <li>공단점</li>
               </ul>
             </li>
-            <li>
+            <li class="locationBox">
               광주
-              <ul>
+              <ul class="loc_component">
                 <li>하남산단점</li>
                 <li>광주역점</li>
               </ul>
             </li>
           </ul>
         </div>
-        <div>
-          <p>[ 당신의 선택 ]</p>
-          <p><b>공부하고 싶은 분야를 골라주세요!!</b></p>
-          <ul>
+        <div class="poll">
+          <p class="title">[ 당신의 선택 ]</p>
+          <p class="subtitle"><b>공부하고 싶은 분야를 골라주세요!!</b></p>
+          <ul class="pollList">
             <li>
               <label>
                 <input type="radio" name="Study" value="Python" />
@@ -148,9 +147,11 @@
               </label>
             </li>
           </ul>
-          <input type="submit" value="투표하기" />
-          <input type="button" value="결과보기" />
-          <p><b>투표기간 : 24.03.05 ~ 24.03.31</b></p>
+          <div class="buttons">
+            <input type="submit" value="투표하기" />
+            <input type="button" value="결과보기" />
+          </div>
+          <p class="Period"><b>투표기간 : 24.03.05 ~ 24.03.31</b></p>
         </div>
       </aside>
       <section>
