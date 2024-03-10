@@ -1,36 +1,47 @@
 import java.io.*;
 import java.util.*;
 
-public class B18921_ºñ¿ä¶ßÀÇÂ¡°Ë´Ù¸®°Ç³Ê±â_¿ÀÈ­¶û {
+public class B18921_ë¹„ìš”ëœ¨ì˜ì§•ê²€ë‹¤ë¦¬ê±´ë„ˆê¸°_ì˜¤í™”ë‘ {
+	static int[] jumpList = new int[1001];
+	static int threshold = (int) Math.pow(5,9) + 7;
 	public static void main(String[] args) throws IOException {
 		BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
 		int testCase = Integer.parseInt(input.readLine());
+		jumpList[1] = 1;
+		jumpList[2] = 1;
 		for (int t = 0 ; t < testCase ; t++) {
 			int size = Integer.parseInt(input.readLine());
-			ArrayList<Integer> tempArr = new ArrayList<>();
-			tempArr.add(1); tempArr.add(1);
-			int index = 3;
-			if (size == 1) System.out.println(tempArr.get(size - 1));
-			if (size == 2) System.out.println(tempArr.get(size - 1));
+			System.out.println(getJump(size));
+		}
+	}
+	public static int getJump(int size) {
+		if (jumpList[size] != 0) return jumpList[size];
+		else {
+			int temp = getJump(size - 1) * 2;
+			if (temp == -2) {
+				jumpList[size] = -1;
+				return jumpList[size] + 1;
+			}
+			if (temp < threshold)  return jumpList[size] = temp;
+			else if (temp == threshold) {
+				jumpList[size] = -1;
+				return jumpList[size] + 1;
+			}
 			else {
-				while (true) {
-					tempArr.add(tempArr.get(index - 1) * 2);
-					if (tempArr.get(index) > (int) Math.pow(10,9) + 7) {
-						tempArr.clear();
-					}
-					index++;
-				}
+				jumpList[size] = temp % threshold;
+				return jumpList[size];
 			}
 		}
 	}
 }
 
+// New Idea -> 10^9 + 7ì˜ ìƒí™©ì„ -> 11ë²ˆì§¸ ì§•ê²€ë‹¤ë¦¬ë¶€í„° -> 2^9 / 10^9  + 7
 
 
-// ¸ğµâ·¯ ¿¬»êÀÌ ºñ¿ä¶ß dp¾È¿¡ ³ªÅ¸³ª¾ß ÇÑ´Ù 
-// ÀÓÀÇÀÇ Á¤¼ö X¿¡ ´ëÇØ i¹øÂ° -> i + X¹øÂ°·Î Jump °¡´É
-// N¹øÂ° Â¡°Ë´Ù¸®¸¦ Áö³ªÄ¡¸é ¾ÈµÇ¸ç, Á¤È®ÇÏ°Ô µµÂøÇØ¾ß ÇÑ´Ù.
-// 1 2 3 4ÀÇ Â¡°Ë´Ù¸® : 1¿¡¼­ 4·Î Á¤È®ÇÏ°Ô °¥ ¼ö ÀÖ´Â °æ¿ìÀÇ ¼ö!
-// 1 2 3 4 => 1 4, 1 2 4, 1 3 4, 1 2 3 4 => 4°³ => ºÎºĞÁıÇÕ ¾Æ´Ñ°¡? 
-// 10^9ÀÇ Â¡°Ë´Ù¸®¸¦.. ÇÒ ¼ö ÀÖÀ»±î? => NextPowerSet?
+// ëª¨ë“ˆëŸ¬ ì—°ì‚°ì´ ë¹„ìš”ëœ¨ dpì•ˆì— ë‚˜íƒ€ë‚˜ì•¼ í•œë‹¤ 
+// ì„ì˜ì˜ ì •ìˆ˜ Xì— ëŒ€í•´ ië²ˆì§¸ -> i + Xë²ˆì§¸ë¡œ Jump ê°€ëŠ¥
+// Në²ˆì§¸ ì§•ê²€ë‹¤ë¦¬ë¥¼ ì§€ë‚˜ì¹˜ë©´ ì•ˆë˜ë©°, ì •í™•í•˜ê²Œ ë„ì°©í•´ì•¼ í•œë‹¤.
+// 1 2 3 4ì˜ ì§•ê²€ë‹¤ë¦¬ : 1ì—ì„œ 4ë¡œ ì •í™•í•˜ê²Œ ê°ˆ ìˆ˜ ìˆëŠ” ê²½ìš°ì˜ ìˆ˜!
+// 1 2 3 4 => 1 4, 1 2 4, 1 3 4, 1 2 3 4 => 4ê°œ => ë¶€ë¶„ì§‘í•© ì•„ë‹Œê°€? 
+// 10^9ì˜ ì§•ê²€ë‹¤ë¦¬ë¥¼.. í•  ìˆ˜ ìˆì„ê¹Œ? => NextPowerSet?
 // 1 -> 1 -> 2 -> 4 -> 8 -> 16 -> 32 -> 64 -> 128 -> 256 -> 512
