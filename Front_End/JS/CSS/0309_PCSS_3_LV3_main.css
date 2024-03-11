@@ -101,6 +101,14 @@ aside .poll {
   border-radius: 5%;
   width: 300px;
 }
+aside .noPollImg {
+  align-self: center;
+  border-radius: 10%;
+  margin-bottom: 10px;
+  width: 250px;
+  height: 150px;
+}
+
 aside .poll .title {
   text-align: center;
   color: gray;

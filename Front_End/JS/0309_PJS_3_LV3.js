@@ -1,5 +1,4 @@
 window.onload = function () {
-    window.open("./0308_PHTML_3_LV3_poll.html", "투표 생성", "width=400, height=400");
     currlogOut();
     let logIn = document.querySelector("header #getLogIn");
     logIn.addEventListener("click", goLogIn);
