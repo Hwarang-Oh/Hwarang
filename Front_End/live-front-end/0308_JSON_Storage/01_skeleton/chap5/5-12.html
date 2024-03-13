@@ -21,14 +21,14 @@
     </style>
     <script>
       function info() {
-        let cls = document.querySelector("input[name='cls']:checked").value;
-        let name = document.getElementById("name").value;
+        let cls = document.querySelector("input[name='cls']:checked").value; //
+        let name = document.getElementById('name').value;
 
-        let span = document.createElement("span");
-        span.setAttribute("class", cls);
+        let span = document.createElement('span');
+        span.setAttribute('class', cls);
         span.appendChild(document.createTextNode(name));
 
-        let result = document.querySelector("#result");
+        let result = document.querySelector('#result');
         result.appendChild(span);
       }
     </script>
