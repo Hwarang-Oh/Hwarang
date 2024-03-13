@@ -101,6 +101,20 @@ aside .poll {
   border-radius: 5%;
   width: 300px;
 }
+aside .notPoll {
+  display: flex;
+  flex-direction: column;
+  border: solid;
+  border-color: rgb(177, 177, 177);
+  border-radius: 5%;
+  width: 300px;
+}
+aside .notPoll .title {
+  text-align: center;
+  color: gray;
+  font-size: 20px;
+  font-weight: bold;
+}
 aside .noPollImg {
   align-self: center;
   border-radius: 10%;
@@ -108,7 +122,6 @@ aside .noPollImg {
   width: 250px;
   height: 150px;
 }
-
 aside .poll .title {
   text-align: center;
   color: gray;
