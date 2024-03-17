@@ -2,7 +2,7 @@ import java.io.*;
 import java.util.*;
 
 public class B14500_테트로미노_오화랑 {
-    static class sum {
+    static class sum { // 2칸의 합을 더한 것 -> 테트로미노 2칸 + 2칸으로 이루어져 있음
         int hSum, vSum;
         public sum(int hSum, int vSum) {
             this.hSum = hSum;
@@ -10,7 +10,7 @@ public class B14500_테트로미노_오화랑 {
         }
     }
     static int[][] Map;
-    static sum[][] sumMap;
+    static sum[][] sumMap; // 2개의 합정보를 가지고 있음
     static int N, M;
     static int maxTet = Integer.MIN_VALUE;
     public static void main(String[] args) throws IOException {
@@ -41,6 +41,12 @@ public class B14500_테트로미노_오화랑 {
                 }
             }
         }
+        // 1 2 3 4
+        // 2 3 4 5
+        // {0, 0}, {3, 0}
+        // {0, 3}, {5, 5}
+
+
         for (int i = 0 ; i < N ; i++) {
             for (int j = 0 ; j < M ; j++) {
                 makeMax(i,j,sumMap[i][j]);
