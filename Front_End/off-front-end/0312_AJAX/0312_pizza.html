@@ -26,7 +26,7 @@
         let phone = document.querySelector('#phone').value;
         let data = new URLSearchParams({
           phone: phone,
-          type: 'json',
+          type: 'xml',
         }); // phone => XXXXX&type=json -> 일반 Form의 전송 Type은 다음과 같음
         let config = {
           method: 'POST',
@@ -37,11 +37,12 @@
           body: data,
           // Data의 형식을 고려한 방식으로 읽어야 함
         };
+
         fetch('http://70.12.50.40:9090/myapp/customer.do', config) // 쿼리스트링 필요 없고 (-> 바디부에 다 올 꺼니까 post라서!!)
           .then(function (response) {
-            return response.json(); // 비동기 응답에 대해 json Parsing해서~~
+            return response.text(); // phone => XXXXX&type=xml -> 일반 Form의 전송 Type은 다음과 같음
           })
-          .then(updatePage)
+          .then(updatePage2)
           .catch(function () {
             alert('고객정보 조회 중 문제가 발생하였습니다.');
           });
@@ -54,8 +55,8 @@
         let phone = document.querySelector('#phone').value;
         let data = new URLSearchParams({
           phone: phone,
-          type: 'xml', // xml
-        }); // phone => XXXXX&type=xml -> 일반 Form의 전송 Type은 다음과 같음
+          type: 'json', // json
+        }); // 비동기 응답에 대해 json Parsing해서~~
         let config = {
           method: 'POST',
           headers: {
@@ -65,7 +66,7 @@
         };
         fetch('http://70.12.50.40:9090/myapp/customer.do', config)
           .then(function (response) {
-            return response.text(); // xml
+            return response.json(); // json
           })
           .then(updatePage2)
           .catch(function () {
@@ -94,7 +95,7 @@
     <form method="POST" action="placeOrder.jsp">
       <p>
         Enter your phone number:
-        <input type="text" size="14" name="phone" id="phone" onchange="getCustomerInfo3()" />
+        <input type="text" size="14" name="phone" id="phone" onchange="getCustomerInfo2()" />
       </p>
       <p>Type your order in here:</p>
       <p><textarea name="order" id="order" rows="6" cols="50"></textarea></p>
