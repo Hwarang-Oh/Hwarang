@@ -1,5 +1,7 @@
 window.onload = function () {
   currlogOut();
+  getProgramming();
+  getEssay();
   let logIn = document.querySelector('header #getLogIn');
   logIn.addEventListener('click', goLogIn);
 
@@ -21,7 +23,11 @@ window.onload = function () {
 
   let adminMakePoll = document.querySelector('header #adminFunc');
   adminMakePoll.addEventListener('click', function () {
-    window.open('./0309_PHTML_4_LV3_poll.html', '투표 생성', 'width=400, height=400');
+    window.open(
+      './0309_PHTML_4_LV3_poll.html',
+      '투표 생성',
+      'width=400, height=400'
+    );
   });
   reloadPoll();
 };
@@ -127,4 +133,74 @@ function reloadPoll() {
                     <input type="button" value="결과보기" style="background-color: aliceblue;">
                 </div>
                 <div style="text-align: center; font-weight: bold; padding: 10px 0px;" id="poll-date">투표기간 : ${poll.start_date} ~ ${poll.end_date}</div>`;
+}
+
+function getProgramming() {
+  fetch('./data/programming.xml')
+    .then((response) => response.text())
+    .then((text) => makeHosinoList(text));
+}
+
+function makeHosinoList(data) {
+  let BookList = document.querySelector('.PBookList');
+  let parser = new DOMParser();
+  const xml = parser.parseFromString(data, 'application/xml');
+
+  let Books = xml.querySelectorAll('book');
+  Books.forEach((eachBook) => {
+    let source = eachBook.querySelector('isbn').textContent;
+    let title = eachBook.querySelector('title').textContent;
+    let price = eachBook.querySelector('price').textContent;
+
+    let li = document.createElement('li');
+    li.classList.add('bookBox');
+
+    let fig = document.createElement('figure');
+    li.appendChild(fig);
+
+    let img = document.createElement('img');
+    img.classList.add('book');
+    img.src = './img/0306_IMG/' + source + '.png';
+
+    let figcapt = document.createElement('figcaption');
+    figcapt.innerHTML = `${title}<br>(${price}원)`;
+
+    fig.appendChild(img);
+    fig.appendChild(figcapt);
+    li.appendChild(fig);
+    BookList.appendChild(li);
+  });
+}
+
+function getEssay() {
+  fetch('./data/essay.json')
+    .then((response) => response.json())
+    .then((obj) => makeEssayList(obj));
+}
+
+function makeEssayList(obj) {
+  let essayList = document.querySelector('.EssayList');
+  for (eachEssay of obj) {
+    let source = eachEssay.isbn;
+    let title = eachEssay.title;
+    let price = eachEssay.price;
+
+    let li = document.createElement('li');
+    li.classList.add('bookBox');
+
+    let fig = document.createElement('figure');
+    li.appendChild(fig);
+
+    let img = document.createElement('img');
+    img.classList.add('book');
+    img.src = './img/0306_IMG/' + source + '.png';
+
+    let figcapt = document.createElement('figcaption');
+    figcapt.innerHTML = `${title}<br>(${price}원)`;
+
+    fig.appendChild(img);
+    fig.appendChild(figcapt);
+    li.appendChild(fig);
+    essayList.appendChild(li);
+  }
 }

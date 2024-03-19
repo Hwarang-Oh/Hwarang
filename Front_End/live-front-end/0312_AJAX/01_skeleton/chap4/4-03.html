@@ -33,49 +33,49 @@
       <tbody id="studentinfo"></tbody>
     </table>
     <script>
-      let btn = document.querySelector("#listBtn");
-      btn.addEventListener("click", function () {
+      let btn = document.querySelector('#listBtn');
+      btn.addEventListener('click', function () {
         // TODO : 4-03.json 비동기 호출
       });
 
       function makeList(data) {
         // console.log(typeof data);
-        document.querySelector("table").setAttribute("style", "display: ;");
-        let tbody = document.querySelector("#studentinfo");
+        document.querySelector('table').setAttribute('style', 'display: ;');
+        let tbody = document.querySelector('#studentinfo');
         // let students = data.split("\n");
         initTable();
         data.forEach((student) => {
-          let tr = document.createElement("tr");
+          let tr = document.createElement('tr');
 
-          let idTd = document.createElement("td");
+          let idTd = document.createElement('td');
           idTd.appendChild(document.createTextNode(student.id));
           tr.appendChild(idTd);
 
-          let nameTd = document.createElement("td");
+          let nameTd = document.createElement('td');
           nameTd.appendChild(document.createTextNode(student.name));
           tr.appendChild(nameTd);
 
-          let classTd = document.createElement("td");
+          let classTd = document.createElement('td');
           classTd.appendChild(document.createTextNode(student.class));
           tr.appendChild(classTd);
 
-          let gradeTd = document.createElement("td");
+          let gradeTd = document.createElement('td');
           gradeTd.appendChild(document.createTextNode(student.grade));
           tr.appendChild(gradeTd);
 
           tbody.appendChild(tr);
         });
-        let first = document.querySelector("tr:first-child");
-        first.className = "first-view-bg";
-        first.classList.add("first-view-color");
-        let odd = document.querySelectorAll("tr:nth-child(even)");
+        let first = document.querySelector('tr:first-child');
+        first.className = 'first-view-bg';
+        first.classList.add('first-view-color');
+        let odd = document.querySelectorAll('tr:nth-child(even)');
         odd.forEach(function (td) {
-          td.setAttribute("style", "background: lightgray;");
+          td.setAttribute('style', 'background: lightgray;');
         });
       }
 
       function initTable() {
-        let tbody = document.querySelector("#studentinfo");
+        let tbody = document.querySelector('#studentinfo');
         let len = tbody.rows.length;
         for (let i = len - 1; i >= 0; i--) {
           tbody.deleteRow(i);

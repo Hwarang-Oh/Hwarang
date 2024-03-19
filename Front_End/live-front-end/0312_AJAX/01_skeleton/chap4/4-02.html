@@ -33,51 +33,59 @@
       <tbody id="studentinfo"></tbody>
     </table>
     <script>
-      let btn = document.querySelector("#listBtn");
-      btn.addEventListener("click", function () {
+      let btn = document.querySelector('#listBtn');
+      btn.addEventListener('click', function () {
         // TODO : 4-02.xml 비동기 호출
       });
 
       function makeList(data) {
-        document.querySelector("table").setAttribute("style", "display: ;");
-        let tbody = document.querySelector("#studentinfo");
+        document.querySelector('table').setAttribute('style', 'display: ;');
+        let tbody = document.querySelector('#studentinfo');
         let parser = new DOMParser();
-        const xml = parser.parseFromString(data, "application/xml");
+        const xml = parser.parseFromString(data, 'application/xml');
         // console.log(xml);
         initTable();
-        let students = xml.querySelectorAll("student");
+        let students = xml.querySelectorAll('student');
         students.forEach((student) => {
-          let tr = document.createElement("tr");
+          let tr = document.createElement('tr');
 
-          let idTd = document.createElement("td");
-          idTd.appendChild(document.createTextNode(student.querySelector("id").textContent));
+          let idTd = document.createElement('td');
+          idTd.appendChild(
+            document.createTextNode(student.querySelector('id').textContent)
+          );
           tr.appendChild(idTd);
 
-          let nameTd = document.createElement("td");
-          nameTd.appendChild(document.createTextNode(student.querySelector("name").textContent));
+          let nameTd = document.createElement('td');
+          nameTd.appendChild(
+            document.createTextNode(student.querySelector('name').textContent)
+          );
           tr.appendChild(nameTd);
 
-          let classTd = document.createElement("td");
-          classTd.appendChild(document.createTextNode(student.querySelector("class").textContent));
+          let classTd = document.createElement('td');
+          classTd.appendChild(
+            document.createTextNode(student.querySelector('class').textContent)
+          );
           tr.appendChild(classTd);
 
-          let gradeTd = document.createElement("td");
-          gradeTd.appendChild(document.createTextNode(student.querySelector("grade").textContent));
+          let gradeTd = document.createElement('td');
+          gradeTd.appendChild(
+            document.createTextNode(student.querySelector('grade').textContent)
+          );
           tr.appendChild(gradeTd);
 
           tbody.appendChild(tr);
         });
-        let first = document.querySelector("tr:first-child");
-        first.className = "first-view-bg";
-        first.classList.add("first-view-color");
-        let odd = document.querySelectorAll("tr:nth-child(even)");
+        let first = document.querySelector('tr:first-child');
+        first.className = 'first-view-bg';
+        first.classList.add('first-view-color');
+        let odd = document.querySelectorAll('tr:nth-child(even)');
         odd.forEach(function (td) {
-          td.setAttribute("style", "background: lightgray;");
+          td.setAttribute('style', 'background: lightgray;');
         });
       }
 
       function initTable() {
-        let tbody = document.querySelector("#studentinfo");
+        let tbody = document.querySelector('#studentinfo');
         let len = tbody.rows.length;
         for (let i = len - 1; i >= 0; i--) {
           tbody.deleteRow(i);
