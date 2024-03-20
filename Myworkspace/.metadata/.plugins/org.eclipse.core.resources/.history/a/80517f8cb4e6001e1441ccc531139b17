@@ -1,0 +1,5 @@
+package com.ssafy.jdbc;
+
+public class ConnectionTest {
+
+}

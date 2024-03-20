@@ -1,0 +1,24 @@
+package com.ssafy.jdbc;
+
+public class ConnectionTest {
+	
+	private final String DRIVER = "com.mysql.cj.jdbc.Driver";
+	private final String URL = "jdbc:mysql://localhost:3306/ssafyweb?serverTimezone=UTC";
+	private final String DB_ID = "ssafy";
+	private final String DB_PWD = "ssafy";
+	
+	public ConnectionTest() {
+		// Class를 읽고 메모리에 올리는 역할을 한다. 
+		try {
+			Class.forName(DRIVER);
+			System.out.println("드라이버 로딩 성공!!");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  
+	}
+	
+	public static void main(String[] args) {
+		ConnectionTest ct = new ConnectionTest();
+	}
+}
