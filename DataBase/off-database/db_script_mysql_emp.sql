@@ -1,6 +1,8 @@
-drop database if exists scott;
-create database scott;
-use scott;
+-- drop database if exists scott;
+-- create database scott;
+-- use scott;
+create DATABASE elevenDB;
+use elevenDB;
 
 CREATE TABLE SALGRADE( 
 	GRADE int(2),

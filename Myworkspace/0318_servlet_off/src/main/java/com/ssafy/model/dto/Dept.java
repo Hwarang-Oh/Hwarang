@@ -5,10 +5,8 @@ public class Dept {
 	private String dname;
 	private String loc;
 	
-	public Dept() {
-		super();
-	}
-
+	public Dept() {}
+	
 	public Dept(int deptno, String dname, String loc) {
 		super();
 		this.deptno = deptno;

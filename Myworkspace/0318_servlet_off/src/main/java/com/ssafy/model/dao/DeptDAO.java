@@ -14,124 +14,114 @@ public class DeptDAO {
 
 	// 부서등록
 	public int insertDept(Dept dept) throws SQLException {
-		
-		Connection conn= null;
-		PreparedStatement stmt = null;
-		String sql = "insert into dept(deptno,dname,loc) values(?,?,?)";
-		int rowCount = 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = "insert into dept(deptno, dname, loc) values (?, ?, ?)";
+		int rCnt = 0;
 		try {
+			int cIdx = 1;
 			conn = DBUtil.getConnection();
-			stmt = conn.prepareStatement(sql);
-			stmt.setInt(1, dept.getDeptno());
-			stmt.setString(2, dept.getDname());
-			stmt.setString(3, dept.getLoc());
-			rowCount = stmt.executeUpdate();
-		}finally {
-			DBUtil.close(stmt,conn);
-		}
-		return rowCount;
-	}
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(cIdx++, dept.getDeptno());
+			pstmt.setString(cIdx++, dept.getDname());
+			pstmt.setString(cIdx++, dept.getLoc());
+			rCnt = pstmt.executeUpdate();
+		} finally {
+			DBUtil.close(pstmt, conn);
+		} return rCnt;
+	} 
 	// 부서수정
 	public int updateDept(Dept dept) throws SQLException {
-		
-		Connection conn= null;
-		PreparedStatement stmt = null;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
 		String sql = "update dept set dname = ?, loc = ? where deptno = ?";
-		int rowCount = 0;
+		int rCnt = 0;
 		try {
+			int cIdx = 1;
 			conn = DBUtil.getConnection();
-			stmt = conn.prepareStatement(sql);
-			stmt.setString(1, dept.getDname());
-			stmt.setString(2, dept.getLoc());
-			stmt.setInt(3, dept.getDeptno());
-			rowCount = stmt.executeUpdate();
-		}finally {
-			DBUtil.close(stmt,conn);
-		}
-		return rowCount;
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(cIdx++, dept.getDname());
+			pstmt.setString(cIdx++, dept.getLoc());
+			pstmt.setInt(cIdx++, dept.getDeptno());
+			rCnt = pstmt.executeUpdate();
+		} finally {
+			DBUtil.close(pstmt, conn);
+		} return rCnt;
 	}
+
 	// 부서삭제
 	public int deleteDept(int deptno) throws SQLException {
-		
-		Connection conn= null;
-		PreparedStatement stmt = null;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
 		String sql = "delete from dept where deptno = ?";
-		int rowCount = 0;
+		int rCnt = 0;
 		try {
 			conn = DBUtil.getConnection();
-			stmt = conn.prepareStatement(sql);
-			stmt.setInt(1, deptno);
-			rowCount = stmt.executeUpdate();
-		}finally {
-			DBUtil.close(stmt,conn);
-		}
-		return rowCount;
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, deptno);
+			rCnt = pstmt.executeUpdate(); // 왜 sql을 Argument에 X?
+		} finally {
+			DBUtil.close(pstmt, conn);
+		} return rCnt;
 	}
+		
 	// 부서목록조회
 	public List<Dept> selectDepts() throws SQLException {
-		
-		Connection conn= null;
-		PreparedStatement stmt = null;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "select deptno,dname,loc from dept";
+		String sql = "Select deptno, dname, loc from dept";
 		List<Dept> list = new ArrayList<Dept>();
-		
 		try {
 			conn = DBUtil.getConnection();
-			stmt = conn.prepareStatement(sql);
-			rs = stmt.executeQuery();
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
 			while (rs.next()) {
-				list.add(new Dept(rs.getInt(1), rs.getString("dname"), rs.getString(3)));
+				list.add(new Dept(rs.getInt(1), rs.getString(2), rs.getString(3)));
 			}
-			
-		}finally {
-			DBUtil.close(rs,stmt,conn);
-		}
-		return list;
+		} finally {
+			DBUtil.close(rs, pstmt, conn);
+		} return list;
 	}
+
 	// 부서목록조회 - 부서이름포함검색
 	public List<Dept> selectDepts(String dname) throws SQLException {
-		Connection conn= null;
-		PreparedStatement stmt = null;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-//		String sql = "select deptno,dname,loc from dept where dname like concat('%',?,'%')";
-		String sql = "select deptno,dname,loc from dept where dname like ?";
+		String sql = "Select deptno, dname, loc from dept where dname like ?";
 		List<Dept> list = new ArrayList<Dept>();
-		
 		try {
 			conn = DBUtil.getConnection();
-			stmt = conn.prepareStatement(sql);
-//			stmt.setString(1, dname);
-			stmt.setString(1, "%"+dname+"%");
-			rs = stmt.executeQuery();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%" + dname + "%");
+			rs = pstmt.executeQuery();
 			while (rs.next()) {
-				list.add(new Dept(rs.getInt(1), rs.getString("dname"), rs.getString(3)));
+				list.add(new Dept(rs.getInt(1), rs.getString(2), rs.getString(3)));
 			}
-			
-		}finally {
-			DBUtil.close(rs,stmt,conn);
+		} finally {
+			DBUtil.close(rs, pstmt, conn);
 		}
 		return list;
 	}
+		
 	// 부서조회-deptno
 	public Dept selectDept(int deptno) throws SQLException {
-		
-		Connection conn= null;
-		PreparedStatement stmt = null;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "select deptno,dname,loc from dept where deptno = ?";
-		
+		String sql = "Select deptno, dname, loc from dept where deptno = ?";
+		List<Dept> list = new ArrayList<Dept>();
 		try {
 			conn = DBUtil.getConnection();
-			stmt = conn.prepareStatement(sql);
-			stmt.setInt(1,deptno);
-			rs = stmt.executeQuery();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, deptno);
+			rs = pstmt.executeQuery();
 			if (rs.next()) {
-				return new Dept(rs.getInt(1), rs.getString(2), rs.getString(3));
+				list.add(new Dept(rs.getInt(1), rs.getString(2), rs.getString(3)));
 			}
-		}finally {
-			DBUtil.close(rs,stmt,conn);
-		}
-		return null;
-	}	
+		} finally {
+			DBUtil.close(rs, pstmt, conn);
+		} return null;
+	}
 }
