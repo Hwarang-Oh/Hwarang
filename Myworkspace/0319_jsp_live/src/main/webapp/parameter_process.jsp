@@ -1,31 +1,34 @@
 <%@ page language="java" 
-	info="ÀÌ JSP ÆÄÀÏÀº Á¤¸» Áß¿äÇÑ XXX Á¤º¸"
-	contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-<!-- ÁÖ¼®À¸·Î ³Ö¾îµÎ¸é -> Ä¿¼­¸¦ µÎ¸é È®ÀÎÀÌ µÇ¹ö¸² => info Á¤µµ·Î Ã³¸® °¡´É! -->
+	info="ì´ JSPíŒŒì¼ì€ ì •ë§ ì¤‘ìš”í•œ xxxx ì •ë³´ìžˆì–´."
+	contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!-- ì´ JSPíŒŒì¼ì€ ì •ë§ ì¤‘ìš”í•œ xxxx ì •ë³´ìžˆì–´. -->
 <%
+//1. ì´ë¦„, ë¹„ë²ˆ, ê³¼ì¼ get
 String name = request.getParameter("username");
 String pwd = request.getParameter("userpwd");
 String[] fruit = request.getParameterValues("fruit");
-%>
+//2. logic ì²˜ë¦¬
+%>    
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-<%= name %>(<%= pwd %>)´ÔÀÌ ÁÁ¾ÆÇÏ´Â °úÀÏÀº
+<h1>ê³¼ì¼ ì„ í˜¸ë„ ì¡°ì‚¬(JSP) !!!</h1>
+<%= name %>(<%= pwd %>)ë‹˜ì´ ì¢‹ì•„í•˜ëŠ” ê³¼ì¼ì€
 <%
-if (fruit != null) {
-	for (int i = 0 ; i < fruit.length ; i++) {
+if(fruit != null) {
+	for(int i=0;i<fruit.length;i++) {
 %>
 <%= fruit[i] %>,
-<%	
+<%		
 	}
 } else {
 %>
-¾÷½À´Ï´Ù.
+	ì—†ìŠµë‹ˆë‹¤.
 <%
 }
 %>

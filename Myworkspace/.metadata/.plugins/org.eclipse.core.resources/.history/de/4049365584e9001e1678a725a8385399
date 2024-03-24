@@ -1,0 +1,21 @@
+package com.ssafy.service;
+
+import com.ssafy.dto.Dept;
+
+public interface DeptService {
+	
+	// 부서 등록
+	boolean registerDept(Dept dept) throws Exception;
+	
+	// 부서 수정
+	boolean modifyDept(Dept dept) throws Exception;
+	
+	// 부서 삭제
+	boolean removeDept(Dept dept) throws Exception;
+	
+	boolean registerDept(Dept dept) throws Exception;
+	
+	boolean registerDept(Dept dept) throws Exception;
+	
+	boolean registerDept(Dept dept) throws Exception;
+}

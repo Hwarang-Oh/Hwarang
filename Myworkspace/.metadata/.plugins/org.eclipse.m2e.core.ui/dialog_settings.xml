@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="wizardPage">
+		<list key="groupId">
+			<item value="0320_mvc_live"/>
+			<item value="0318_servlet_board1"/>
+			<item value="0318_servlet_live"/>
+			<item value="0319_1_LV3_BACK"/>
+			<item value="0321_mvc_off"/>
+			<item value="0320_mvc_off"/>
+			<item value="0319_mvc_off"/>
+		</list>
+		<list key="name">
+		</list>
+		<list key="artifactId">
+			<item value="0320_mvc_live"/>
+			<item value="0318_servlet_board1"/>
+			<item value="0318_servlet_live"/>
+			<item value="0319_1_LV3_BACK"/>
+			<item value="0321_mvc_off"/>
+			<item value="0320_mvc_off"/>
+			<item value="0319_mvc_off"/>
+		</list>
+		<list key="version">
+			<item value="0.0.1-SNAPSHOT"/>
+		</list>
+	</section>
+	<section name="org.eclipse.m2e.core.pom.overview">
+	</section>
+	<section name="org.eclipse.m2e.core.pom.dependencies">
+	</section>
+</section>

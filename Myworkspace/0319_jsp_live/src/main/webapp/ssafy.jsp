@@ -1,24 +1,22 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR" import="java.util.Date, java.sql.*" 
-    import ="java.text.*" session="false"
-    %> 
-    <!-- ¼¼¹ÌÄÝ·Ð X -->
-    <!-- ¼Ó¼º »çÀÌ´Â Ç×»ó white Space°¡ ÀÖ¾î¾ß ÇÑ´Ù!! -->
-<%
-  String name = "¿ÀÈ­¶û";
-  Date date = new Date();
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" import="java.util.Date, java.sql.*"
+	import="java.text.*" 
 %>
+<%!
+String name = "ì•ˆíš¨ì¸";
+Date date = new Date();
+%>    
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-<h1>Hello SSAFY JSP!!</h1>
-<h1>¾È³ç ½ÎÇÇ Á¦ÀÌ¿¡½ºÇÇ!</h1>
-<h3><%out.print(name + "´Ô ¾È³ç"); %></h3>
-<h3><%=name %>´Ô ¾È³ç</h3>
-<div>¿À´ÃÀº <%= date %></div>
+<h1>Hello SSAFY JSP!!!</h1>
+<h1>ì•ˆë…• ì‹¸í”¼ ì œì—ìŠ¤í”¼ !!!</h1>
+<h3><% out.print(name + "ë‹˜ ì•ˆë…•"); %></h3>
+<h3><%= name %>ë‹˜ ì•ˆë…•</h3>
+<div>ì˜¤ëŠ˜ì€ <%= date %></div>
 </body>
 </html>

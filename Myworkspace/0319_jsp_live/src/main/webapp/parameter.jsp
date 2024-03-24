@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<% String root = request.getContextPath(); %>    
 <!DOCTYPE html>
 <html lang="ko">
   <head>
@@ -12,6 +13,7 @@
       integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
       crossorigin="anonymous"
     />
+    <script type="text/javascript" src="<%= root %>/js/a.js"></script>
     <title>SSAFY</title>
   </head>
   <body>
@@ -19,46 +21,46 @@
       <div class="row justify-content-center">
         <div class="col-lg-8 col-md-10 col-sm-12">
           <h2 class="my-3 py-3 shadow-sm bg-light text-center">
-            <mark>ÆÄ¶ó¹ÌÅÍ Å×½ºÆ®!!!</mark>
+            <mark>íŒŒë¼ë¯¸í„° í…ŒìŠ¤íŠ¸!!!</mark>
           </h2>
         </div>
         <div class="col-lg-8 col-md-10 col-sm-12">
           <form id="form-param" method="POST" action="">
             <div class="mb-3">
-              <label for="username" class="form-label">ÀÌ¸§ : </label>
+              <label for="username" class="form-label">ì´ë¦„ : </label>
               <input
                 type="text"
                 class="form-control"
                 id="username"
                 name="username"
-                placeholder="ÀÌ¸§..."
+                placeholder="ì´ë¦„..."
               />
             </div>
             <div class="mb-3">
-              <label for="userpwd" class="form-label">ºñ¹Ğ¹øÈ£ : </label>
+              <label for="userpwd" class="form-label">ë¹„ë°€ë²ˆí˜¸ : </label>
               <input
                 type="password"
                 class="form-control"
                 id="userpwd"
                 name="userpwd"
-                placeholder="ºñ¹Ğ¹øÈ£..."
+                placeholder="ë¹„ë°€ë²ˆí˜¸..."
               />
             </div>
-            <div class="mb-3">ÁÁ¾ÆÇÏ´Â °úÀÏ?</div>
+            <div class="mb-3">ì¢‹ì•„í•˜ëŠ” ê³¼ì¼?</div>
             <div class="form-check">
-              <input type="checkbox" class="form-check-input" name="fruit" value="»ç°ú" />
-              <label class="form-check-label">»ç°ú</label>
+              <input type="checkbox" class="form-check-input" name="fruit" value="ì‚¬ê³¼" />
+              <label class="form-check-label">ì‚¬ê³¼</label>
             </div>
             <div class="form-check">
-              <input type="checkbox" class="form-check-input" name="fruit" value="µş±â" />
-              <label class="form-check-label">µş±â</label>
+              <input type="checkbox" class="form-check-input" name="fruit" value="ë”¸ê¸°" />
+              <label class="form-check-label">ë”¸ê¸°</label>
             </div>
             <div class="form-check mb-3">
-              <input type="checkbox" class="form-check-input" name="fruit" value="¼ö¹Ú" />
-              <label class="form-check-label">¼ö¹Ú</label>
+              <input type="checkbox" class="form-check-input" name="fruit" value="ìˆ˜ë°•" />
+              <label class="form-check-label">ìˆ˜ë°•</label>
             </div>
             <div class="col-auto text-center">
-              <button type="button" id="btn-send" class="btn btn-outline-primary mb-3">Àü¼Û</button>
+              <button type="button" id="btn-send" class="btn btn-outline-primary mb-3">ì „ì†¡</button>
             </div>
           </form>
         </div>
@@ -72,14 +74,14 @@
     <script>
       document.querySelector("#btn-send").addEventListener("click", function () {
         if (!document.querySelector("#username").value) {
-          alert("ÀÌ¸§ ÀÔ·Â!!");
+          alert("ì´ë¦„ ì…ë ¥!!");
           return;
         } else if (!document.querySelector("#userpwd").value) {
-          alert("ºñ¹Ğ¹øÈ£ ÀÔ·Â!!");
+          alert("ë¹„ë°€ë²ˆí˜¸ ì…ë ¥!!");
           return;
         } else {
           let form = document.querySelector("#form-param");
-          form.setAttribute("action", "/basic_jsp/parameter_process.jsp");
+          form.setAttribute("action", "<%= root %>/parameter_process.jsp");
           form.submit();
         }
       });

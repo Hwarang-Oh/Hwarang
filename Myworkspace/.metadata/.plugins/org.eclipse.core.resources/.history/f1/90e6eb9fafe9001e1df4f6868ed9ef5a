@@ -1,0 +1,12 @@
+package com.ssafy.model.dao;
+
+import java.sql.SQLException;
+
+import com.ssafy.model.dto.BoardDto;
+
+public interface BoardDao {
+	// 문서 작성
+	int InsertArticle(BoardDto boardDto) throws SQLException;
+	
+	
+}

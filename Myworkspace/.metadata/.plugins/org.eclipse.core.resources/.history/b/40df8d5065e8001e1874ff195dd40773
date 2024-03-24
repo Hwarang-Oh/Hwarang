@@ -1,0 +1,24 @@
+package com.ssafy.controller;
+
+import java.io.IOException;
+
+import com.ssafy.service.DeptService;
+import com.ssafy.service.DeptServiceImpl;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+// HttpServlet을 Extends하는 Method가 가장 편함
+public class DeptListServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	private DeptService deptService = new DeptServiceImpl();
+	
+	// Why doGet으로 했을까?
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		super.doGet(req, resp);
+	}
+}

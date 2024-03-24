@@ -5,57 +5,33 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DBUtil {
-	
-	private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
-	private static final String URL = "jdbc:mysql://localhost:3306/ssafyweb?serverTimezone=UTC";
-	private static final String DB_ID = "ssafy";
-	private static final String DB_PWD = "ssafy";
+
+	private static final String DRIVER_CLASS = "com.mysql.cj.jdbc.Driver";
+	private static final String URL = "jdbc:mysql://localhost:3306/ssafyweb?serverTimeZone=UTC";
+	private static final String USER_NAME = "root";
+	private static final String USER_PW = "admin";
 	
 	static {
 		try {
-			Class.forName(DRIVER);
+			Class.forName(DRIVER_CLASS);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 	}
-
+	
 	public static Connection getConnection() throws SQLException {
-		return DriverManager.getConnection(URL, DB_ID, DB_PWD);
+		return DriverManager.getConnection(URL, USER_NAME, USER_PW);
 	}
 	
-//	public static void close(PreparedStatement pstmt, Connection conn) {
-//		try {
-//			if(pstmt != null)
-//				pstmt.close();
-//			if(conn != null)
-//				conn.close();
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		}
-//	}
-//	
-//	public static void close(ResultSet rs, PreparedStatement pstmt, Connection conn) {
-//		try {
-//			if(rs != null)
-//				rs.close();
-//			if(pstmt != null)
-//				pstmt.close();
-//			if(conn != null)
-//				conn.close();
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		}
-//	}
-	
-	public static void close(AutoCloseable... autoCloseables) {
-		for(AutoCloseable ac : autoCloseables) {
-			if(ac != null) {
+	public static void close(AutoCloseable... resources) {
+		for (AutoCloseable res : resources) {
+			if(res != null) {
 				try {
-					ac.close();
+					res.close();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-			}
+			}			
 		}
 	}
 }
