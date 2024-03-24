@@ -139,7 +139,12 @@
              Documentation at: /docs/config/valve.html
              Note: The pattern used is equivalent to using pattern="common" -->
         <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" pattern="%h %l %u %t &quot;%r&quot; %s %b" prefix="localhost_access_log" suffix=".txt"/>
+<<<<<<< HEAD
       <Context docBase="0320_mvc_live" path="/0320_mvc_live" reloadable="true" source="org.eclipse.jst.jee.server:0320_mvc_live"/></Host>
+=======
+
+      <Context docBase="0318_servlet_live" path="/0318_servlet_live" reloadable="true" source="org.eclipse.jst.jee.server:0318_servlet_live"/></Host>
+>>>>>>> 935563b72c1aad6d60838a4bdae30614ca75ec30
     </Engine>
   </Service>
 </Server>

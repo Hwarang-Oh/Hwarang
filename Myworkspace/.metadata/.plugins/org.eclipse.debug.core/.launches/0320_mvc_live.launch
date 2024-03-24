@@ -2,10 +2,17 @@
 <launchConfiguration type="org.eclipse.wst.server.ui.launchConfigurationType">
     <stringAttribute key="client-id" value="org.eclipse.wst.server.ui.web"/>
     <stringAttribute key="launchable-adapter-id" value="org.eclipse.jst.server.tomcat.web"/>
+<<<<<<< HEAD:Myworkspace/.metadata/.plugins/org.eclipse.debug.core/.launches/0320_mvc_live.launch
     <stringAttribute key="module-artifact" value="org.eclipse.jst.jee.server:0320_mvc_live//"/>
     <stringAttribute key="module-artifact-class" value="org.eclipse.wst.server.core.util.WebResource"/>
     <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
         <listEntry value="/0320_mvc_live"/>
+=======
+    <stringAttribute key="module-artifact" value="org.eclipse.jst.jee.server:0318_servlet_live///index.html"/>
+    <stringAttribute key="module-artifact-class" value="org.eclipse.wst.server.core.util.WebResource"/>
+    <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
+        <listEntry value="/0318_servlet_live"/>
+>>>>>>> 935563b72c1aad6d60838a4bdae30614ca75ec30:Myworkspace/.metadata/.plugins/org.eclipse.debug.core/.launches/_index.html.launch
     </listAttribute>
     <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
         <listEntry value="4"/>

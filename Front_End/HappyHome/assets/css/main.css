@@ -42,10 +42,10 @@
 }
 
 .mainImage .searchTitle {
-  font-size: 35px;
+  font-size: 45px;
   font-weight: bold;
   font-family: 'Noto Sans KR';
-  color: whitesmoke;
+  color: white;
 }
 
 .mainImage .btn-outline-dark {
@@ -131,6 +131,8 @@
   color: gray;
 }
 
-footer #Contact {
-  style: 'max-width: 1500px;';
+footer #ContactInfo {
+  font-family: 'Noto Sans KR';
+  font-size: 20px;
+  color: black;
 }
