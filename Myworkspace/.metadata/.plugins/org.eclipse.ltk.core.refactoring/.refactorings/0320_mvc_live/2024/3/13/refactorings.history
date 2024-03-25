@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Rename type &apos;com.ssafy.model.dto.Board&apos; to &apos;BoardDto&apos;&#x0D;&#x0A;- Original project: &apos;0320_mvc_live&apos;&#x0D;&#x0A;- Original element: &apos;com.ssafy.model.dto.Board&apos;&#x0D;&#x0A;- Renamed element: &apos;com.ssafy.model.dto.BoardDto&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;Board&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src\/main\/java&lt;com.ssafy.model.dto{Board.java[Board" matchStrategy="1" name="BoardDto" qualified="false" references="true" similarDeclarations="false" stamp="1711286387957" textual="false" version="1.0"/>
-</session>

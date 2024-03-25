@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Move element &apos;WEB-INF&apos; to &apos;0318_servlet_board1/src/main/java&apos;&#x0D;&#x0A;- Original project: &apos;0319_1_LV3_BACK&apos;&#x0D;&#x0A;- Destination element: &apos;0318_servlet_board1/src/main/java&apos;&#x0D;&#x0A;- Original element: &apos;WEB-INF&apos;&#x0D;&#x0A;- Update references to refactored element" description="Move folder" destination="=0318_servlet_board1/src\/main\/java" element1="src/main/webapp/WEB-INF" files="0" flags="589830" folders="1" id="org.eclipse.jdt.ui.move" policy="org.eclipse.jdt.ui.moveResources" qualified="false" references="true" stamp="1711264532878" units="0" version="1.0"/>
-</session>
