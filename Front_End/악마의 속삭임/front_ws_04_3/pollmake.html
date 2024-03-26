@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>투표 생성</title>
+	<title>Document</title>
+	<style type="text/css">
+		main {
+			display: flex;
+			flex-direction: column;
+			border: 2px gray solid;
+			border-radius: 5px;
+		}
+		h2 {
+			display: inline;
+		}
+		button {
+			font-size: large;
+			background-color: white;
+		}
+		input {
+			background-color: wheat;
+		}
+        .answerField-text {
+            display: inline;
+            margin: 5px 10px;
+            padding: 5px 30px;
+        }
+		div {
+			padding: 10px 10px;
+		}
+	</style>
+	<script>
+        //MARK: Property
+        class PollVO {
+             constructor(startDate, endDate, question, answers) {
+                this.startDate = startDate;
+                this.endDate = endDate;
+                this.question = question;
+                this.answers = answers;
+             }
+            validate() {
+                if (this.startDate != "" && this.endDate != "" && this.question != "" && this.answers != undefined) {
+                    return !this.answers.includes("") && this.startDate < this.endDate && this.answers.length > 0;
+                }
+                return false;
+            }
+        }
+
+		//MARK: Lifecycle
+		window.onload = function() {
+			document.querySelector("#addQuestionButton").addEventListener('click', function(event){
+				createAnswerInput();
+			});   
+            document.querySelector("#makePollButton").addEventListener('click', function(event) {
+                makePoll();
+            })
+		}
+
+		function createAnswerInput() {
+			const answerInput = document.createElement("input");
+			answerInput.type = "text";
+            answerInput.className = "answerField-text";
+
+            let answerRemove = document.createElement("button");
+            answerRemove.className = "removeAnswerButton"
+            answerRemove.innerText = "삭제";
+            let uuid = crypto.randomUUID();
+            answerRemove.addEventListener('click', function(event){
+                removeAnswerInput(uuid);
+            });
+            
+            let div = document.createElement("div");
+			div.appendChild(answerInput);
+            div.appendChild(answerRemove);
+            div.appendChild(document.createElement("br"));
+            div.id = 'uuid' + uuid;
+
+			var answerField = document.querySelector("#answerField");
+            answerField.appendChild(div);
+		}
+        
+		function removeAnswerInput(id) {
+            document.querySelector('#answerField #uuid' + id).remove();
+		}
+
+        function makePoll() {
+            let startDate = document.querySelector("#startDate").value;
+            let endDate = document.querySelector("#endDate").value;
+            let title = document.querySelector("#question").value;
+            let answers = Array.from(document.querySelectorAll(".answerField-text")).map((elem) => elem.value);
+            let poll = new PollVO(startDate, endDate, title, answers);
+            if (!poll.validate()) {
+                alert("올바르지 않은 형식입니다.");
+                return;
+            }
+            localStorage.setItem("poll", JSON.stringify(poll));
+            alert("투표를 생성했습니다.");
+            opener.parent.reloadPoll();
+            window.close();
+        }   
+	</script>
+</head>
+<body>
+	<main>
+		<h1 style="align-self: center;">투표 만들기</h2>
+        <div>
+            <h2>시작일</h2>
+            <input type="date" name="" id="startDate">
+            <h2>종료일</h2>
+            <input type="date" name="" id="endDate">
+        </div>
+
+		<div>
+			<h2>질문 내용</h2>
+			<input type="text" placeholder="질문내용..." id="question">
+		</div>
+		<div>
+			<h2>답변 항목</h2>
+			<button type="button" id="addQuestionButton">추가</button>
+		</div>
+		<div id="answerField">
+            <div><input type="text" class="answerField-text" name=""><br/></div>
+		</div>
+		<div style="align-self: center;" id="makePollButton">
+			<button>투표 생성</button>
+		</div>
+	</main>
+</body>
+</html>

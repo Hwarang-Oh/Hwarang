@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>SSAFY BOOK CAFE</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="img/favicon.ico" />
+    <link type="text/css" rel="stylesheet" href="./css/main.css" />
+    <script>
+        //MARK: Property
+        class PollVO {
+             constructor(startDate, endDate, question, answers) {
+                this.startDate = startDate;
+                this.endDate = endDate;
+                this.question = question;
+                this.answers = answers;
+             }
+            validate() {
+                if (this.startDate != "" && this.endDate != "" && this.question != "" && this.answers != undefined) {
+                    return !this.answers.includes("") && this.startDate < this.endDate && this.answers.length > 0;
+                }
+                return false;
+            }
+        }
+        const isLoginWrap = {
+            isLogin: false,
+            getIsLogin() { return isLogin; },
+            setIsLogin(value) {
+                if (value == isLoginWrap.getIsLogin) { return; }
+                isLogin = value;
+
+                Array.from(document.getElementsByClassName("before-login")).forEach(element => {
+                    element.style.display = isLogin ? "none" : "inline";
+                });
+                Array.from(document.getElementsByClassName("after-login")).forEach(element => {
+                    element.style.display = !isLogin ? "none" : "inline";
+                });
+            }
+        };
+        const isFoldAllWrap = {
+            isFold: true,
+            getIsFold() { return this.isFold; },
+            toggle() {
+                this.setIsFold(!this.isFold);
+            },
+            setIsFold(value) {
+                if (value == this.isFold) { return; }
+                this.isFold = value;
+                var toggle = document.querySelector("#storeToggle");
+                toggle.children[0].innerText = "전국매장" + (this.isFold ? "펼치기" : "열기");
+                document.querySelectorAll(".store-spot").forEach(element => {
+                    element.style.display = this.isFold ? "none" : null;
+                });
+            }
+        }
+
+        //MARK: Lifecycle
+        window.onload = function () {
+            isLoginWrap.setIsLogin(false);
+            isFoldAllWrap.setIsFold(true);
+            document.querySelectorAll(".store-city").forEach(element => {
+                element.addEventListener('click', function (event) {
+                    element.children[1].style.display = element.children[1].style.display == "none" ? null : "none";
+                    console.log(element.children[1].style.display);
+                });
+            });
+            document.querySelector("#adminButton").addEventListener('click', function (event) {
+                window.open("./pollmake.html", "a", "width=400, height=400, left=100, top=50")
+            });
+            reloadPoll();
+        }
+
+
+        //MARK: Method
+        function performLogin() {
+            var id = prompt("아이디 입력", "ssafy");
+            if (id != "ssafy") { return; }
+            var pw = prompt("비밀번호 입력", "1234");
+            if (pw != "1234") { return; }
+            alert("로그인 성공!!")
+            isLoginWrap.setIsLogin(true);
+        }
+        function performToggleAll() {
+            isFoldAllWrap.toggle();
+        }
+        function reloadPoll() {
+            if (localStorage.getItem("poll") == null) {
+                document.querySelector("#notpoll").style.display = null;
+                document.querySelector("#poll").style.display = "none";
+                return;
+            }
+            document.querySelector("#notpoll").style.display = "none";
+            document.querySelector("#poll").style.display = null;
+            let poll = JSON.parse(localStorage.getItem("poll"));
+            let pollOptions = "";
+            for(let option of poll.answers) {
+                pollOptions += `<li>
+                                    <input type="radio" name="poll" id="${option}">
+                                    <caption>${option}</caption>
+                                    </li>`
+            }
+            document.querySelector("#poll").innerHTML = `<p style="text-align: center;">[ 당신의 선택 ]</p>
+                <p style="font-weight: bold; text-indent: 5px; text-wrap: wrap;" id="poll-title">${poll.question}</p>
+                <ul class="poll-options">`
+                    + pollOptions +
+                `</ul>
+                <div style="display: flex; justify-content: flex-end; padding: 0px 10px 10px 0px;">
+                    <input type="submit" value="투표하기"
+                        style="padding: 5px; margin: 0px 10px; background-color: blueviolet; color: aliceblue;">
+                    <input type="button" value="결과보기" style="background-color: aliceblue;">
+                </div>
+                <div style="text-align: center; font-weight: bold; padding: 10px 0px;" id="poll-date">투표기간 : ${poll.startDate} ~ ${poll.endDate}</div>`
+        }
+    </script>
+</head>
+
+<body>
+    <header>
+        <span id="header-left">
+            <a href="SSAFY" class="header-title">SSAFY</a>
+            <a href="BookCafe" class="header-title">BookCafe</a>
+            <a href="공지사항" style="align-self: flex-start;">공지사항</a>
+        </span>
+        <span id="header-right">
+            <a href="javascript:performLogin()" class="before-login">로그인</a>
+            <a href="회원가입" class="before-login">회원가입</a>
+            <a href="로그아웃" class="after-login">로그아웃</a>
+            <a href="마이페이지" class="after-login">마이페이지</a>
+            <a class="after-login" id="adminButton">관리자</a>
+        </span>
+    </header>
+    <notHeader>
+        <aside>
+            <img src="./img/noimg.png" alt="" class="before-login">
+            <img src="./img/profile.png" alt="" class="after-login">
+            <div id="stores">
+                <div id="storeToggle" onclick='performToggleAll();'>
+                    <p>전국매장접기</p>
+                </div>
+                <ul>
+                    <li class="store-city">
+                        <span>서울</span>
+                        <ul class="store-spot">
+                            <li>역삼점</li>
+                            <li>선릉점</li>
+                        </ul>
+                    </li>
+                    <li class="store-city">
+                        <span>대전</span>
+                        <ul class="store-spot">
+                            <li>학하점</li>
+                            <li>봉명점</li>
+                        </ul>
+                    </li>
+                    <li class="store-city">
+                        <span>구미</span>
+                        <ul class="store-spot">
+                            <li>인동점</li>
+                            <li>공단점</li>
+                        </ul>
+                    </li>
+                    <li class="store-city">
+                        <span>광주</span>
+                        <ul class="store-spot">
+                            <li>하남산단점</li>
+                            <li>광주역점</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div id="notpoll" style="border: 1px gray solid; border-radius: 5px; text-align: center;">
+                <h3>진행중인 투표가 없습니다.</h3>
+            </div>
+            <div id="poll">
+            </div>
+        </aside>
+        <main>
+            <article id="language">
+                <h3>[ 프로그래밍 언어 ]</h3>
+                <div class="books">
+                    <ul>
+                        <li>
+                            <img src="./img/book/p_book01.png" alt="" width="200">
+                            <figcaption>Do it! 점프 투 파이썬 (18,000원)</figcaption>
+                        </li>
+                        <li>
+                            <img src="./img/book/p_book02.png" alt="" width="200">
+                            <figcaption>HTML5 API 프로그래밍 (23,000원)</figcaption>
+                        </li>
+                        <li>
+                            <img src="./img/book/p_book03.png" alt="" width="200">
+                            <figcaption>백견불여일타 Vue.js입문 (22,000원)</figcaption>
+                        </li>
+                        <li>
+                            <img src="./img/book/p_book04.png" alt="" width="200">
+                            <figcaption>Java 프로그래밍 (26,500원)</figcaption>
+                        </li>
+                    </ul>
+                </div>
+            </article>
+            <article id="essay">
+                <h3>[ 에세이 ]</h3>
+                <ul>
+                    <li>
+                        <img src="./img/book/e_book01.png" alt="" width="200">
+                        <figcaption>2인조 (14,800원)</figcaption>
+                    </li>
+                    <li>
+                        <img src="./img/book/e_book02.png" alt="" width="200">
+                        <figcaption>안녕, 소중한 사람 (15,000원)</figcaption>
+                    </li>
+                    <li>
+                        <img src="./img/book/e_book03.png" alt="" width="200">
+                        <figcaption>꽃을 보든 너를 본다 (10,000원) </figcaption>
+                    </li>
+                    <li>
+                        <img src="./img/book/e_book04.png" alt="" width="200">
+                        <figcaption>곰돌이 푸, 행복한 일은 매일 있어 (12,000원)</figcaption>
+                    </li>
+                </ul>
+            </article>
+            <div id="articles">
+                <article class="writing">
+                    <h3>[ 인기글 ]</h3>
+                    <table id="pop" style="padding: 10px;">
+                        <thead>
+                            <tr>
+                                <th>제목</th>
+                                <th>작성자</th>
+                                <th>조회수</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>자바공부 쉽게하는법!!</td>
+                                <td>이쎄림</td>
+                                <td>1756</td>
+                            </tr>
+                            <tr>
+                                <td>알고리즘은 자바? 파이썬?</td>
+                                <td>홍정밍</td>
+                                <td>998</td>
+                            </tr>
+                            <tr>
+                                <td>스프링 정복하기~</td>
+                                <td>김나켠</td>
+                                <td>856</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </article>
+                <article class="writing">
+                    <h3>[ 최신글 ]</h3>
+                    <table id="new">
+                        <thead>
+                            <tr>
+                                <th>제목</th>
+                                <th>작성자</th>
+                                <th>조회수</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>web 관련 질문있어요</td>
+                                <td>이주녕</td>
+                                <td>12</td>
+                            </tr>
+                            <tr>
+                                <td>vuejs는 이렇게 공부해보세요.</td>
+                                <td>조밍기</td>
+                                <td>998</td>
+                            </tr>
+                            <tr>
+                                <td>꽃길만 걸어요.</td>
+                                <td>류해면</td>
+                                <td>856</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </article>
+            </div>
+        </main>
+    </notHeader>
+    <footer>
+        <ul>
+            <li>
+                <a href="카페소개">카페소개</a>
+            </li>
+            <li>
+                <a href="개인정보처리방침">개인정보처리방침</a>
+            </li>
+            <li>
+                <a href="이용약관">이용약관</a>
+            </li>
+            <li>
+                <a href="오시는길">오시는길</a>
+            </li>
+            <li>
+                &copy SSAFY Corp.
+            </li>
+        </ul>
+    </footer>
+
+</body>
+
+</html>

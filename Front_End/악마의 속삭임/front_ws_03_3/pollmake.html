@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>투표 생성</title>
+	<title>Document</title>
+	<style type="text/css">
+		main {
+			display: flex;
+			flex-direction: column;
+			border: 2px gray solid;
+			border-radius: 5px;
+		}
+		h2 {
+			display: inline;
+		}
+		button {
+			font-size: large;
+			background-color: white;
+		}
+		input {
+			background-color: wheat;
+		}
+		div {
+			padding: 10px 10px;
+		}
+	</style>
+	<script>
+		var answerCount = 0;
+		var inputs = [];
+		//MARK: Lifecycle
+		window.onload = function() {
+			document.querySelector("#removeAnswerButton").style.display = "none";
+			document.querySelector("#addQuestionButton").addEventListener('click', function(event){
+				createAnswerInput();
+			});   
+			document.querySelector("#removeAnswerButton").addEventListener('click', function(event){
+				removeAnswerInput();
+			});
+		}
+
+		function createAnswerInput() {
+			if (inputs.length > 0) {
+				inputs[inputs.length-1].style.display = "block";
+			}
+
+			const answerInput = document.createElement("input");
+			answerInput.type = "text";
+			answerInput.style.display = "inline";
+			answerInput.style.margin = "5px 10px";
+			answerInput.style.padding = "5px 30px";
+			inputs.push(answerInput);			
+
+			var answerField = document.querySelector("#answerField");
+			answerField.insertBefore(answerInput, answerField.lastElementChild);
+
+			document.querySelector("#removeAnswerButton").style.display = "inline";
+		}
+		function removeAnswerInput() {
+			inputs.pop().remove()
+			if (inputs.length == 0) {
+				document.querySelector("#removeAnswerButton").style.display = "none";
+			}
+			inputs[inputs.length-1].style.display = "inline";
+		}
+	</script>
+</head>
+<body>
+	<main>
+		<h1 style="align-self: center;">투표 만들기</h2>
+		<div>
+			<h2>질문 내용</h2>
+			<input type="text" placeholder="질문내용...">
+		</div>
+		<div>
+			<h2>답변 항목</h2>
+			<button type="button" id="addQuestionButton">추가</button>
+		</div>
+		<div id="answerField">
+			<button type="button" id="removeAnswerButton">삭제</button>
+		</div>
+		<div style="align-self: center;">
+			<button>투표 생성</button>
+		</div>
+	</main>
+</body>
+</html>
