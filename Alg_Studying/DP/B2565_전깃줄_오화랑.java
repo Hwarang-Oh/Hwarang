@@ -8,14 +8,6 @@ public class B2565_전깃줄_오화랑 {
             this.x = x;
             this.y = y;
         }
-
-        @Override
-        public String toString() {
-            return "Line{" +
-                    "x=" + x +
-                    ", y=" + y +
-                    '}';
-        }
     }
     static PriorityQueue<Line> lineList = new PriorityQueue<>(new Comparator<Line>() {
         @Override
@@ -41,7 +33,37 @@ public class B2565_전깃줄_오화랑 {
         while (!lineList.isEmpty()) { // 시작점을 기준으로 End 지점에 대한 수열 생성 -> 최장증가수열의 길이를 구하면 된다.
             lines[index++] = lineList.poll().y;
         }
-        
+        System.out.println(Arrays.toString(lines));
+
+        int[] memo = new int [size];
+        int currHead, cnt;
+        for (int i = 0 ; i < size ; i++) {
+            currHead = lines[i];
+            cnt = 0;
+            for (int j = i + 1; j < size; j++) {
+                if (lines[j] > currHead) {
+                    currHead = lines[j];
+                    cnt++;
+                }
+            }
+            memo[i] = cnt;
+        }
+        System.out.println(Arrays.toString(memo));
+
+        int maxCnt = Integer.MIN_VALUE;
+        for (int i = size - 1 ; i >= 0 ; i--) {
+            currHead = lines[i];
+            cnt = memo[i];
+            for (int j = i + 1 ; j < size ; j++) {
+                if (lines[j] > currHead) {
+                    cnt =  Math.max(cnt, memo[j] + 1);
+                }
+            }
+            memo[i] = cnt;
+            maxCnt = Math.max(maxCnt, memo[i]);
+        }
+        System.out.println(Arrays.toString(memo));
+        System.out.println(size - maxCnt - 1);
     }
 }
 
