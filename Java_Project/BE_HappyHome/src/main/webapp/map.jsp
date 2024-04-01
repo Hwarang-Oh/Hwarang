@@ -1,12 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8" />
     <title>다음 지도 API</title>
-    <script type="text/javascript" src="http://dapi.kakao.com/v2/maps/sdk.js?appkey=3b0744fab3aecc6b20f2a1b03967b619&libraries=services">
-    </script>
+    <script
+      type="text/javascript"
+      src="http://dapi.kakao.com/v2/maps/sdk.js?appkey=3b0744fab3aecc6b20f2a1b03967b619&libraries=services"
+    ></script>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -145,6 +146,49 @@
         </div>
       </div>
     </div>
-        <script src="./assets/js/map.js"></script>
+    <script src="./assets/js/map.js"></script>
+  </body>
+</html>
+
+<%@page import="java.util.List"%> <%@ page language="java" contentType="text/html; charset=UTF-8"
+pageEncoding="UTF-8"%> <%@ taglib uri= "http://java.sun.com/jsp/jstl/core" prefix="c %>
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+      crossorigin="anonymous"
+    ></script>
+
+    <title>Insert title here</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row mt-3">
+        <h2 class="bg-primary text-light text-center">도서 목록</h2>
+      </div>
+      <div class="row">
+        <table class="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th>번호</th>
+              <th>부서번호</th>
+              <th>부서이름</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
   </body>
 </html>
