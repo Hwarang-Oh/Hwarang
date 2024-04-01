@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>아기 상어</title>
+        <style>
+            td {
+                width: 50px;
+                height: 50px;
+                text-align: center;
+                vertical-align: middle;
+                border: 1px solid black;
+            }
+
+            .shark {
+                background-color: lightblue;
+            }
+
+            .fish {
+                background-color: lightgreen;
+            }
+            .melt {
+                background-color: rgb(186, 230, 173);
+            }
+            .reds {
+                background-color: #ff0000;
+            }
+        </style>
+    </head>
+
+    <body>
+        <section class="main" style="display: flex; justify-content: center; align-items: center">
+            <div style="display: flex; flex-direction: column; align-items: center">
+                <textarea id="mapInput" placeholder="테스트 케이스를 복붙 해주세요" rows="10" cols="60"></textarea
+                ><br />
+                <div style="margin: 10px 0">
+                    <button onclick="initialize()">맵 생성</button>
+                    <button onclick="moveShark()">이동</button>
+                </div>
+
+                <div style="margin-bottom: 16px">
+                    <span id="timer">0</span> seconds elapsed | Shark size:
+                    <span id="sharkSize">2</span>
+                </div>
+                <table id="ocean" style="margin: 0 auto"></table>
+            </div>
+        </section>
+
+        <script>
+            const ocean = document.getElementById('ocean');
+            const mapInput = document.getElementById('mapInput');
+            const timerSpan = document.getElementById('timer');
+            const sharkSizeSpan = document.getElementById('sharkSize');
+            let gridSize, shark, fishes, timer, grid;
+
+            function createOcean() {
+                let html = '<tbody>';
+                for (let y = 0; y < gridSize; y++) {
+                    html += '<tr>';
+                    for (let x = 0; x < gridSize; x++) {
+                        const fish = fishes.find((f) => f.x === x && f.y === y);
+                        const content = shark.x === x && shark.y === y ? `S${shark.size}` : fish ? `F${fish.size}` : '';
+                        const cellClass = shark.x === x && shark.y === y ? 'shark' : fish ? 'fish' : '';
+                        html += `<td  id="x${x}y${y}"  class="${cellClass}">${content}</td>`;
+                    }
+                    html += '</tr>';
+                }
+                html += '</tbody>';
+                ocean.innerHTML = html;
+            }
+
+            function updateTimer() {
+                timerSpan.textContent = timer;
+                sharkSizeSpan.textContent = shark.size;
+            }
+
+            function initialize() {
+                console.log(mapInput.value);
+                const inputLines = mapInput.value.trim().split('\n');  //텍스트에어리아에서 읽고 한줄씨 잘라써 배열 
+                console.log(inputLines);
+                gridSize = +inputLines[0];
+                grid = inputLines.slice(1).map((line) => line.split(' ').map(Number));
+                fishes = [];
+                shark = { x: 0, y: 0, size: 2, eaten: 0 };
+
+                grid.forEach((row, y) => {
+                    row.forEach((cell, x) => {
+                        const size = cell;
+                        if (size === 9) {
+                            shark.x = x;
+                            shark.y = y;
+                            grid[y][x] = 0;
+                        } else if (size > 0) {
+                            fishes.push({ x, y, size });
+                            grid[y][x] = 0;
+                        }
+                    });
+                });
+
+                timer = 0;
+                updateTimer();
+                createOcean();
+            }
+
+            function bfs(start, end) {
+                const queue = [{ x: start.x, y: start.y, path: [] }];
+                const visited = Array.from({ length: gridSize }, () => Array(gridSize).fill(false));
+                visited[start.y][start.x] = true;
+
+                while (queue.length > 0) {
+                    const { x, y, path } = queue.shift();
+
+                    if (x === end.x && y === end.y) return path;
+
+                    [
+                        [-1, 0],
+                        [1, 0],
+                        [0, -1],
+                        [0, 1],
+                    ].forEach(([dx, dy]) => {
+                        const newX = x + dx;
+                        const newY = y + dy;
+
+                        if (newX >= 0 && newY >= 0 && newX < gridSize && newY < gridSize && !visited[newY][newX]) {
+                            const cellFish = fishes.find((f) => f.x === newX && f.y === newY);
+                            const cellValue = cellFish ? cellFish.size : 0;
+
+                            if (!cellValue || cellValue <= shark.size) {
+                                visited[newY][newX] = true;
+                                queue.push({
+                                    x: newX,
+                                    y: newY,
+                                    path: [...path, { x: newX, y: newY }],
+                                });
+                            }
+                        }
+                    });
+                }
+
+                return null;
+            }
+
+            function moveShark() {
+                if (!fishes.length) {
+                    alert(`정답 : ${timer}초`);
+                    return;
+                }
+
+                const edibleFishes = fishes.filter((fish) => fish.size < shark.size);
+                if (!edibleFishes.length) {
+                    alert(`정답 : ${timer}초`);
+                    return;
+                }
+
+                let minPath = null;
+                let targetFish = null;
+
+                edibleFishes.forEach((fish) => {
+                    const path = bfs(shark, fish);
+                    if (path && (!minPath || path.length < minPath.length)) {
+                        minPath = path;
+                        targetFish = fish;
+                    }
+                });
+
+                if (!minPath) {
+                    alert(`정답 : ${timer}초`);
+                    return;
+                }
+                // 먹힌 물고기를 빼고 먹힌 물고기 위치로 이동
+                fishes = fishes.filter((fish) => fish !== targetFish);
+                shark.eaten++;
+                if (shark.eaten === shark.size) {
+                    shark.size++;
+                    shark.eaten = 0;
+                }
+                
+                moveOneStep(minPath,targetFish);
+            }
+
+            function moveOneStep(path,tg) {
+                if (!path.length) return;
+
+                const { x, y } = path.shift();
+                shark.x = x;
+                shark.y = y;
+                timer++;
+                updateTimer();
+                createOcean();
+                //-- 추가 타겟 위치를 red로 
+                //-- 한칸차이날때 red가 남아 있게 된다.
+                if(tg!=null){
+                    //console.log(tg);
+                    const giji=document.querySelector(`#x${tg.x}y${tg.y}`);
+                    giji.setAttribute("class","reds");
+                    //console.log(ocean.innerHTML);
+                }
+
+                if (path.length) {
+                    const startTime = new Date().getTime();
+                    setTimeout(() => {
+                        const endTime = new Date().getTime();
+                        const deltaTime = endTime - startTime;
+
+                        if (deltaTime >= 500) {
+                            moveOneStep(path);
+                        }
+                    }, 500);
+                }
+            }
+
+            initialize();
+        </script>
+    </body>
+</html>
+
+<!--
+6
+5 4 3 2 3 4
+4 3 2 3 4 5
+3 2 9 5 6 6
+2 1 2 3 4 5
+3 2 1 6 5 4
+6 6 6 6 6 6
+
+
+
+
+ -->
