@@ -41,7 +41,33 @@ public class B4485_녹색옷입은애가젤다지_오화랑 {
         System.out.print(sb);
     }
     public static void getCost(int size) {
+        int[][] move = { {1, 0}, {0, -1}, {-1, 0}, {0, 1} };
+        Queue<pair> queue = new ArrayDeque<>();
+        visited[0][0] = true;
+        costVisited[0][0] = Map[0][0];
+        queue.offer(new pair(0, 0, Map[0][0]));
+        pair tempPair;
+        int cX, cY, cCost, nX, nY;
+        while (!queue.isEmpty()) {
+            tempPair = queue.poll();
+            cX = tempPair.x;
+            cY = tempPair.y;
+            cCost = tempPair.cost;
 
+            if (cX == size - 1 && cY == size - 1) {
+                minCost = Math.min(minCost, cCost);
+            }
+
+            for (int[] eachM : move) {
+                nX = cX + eachM[0];
+                nY = cY + eachM[1];
+                if (nX < 0 || nY < 0 || nX >= size || nY >= size) continue;
+                if (visited[nX][nY] && costVisited[nX][nY] <= cCost + Map[nX][nY]) continue;
+                visited[nX][nY] = true;
+                costVisited[nX][nY] = cCost + Map[nX][nY];
+                queue.offer(new pair(nX, nY, costVisited[nX][nY]));
+            }
+        }
     }
 }
 
