@@ -40,3 +40,13 @@ APP 풀어보기 -> O -> 최적화 필요하다
 -> 그냥 중복순열을 하면서, 기능을 돌리는 것이 낫다. 
 
 * 펜윅트리 => 빠르고, Seg Tree 보다 메모리 1/2 ,좋은 Algorithm
+
+* 해싱 함수의 단방향적인 성격
+=> 민감한 정보 -> data -> 해시함수 -> hash => 역 유추가 어려움
+=> 해쉬 함수 -> SHA - 2 ~ 3;
+
+* Naver News API
+uHNoMw54UkermiqiUmnz
+IPGeKIYAce
+
+* 대규모 시스템 설계 면접 준비 , Effective
