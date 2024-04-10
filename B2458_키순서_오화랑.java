@@ -16,6 +16,8 @@ public class B2458_키순서_오화랑 {
         studList = new student[sNum + 1];
         for (int i = 1 ; i <= sNum ; i++) studList[i] = new student();
 
+
+
         int s1, s2;
         for (int i = 1 ; i <= optNum ; i++) {
             st = new StringTokenizer(input.readLine());
@@ -44,6 +46,7 @@ public class B2458_키순서_오화랑 {
             System.out.println(i++ + "번째 학생 lose");
             while(!each.loseMemo.isEmpty()) System.out.print(each.loseMemo.poll());
             System.out.println();
+
         }
 
 
