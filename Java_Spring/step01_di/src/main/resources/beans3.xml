@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
+    
+<!--    <bean id="greetingService" class="com.ssafy.step3.setter.autowire.GreetingServiceImpl" autowire="byType">
+	</bean>-->
+	
+	<bean id="greetingService" class="com.ssafy.step3.setter.autowire.GreetingServiceImpl" autowire="byName">
+	</bean>
+
+    <bean id="outputter" class="com.ssafy.step3.setter.autowire.OutputServiceConsole"></bean>
+    <bean id="outputterFile" class="com.ssafy.step3.setter.autowire.OutputServiceFile"></bean>
+    
+</beans>
+<!--Primary = true -> Type이 같은 상황에 대비하여 AutoWire의 우선순위 결정 -->
