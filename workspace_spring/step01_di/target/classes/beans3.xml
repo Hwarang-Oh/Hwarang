@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+  <!-- Bean 등록 -->
+  <!-- <bean id="greetingService" class="com.ssafy.step3.autowire.GreetingServiceImpl"
+  autowire="byType" /> -->
+  <bean id="greetingService" class="com.ssafy.step3.autowire.GreetingServiceImpl"
+    autowire="byName" />
+
+  <bean id="outputter" class="com.ssafy.step3.autowire.OutputServiceConsole"></bean>
+
+  <!-- <bean id="outputterFile" class="com.ssafy.step3.autowire.OutputServiceConsole"
+  primary="true"></bean> -->
+  <bean id="outputterFile" class="com.ssafy.step3.autowire.OutputServiceFile"></bean>
+</beans>
