@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.ssafy.model.dao.DeptDAO;
-import com.ssafy.model.dao.DeptDAOImpl;
 import com.ssafy.model.dto.Dept;
 
 @Service
