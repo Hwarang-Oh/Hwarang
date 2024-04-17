@@ -13,6 +13,5 @@ public class temp {
             }
             sb.append("\n");
         }
-        System.out.println(sb);
     }
 }
