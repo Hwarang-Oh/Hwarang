@@ -11,24 +11,13 @@ uri="jakarta.tags.core" %>
       rel="stylesheet"
       integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
       crossorigin="anonymous" />
-    <title>SSAFY 도서 관리</title>
+    <title>SSAFY 영화 관리</title>
   </head>
   <body>
-    <%@ include file="include/header.jsp" %>
     <div class="container mt-3">
-      <h2>SSAFY 도서 등록</h2>
-      <form action="main" method="post">
-        <input type="hidden" name="action" value="regist" />
-        <div class="mb-3 mt-3">
-          <label for="isbn">도서 번호</label>
-          <input
-            type="text"
-            class="form-control"
-            id="isbn"
-            placeholder="Enter ISBN"
-            name="isbn"
-            required="required" />
-        </div>
+      <h2>SSAFY 영화 등록</h2>
+      <form action="${root}/regist" method="post">
+        <!-- <input type="hidden" name="action" value="regist" /> -->
         <div class="mb-3 mt-3">
           <label for="title">제목</label>
           <input
@@ -40,35 +29,37 @@ uri="jakarta.tags.core" %>
             required="required" />
         </div>
         <div class="mb-3 mt-3">
-          <label for="author">저자</label>
+          <label for="author">감독</label>
           <input
             type="text"
             class="form-control"
-            id="author"
-            placeholder="Enter Author"
-            name="author"
+            id="director"
+            placeholder="Enter Director"
+            name="director"
             required="required" />
         </div>
         <div class="mb-3">
-          <label for="price">가격</label>
+          <label for="price">장르</label>
           <input
             type="text"
             class="form-control"
-            id="price"
-            placeholder="Enter Price"
-            name="price"
+            id="genre"
+            placeholder="Enter Genre"
+            name="genre"
             required="required" />
         </div>
         <div class="mb-3">
-          <label for="desc">상세 설명</label>
+          <label for="desc">상영 시간</label>
           <input
             type="text"
             class="form-control"
-            id="desc"
-            placeholder="Enter Description"
-            name="desc" />
+            id="runningTime"
+            placeholder="Enter RunningTime"
+            name="runningTime"
+            required="required" />
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="button" class="btn btn-primary">Delete</button>
       </form>
     </div>
   </body>
