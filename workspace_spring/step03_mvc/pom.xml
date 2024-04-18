@@ -245,6 +245,12 @@
       <artifactId>commons-fileupload</artifactId>
       <version>${commons-fileupload-version}</version>
     </dependency>
+
+    <dependency>
+      <groupId>com.zaxxer</groupId>
+      <artifactId>HikariCP</artifactId>
+      <version>5.1.0</version>
+    </dependency>
   </dependencies>
 
   <build>
@@ -285,4 +291,5 @@
       </plugins>
     </pluginManagement>
   </build>
+
 </project>

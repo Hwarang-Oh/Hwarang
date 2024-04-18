@@ -4,6 +4,11 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+/**
+ * @param : 0418_Interceptor_Part
+ *          Pooling으로 바꿀 것임
+ */
+
 public class DBUtil {
 
 	private static final String DRIVER_CLASS = "com.mysql.cj.jdbc.Driver";

@@ -11,6 +11,8 @@ uri="jakarta.tags.core" prefix="c" %>
     <div class="container">
       <div class="row mt-3">
         <h2 class="bg-primary text-light text-center">부서 목록</h2>
+        <h4 class="bg-primary text-light text-center">${msg}</h4>
+        <!--EL의 장점 Null 처리!! 240418 InterCeptor -->
       </div>
       <div class="row">
         <table class="table table-striped table-hover">
@@ -33,9 +35,7 @@ uri="jakarta.tags.core" prefix="c" %>
                     <td>${status.count}</td>
                     <td>${dept.deptno}</td>
                     <td>
-                      <a href="${root}/dept/detail?deptno=${dept.deptno}"
-                        >${dept.dname}</a
-                      >
+                      <a href="${root}/dept/detail?deptno=${dept.deptno}">${dept.dname}</a>
                     </td>
                   </tr>
                 </c:forEach>

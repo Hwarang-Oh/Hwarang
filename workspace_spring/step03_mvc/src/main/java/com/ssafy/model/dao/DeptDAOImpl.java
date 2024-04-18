@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.sql.DataSource;
+
 import org.springframework.stereotype.Repository;
 
 import com.ssafy.model.dto.Dept;
@@ -14,6 +16,18 @@ import com.ssafy.util.DBUtil;
 
 @Repository
 public class DeptDAOImpl implements DeptDAO {
+	/**
+	 * @param : 0418_Interceptor_Part
+	 *          Connection Pool 설정
+	 */
+
+	private DataSource ds; // 외부 Library 내가 Annotation을 붙일 수 없음 -> DAO는 Root에 있음 , ds는 Servelt 부모 자식 관계로 인해
+	// root context에 bean 등록!!
+
+	public DeptDAOImpl(DataSource ds) { // 값 주입 -> Driver Class , DB ID, PW, wait 여부 => ViewResolver처럼 prefix / suffix로
+		this.ds = ds;
+		// 줄 수 있음 ( 값 주입 )
+	}
 
 	// 부서등록
 	@Override
@@ -24,7 +38,7 @@ public class DeptDAOImpl implements DeptDAO {
 		String sql = "insert into dept(deptno,dname,loc) values(?,?,?)";
 		int rowCount = 0;
 		try {
-			conn = DBUtil.getConnection();
+			conn = ds.getConnection();
 			stmt = conn.prepareStatement(sql);
 			stmt.setInt(1, dept.getDeptno());
 			stmt.setString(2, dept.getDname());
@@ -32,6 +46,8 @@ public class DeptDAOImpl implements DeptDAO {
 			rowCount = stmt.executeUpdate();
 		} finally {
 			DBUtil.close(stmt, conn);
+			// 왜 이게 가능할까? connection Pool에서 가져온 connection이랑 DriverManager에서 가져온 Connection
+			// 구현체랑 close의 의미가 가능하다.
 		}
 		return rowCount;
 	}
@@ -45,7 +61,7 @@ public class DeptDAOImpl implements DeptDAO {
 		String sql = "update dept set dname = ?, loc = ? where deptno = ?";
 		int rowCount = 0;
 		try {
-			conn = DBUtil.getConnection();
+			conn = ds.getConnection();
 			stmt = conn.prepareStatement(sql);
 			stmt.setString(1, dept.getDname());
 			stmt.setString(2, dept.getLoc());
@@ -66,7 +82,7 @@ public class DeptDAOImpl implements DeptDAO {
 		String sql = "delete from dept where deptno = ?";
 		int rowCount = 0;
 		try {
-			conn = DBUtil.getConnection();
+			conn = ds.getConnection();
 			stmt = conn.prepareStatement(sql);
 			stmt.setInt(1, deptno);
 			rowCount = stmt.executeUpdate();
@@ -87,7 +103,7 @@ public class DeptDAOImpl implements DeptDAO {
 		List<Dept> list = new ArrayList<Dept>();
 
 		try {
-			conn = DBUtil.getConnection();
+			conn = ds.getConnection();
 			stmt = conn.prepareStatement(sql);
 			rs = stmt.executeQuery();
 			while (rs.next()) {
@@ -112,7 +128,7 @@ public class DeptDAOImpl implements DeptDAO {
 		List<Dept> list = new ArrayList<Dept>();
 
 		try {
-			conn = DBUtil.getConnection();
+			conn = ds.getConnection();
 			stmt = conn.prepareStatement(sql);
 			// stmt.setString(1, dname);
 			stmt.setString(1, "%" + dname + "%");
@@ -137,7 +153,7 @@ public class DeptDAOImpl implements DeptDAO {
 		String sql = "select deptno,dname,loc from dept where deptno = ?";
 
 		try {
-			conn = DBUtil.getConnection();
+			conn = ds.getConnection();
 			stmt = conn.prepareStatement(sql);
 			stmt.setInt(1, deptno);
 			rs = stmt.executeQuery();
