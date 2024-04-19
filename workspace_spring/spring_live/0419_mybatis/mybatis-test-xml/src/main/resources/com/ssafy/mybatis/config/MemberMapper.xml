@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.mybatis.model.dao.MemberDao">
+	<resultMap id="user" type="memberDto">
+		<result column="user_id" property=" " />
+		<result column="user_name" property=" " />
+		<result column="user_password" property=" " />
+		<result column="user_id" property=" " />
+		<result column="user_id" property=" " />
+		<result column="user_id" property=" " />
+	</resultMap>
+
+	<insert id="joinMember" parameterType="memberDto"> insert into members (user_id, user_name,
+		user_password, email_id, email_domain, join_date) values(#{userId}, #{userName}, #{userPwd},
+		#{emailId}, #{emailDomain}, now()) </insert>
+
+	<select id="ListMember" resultType=""> </select>
+
+	<select id="ListMember2" resultMap="user"> select * from members </select>
+
+
+</mapper>

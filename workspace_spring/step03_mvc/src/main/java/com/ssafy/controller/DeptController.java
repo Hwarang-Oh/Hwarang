@@ -46,9 +46,15 @@ public class DeptController {
 	}
 
 	@PostMapping("/register")
-	private String registerDept(Dept dept) throws Exception { // @ModelAttribute -> 이거 안해도 저장됨
-		deptService.registerDept(dept);
-		return "redirect:/dept/list";
+	protected String registerDept(Dept dept, Model model)
+			throws Exception {
+		boolean result = deptService.registerDept(dept);
+		if (result) {
+			model.addAttribute("dept", dept);
+			return "deptSuccess";
+		} else {
+			return "redirect:/dept/registerForm";
+		}
 	}
 
 	// @GetMapping("/registerForm") // Rest를 위해서 나옴 4.0부터!!

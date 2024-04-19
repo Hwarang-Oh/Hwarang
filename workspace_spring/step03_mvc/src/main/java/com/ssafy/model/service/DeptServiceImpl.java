@@ -42,7 +42,7 @@ public class DeptServiceImpl implements DeptService {
 
 	@Override
 	public List<Dept> getDepts(String dname) throws Exception {
-		return deptDao.selectDepts(dname);
+		return deptDao.selectDeptsByName(dname);
 	}
 
 	@Override

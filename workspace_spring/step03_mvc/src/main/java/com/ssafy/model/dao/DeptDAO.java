@@ -20,7 +20,7 @@ public interface DeptDAO {
 	List<Dept> selectDepts() throws SQLException;
 
 	// 부서목록조회 - 부서이름포함검색
-	List<Dept> selectDepts(String dname) throws SQLException;
+	List<Dept> selectDeptsByName(String dname) throws SQLException;
 
 	// 부서조회-deptno
 	Dept selectDept(int deptno) throws SQLException;

@@ -9,24 +9,15 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
-import org.springframework.stereotype.Repository;
-
 import com.ssafy.model.dto.Dept;
 import com.ssafy.util.DBUtil;
 
-@Repository
 public class DeptDAOImpl implements DeptDAO {
-	/**
-	 * @param : 0418_Interceptor_Part
-	 *          Connection Pool 설정
-	 */
 
-	private DataSource ds; // 외부 Library 내가 Annotation을 붙일 수 없음 -> DAO는 Root에 있음 , ds는 Servelt 부모 자식 관계로 인해
-	// root context에 bean 등록!!
+	private DataSource ds;
 
-	public DeptDAOImpl(DataSource ds) { // 값 주입 -> Driver Class , DB ID, PW, wait 여부 => ViewResolver처럼 prefix / suffix로
+	public DeptDAOImpl(DataSource ds) {
 		this.ds = ds;
-		// 줄 수 있음 ( 값 주입 )
 	}
 
 	// 부서등록
@@ -46,8 +37,6 @@ public class DeptDAOImpl implements DeptDAO {
 			rowCount = stmt.executeUpdate();
 		} finally {
 			DBUtil.close(stmt, conn);
-			// 왜 이게 가능할까? connection Pool에서 가져온 connection이랑 DriverManager에서 가져온 Connection
-			// 구현체랑 close의 의미가 가능하다.
 		}
 		return rowCount;
 	}
@@ -118,7 +107,7 @@ public class DeptDAOImpl implements DeptDAO {
 
 	// 부서목록조회 - 부서이름포함검색
 	@Override
-	public List<Dept> selectDepts(String dname) throws SQLException {
+	public List<Dept> selectDeptsByName(String dname) throws SQLException {
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
