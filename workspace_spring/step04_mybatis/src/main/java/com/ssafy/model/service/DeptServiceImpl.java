@@ -33,7 +33,7 @@ public class DeptServiceImpl implements DeptService {
 	}
 
 	@Override
-	public boolean removeDept(int deptno) throws Exception {
+	public boolean removeDept(int[] deptno) throws Exception {
 		return deptDao.deleteDept(deptno) > 0;
 	}
 
@@ -53,8 +53,8 @@ public class DeptServiceImpl implements DeptService {
 	}
 
 	@Override
-	public List<Dept> getDeptsByMultiContition(Map<String, Object> contition) throws Exception {
-		return deptDao.selectDeptsByMultiContition(contition);
+	public List<Dept> getDeptsByMultiCondition(Map<String, Object> contition) throws Exception {
+		return deptDao.selectDeptsByMultiCondition(contition);
 	}
 
 }

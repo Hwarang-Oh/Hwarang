@@ -14,7 +14,7 @@ public interface DeptService {
 	boolean modifyDept(Dept dept) throws Exception;
 
 	// 부서삭제
-	boolean removeDept(int deptno) throws Exception;
+	boolean removeDept(int[] deptno) throws Exception;
 
 	// 부서목록조회
 	List<Dept> getDepts() throws Exception;
@@ -26,5 +26,5 @@ public interface DeptService {
 	Dept getDept(int deptno) throws Exception;
 
 	// 부서조회 - 다양조건
-	List<Dept> getDeptsByMultiContition(Map<String, Object> contition) throws Exception;
+	List<Dept> getDeptsByMultiCondition(Map<String, Object> contition) throws Exception;
 }

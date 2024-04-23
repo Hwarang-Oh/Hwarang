@@ -19,7 +19,7 @@ public interface DeptDAO {
 	int updateDept(Dept dept) throws SQLException;
 
 	// 부서삭제
-	int deleteDept(int deptno) throws SQLException;
+	int deleteDept(int[] deptno) throws SQLException;
 
 	// 부서목록조회
 	List<Dept> selectDepts() throws SQLException;
@@ -31,6 +31,6 @@ public interface DeptDAO {
 	Dept selectDept(int deptno) throws SQLException;
 
 	// 부서 검색 : 자율검색
-	List<Dept> selectDeptsByMultiContition(Map<String, Object> contition) throws Exception;
+	List<Dept> selectDeptsByMultiCondition(Map<String, Object> contition) throws Exception;
 
 }

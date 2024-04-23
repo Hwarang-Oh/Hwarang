@@ -3,8 +3,6 @@ package com.ssafy.controller;
 import java.util.List;
 import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -72,16 +70,20 @@ public class DeptController {
 	}
 
 	@GetMapping("/remove")
-	public String removeDept(@RequestParam("deptno") int deptno, RedirectAttributes redirectAttrs)
+	public String removeDept(@RequestParam(name = "deptno", required = false) int[] deptno,
+			RedirectAttributes redirectAttrs)
 			throws Exception {
-		deptService.removeDept(deptno);
-		redirectAttrs.addFlashAttribute("msg", "삭제에 성공하였습니다.");
+		if (deptService.removeDept(deptno)) {
+			redirectAttrs.addFlashAttribute("msg", "삭제에 성공하였습니다.");
+		} else {
+			redirectAttrs.addFlashAttribute("msg", "삭제에 실패하였거나 삭제할 데이터가 존재하지 않습니다.");
+		}
 		return "redirect:/dept/list";
 	}
 
 	@PostMapping("/listByCondition")
 	public String deptListByMultiCondition(Model model, @RequestParam Map<String, Object> condition) throws Exception {
-		model.addAttribute("depts", deptService.getDeptsByMultiContition(condition));
+		model.addAttribute("depts", deptService.getDeptsByMultiCondition(condition));
 		// 부서정보 조회후 view 페이지에 전달하기 위한 데이터를 저장
 		return "deptList";
 	}

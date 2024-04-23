@@ -8,7 +8,7 @@ import com.ssafy.model.dto.User;
 public interface UserDAO {
 
 	String login(User user);
-	
+
 	boolean register(User user);
 
 }

@@ -6,50 +6,44 @@
 	xmlns:c="http://www.springframework.org/schema/c"
 	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-					http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd
-					http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd">
+											http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd
+											http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd">
 
-<!--  모델 관련 설정은 여기에... -->
+	<!--  모델 관련 설정은 여기에... -->
 	<context:component-scan base-package="com.ssafy.model"></context:component-scan>
-	<context:property-placeholder location="classpath:db.properties"/>
-<!-- 	<bean id="ds" class="org.apache.commons.dbcp2.BasicDataSource" 
+	<context:property-placeholder location="classpath:db.properties" />
+	<!-- 	<bean id="ds" class="org.apache.commons.dbcp2.BasicDataSource" 
 		p:driverClassName="com.mysql.cj.jdbc.Driver"
 		p:url="jdbc:mysql://localhost:3306/scott?serverTimeZone=UTC"
 		p:username="ssafy"
 		p:password="ssafy"
 		/> -->
-	<bean id="ds" class="com.zaxxer.hikari.HikariDataSource" 
+	<bean id="ds" class="com.zaxxer.hikari.HikariDataSource"
 		p:driverClassName="${db.driver}"
 		p:jdbcUrl="${db.url}"
 		p:username="${db.username}"
 		p:password="${db.password}"
-		/>
-	
-<!-- 	<bean id="sqlSessionFactory" 
+	/>
+
+	<!-- 	<bean id="sqlSessionFactory" 
 		class="org.mybatis.spring.SqlSessionFactoryBean" p:configLocation="classpath:sqlMapConfig.xml"
 		p:dataSource-ref="ds"></bean> -->
-	<bean id="sqlSessionFactory" 
+	<bean id="sqlSessionFactory"
 		class="org.mybatis.spring.SqlSessionFactoryBean"
 		p:mapperLocations="classpath:mapper/**/*.xml"
 		p:typeAliasesPackage="com.ssafy.model.dto"
 		p:dataSource-ref="ds"></bean>
 
-	
-	<bean class="org.mybatis.spring.SqlSessionTemplate" c:sqlSessionFactory-ref="sqlSessionFactory"/>
+
+	<bean class="org.mybatis.spring.SqlSessionTemplate" c:sqlSessionFactory-ref="sqlSessionFactory" />
 	<mybatis-spring:scan base-package="com.ssafy.model.dao" />
 
-	
+
 </beans>
 <!--
 특정 Annotation을 가진 것에만 Mapper 적용?
 Flat하게 본인의 일만 모두 분담하고 있지만, 효율적이다
 Method 이름과도 함수명을 만들었다. 
-동적 생성, DB Query은 잘 되는ㄱ라>??
+동적 생성, DB Query은 잘 되는ㄱ라??
 Annotation 생략해도 좋다!!
 -->
-
-
-
-
-
-
