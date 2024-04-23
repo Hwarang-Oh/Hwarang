@@ -8,27 +8,78 @@
   <version>1.0-SNAPSHOT</version>
   <name>step02_aop</name>
   <url>http://maven.apache.org</url>
+
   <properties>
     <maven.compiler.release>17</maven.compiler.release>
     <org.springframework-version>6.1.3</org.springframework-version>
     <org.aspectj-version>1.9.21</org.aspectj-version>
+    <jakarta.servlet-version>6.0.0</jakarta.servlet-version>
+    <jakarta.servlet.jsp-version>3.1.1</jakarta.servlet.jsp-version>
+    <jakarta.servlet.jsp.jstl-version>3.0.0</jakarta.servlet.jsp.jstl-version>
+    <org.glassfish.web-version>3.0.1</org.glassfish.web-version>
+
+    <org.slf4j-version>2.0.12</org.slf4j-version>
   </properties>
+
   <dependencies>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-context</artifactId>
       <version>${org.springframework-version}</version>
     </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
     <dependency>
       <groupId>org.aspectj</groupId>
       <artifactId>aspectjweaver</artifactId>
       <version>${org.aspectj-version}</version>
     </dependency>
+
+    <!--
+      https://mvnrepository.com/artifact/org.springframework/spring-webmvc -->
     <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.1</version>
-      <scope>test</scope>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-webmvc</artifactId>
+      <version>${org.springframework-version}</version>
+    </dependency>
+
+    <!-- Servlet & JSP -->
+    <!--
+      https://mvnrepository.com/artifact/jakarta.servlet/jakarta.servlet-api -->
+    <dependency>
+      <groupId>jakarta.servlet</groupId>
+      <artifactId>jakarta.servlet-api</artifactId>
+      <version>${jakarta.servlet-version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <!--
+      https://mvnrepository.com/artifact/jakarta.servlet.jsp/jakarta.servlet.jsp-api -->
+    <dependency>
+      <groupId>jakarta.servlet.jsp</groupId>
+      <artifactId>jakarta.servlet.jsp-api</artifactId>
+      <version>${jakarta.servlet.jsp-version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <!--
+      https://mvnrepository.com/artifact/jakarta.servlet.jsp.jstl/jakarta.servlet.jsp.jstl-api -->
+    <dependency>
+      <groupId>jakarta.servlet.jsp.jstl</groupId>
+      <artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
+      <version>${jakarta.servlet.jsp.jstl-version}</version>
+    </dependency>
+    <!--
+      https://mvnrepository.com/artifact/org.glassfish.web/jakarta.servlet.jsp.jstl -->
+    <dependency>
+      <groupId>org.glassfish.web</groupId>
+      <artifactId>jakarta.servlet.jsp.jstl</artifactId>
+      <version>${org.glassfish.web-version}</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>${org.slf4j-version}</version>
     </dependency>
   </dependencies>
 </project>

@@ -1,4 +1,4 @@
-package com.ssafy.step1.aop.xml;
+package com.ssafy.step2.aop.annotation;
 
 import java.util.Arrays;
 
@@ -7,7 +7,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class GreetingTest {
 	public static void main(String[] args) {
 
-		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("beans1.xml");
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("beans2.xml");
 		GreetingService greetingService = context.getBean("greetingService", GreetingService.class);
 		System.out.println(greetingService.getClass().getName());
 		System.out.println(Arrays.toString(greetingService.getClass().getMethods()));

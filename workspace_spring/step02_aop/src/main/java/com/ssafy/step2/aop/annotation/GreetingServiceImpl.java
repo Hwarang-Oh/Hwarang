@@ -1,5 +1,8 @@
-package com.ssafy.step1.aop.xml;
+package com.ssafy.step2.aop.annotation;
 
+import org.springframework.stereotype.Service;
+
+@Service("greetingService")
 public class GreetingServiceImpl implements GreetingService {
 
 	@Override
