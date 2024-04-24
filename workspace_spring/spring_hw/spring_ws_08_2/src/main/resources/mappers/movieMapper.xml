@@ -3,8 +3,8 @@
 <mapper namespace="com.ssafy.ws.model.dao.MovieDao">
 
 	<!-- Movie 정보를 저장한다. -->
-	<insert id="insert" parameterType="Movie"> insert into movies(title, director, genre, runningTime,
-		img) values(#{title}, #{director}, #{genre}, #{runningTime}, #{img}) </insert>
+	<insert id="insert" parameterType="Movie"> insert into movies(id, title, director, genre,
+		runningTime, img) values(#{id}, #{title}, #{director}, #{genre}, #{runningTime}, #{img}) </insert>
 
 	<!-- Movie 정보를 삭제한다.. -->
 	<delete id="delete" parameterType="int"> delete from movies where id = #{id} </delete>
