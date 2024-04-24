@@ -1,0 +1,14 @@
+{
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Spring Boot-Step05SpringbootApplication<step05_springboot>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "com.ssafy.Step05SpringbootApplication",
+      "projectName": "step05_springboot",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
+    }
+  ]
+}

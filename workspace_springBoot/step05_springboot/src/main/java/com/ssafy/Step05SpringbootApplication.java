@@ -11,5 +11,4 @@ public class Step05SpringbootApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(Step05SpringbootApplication.class, args);
 	}
-
 }
