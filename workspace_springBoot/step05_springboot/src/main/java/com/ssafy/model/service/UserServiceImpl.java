@@ -1,10 +1,12 @@
 package com.ssafy.model.service;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ssafy.model.dao.UserDAO;
 import com.ssafy.model.dto.User;
 
+@Transactional
 @Service("userService")
 public class UserServiceImpl implements UserService {
 
@@ -14,6 +16,7 @@ public class UserServiceImpl implements UserService {
 		this.userDao = userDao;
 	}
 
+	@Transactional(readOnly = true)
 	@Override
 	public String login(User user) {
 		return userDao.login(user);

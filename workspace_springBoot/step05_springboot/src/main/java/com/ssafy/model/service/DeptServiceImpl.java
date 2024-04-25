@@ -4,10 +4,12 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ssafy.model.dao.DeptDAO;
 import com.ssafy.model.dto.Dept;
 
+// @Transactional
 @Service
 public class DeptServiceImpl implements DeptService {
 
@@ -37,21 +39,25 @@ public class DeptServiceImpl implements DeptService {
 		return deptDao.deleteDept(deptno) > 0;
 	}
 
+	@Transactional(readOnly = true)
 	@Override
 	public List<Dept> getDepts() throws Exception {
 		return deptDao.selectDepts();
 	}
 
+	@Transactional(readOnly = true)
 	@Override
 	public List<Dept> getDepts(String dname) throws Exception {
 		return deptDao.selectDeptsByDname(dname);
 	}
 
+	@Transactional(readOnly = true)
 	@Override
 	public Dept getDept(int deptno) throws Exception {
 		return deptDao.selectDept(deptno);
 	}
 
+	@Transactional(readOnly = true)
 	@Override
 	public List<Dept> getDeptsByMultiCondition(Map<String, Object> contition) throws Exception {
 		return deptDao.selectDeptsByMultiCondition(contition);
