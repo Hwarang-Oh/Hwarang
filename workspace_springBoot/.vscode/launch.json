@@ -2,6 +2,13 @@
   "configurations": [
     {
       "type": "java",
+      "name": "SampleappApplication",
+      "request": "launch",
+      "mainClass": "com.ssafy.sampleapp.SampleappApplication",
+      "projectName": ""
+    },
+    {
+      "type": "java",
       "name": "Spring Boot-Step05SpringbootApplication<step05_springboot>",
       "request": "launch",
       "cwd": "${workspaceFolder}",

@@ -1,19 +1,3 @@
-
-/*
- * 최단 경로 문제와 다른 점
- * 최단 경로 -> V : 20,000 E : 300,000 (단방향)
- * v1 -> v2 로 가는 경로가 여러개일 수 있음
- * 
- * 특정한 최단 경로 -> V : 2 ~ 800 , E : 200,000 (양방향)
- * v1 ~ v2 의 경로는 단 1개
- * 1번 이동했던 간선도 다시 이동할 수 있음
- * 1번 정점 -> N번 정점 까지의 Shortest Route
- * 1 ~ v1 => v1 ~ v2 이렇게 최단을 구하면 되지 않을까? -> V1 - V2 경로를 반드시 지나야 하는 것으로 이해해버림 -> 이거 아님
- * 최대 거리 : 2억 -> 굳이 Long 할 필요는 X
- * 1 ~ v1 -> v1 ~ v2 -> v2 ~ V
- * 1 ~ V -> v1, v2을 반드시 지나야 한다.
- */
-
 import java.io.*;
 import java.util.*;
 
@@ -29,6 +13,8 @@ public class B1504_특정한최단경로_오화랑_Dijkstra {
     }
 
     static ArrayList<ArrayList<adjV>> graph; // Adjacency List
+    static int INF = 200_000_001; // from 200,000 * 1000
+    static PriorityQueue<Integer> distList = new PriorityQueue<>();
 
     public static void main(String[] args) throws IOException {
         BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
@@ -54,5 +40,77 @@ public class B1504_특정한최단경로_오화랑_Dijkstra {
         st = new StringTokenizer(input.readLine());
         int haveTov1 = Integer.parseInt(st.nextToken());
         int haveTov2 = Integer.parseInt(st.nextToken());
+        Dijkstra(1, V, haveTov1, haveTov2);
+        Dijkstra(V, V, haveTov1, haveTov2);
+        Dijkstra(haveTov1, V, haveTov1, haveTov2);
+        int size = 3;
+        int count = 0;
+        while (size > 0) {
+            if (distList.peek() == INF) {
+                count = -1;
+                break;
+            }
+            count += distList.poll();
+            size--;
+        }
+        System.out.println(count);
+    }
+
+    public static void Dijkstra(int start, int V, int haveTov1, int haveTov2) {
+        int[] dist = new int[V + 1];
+        Arrays.fill(dist, INF);
+        boolean[] visited = new boolean[V + 1];
+        PriorityQueue<adjV> PQ = new PriorityQueue<>((o1, o2) -> Integer.compare(o1.cost, o2.cost));
+
+        for (adjV each : graph.get(start)) {
+            dist[each.next] = each.cost;
+            PQ.offer(new adjV(each.next, dist[each.next]));
+        }
+        dist[start] = 0;
+        visited[start] = true;
+
+        adjV temp;
+        while (!PQ.isEmpty()) {
+            temp = PQ.poll();
+            if (visited[temp.next])
+                continue;
+            visited[temp.next] = true;
+
+            for (adjV each : graph.get(temp.next)) {
+                if (visited[each.next])
+                    continue;
+                if (dist[each.next] <= dist[temp.next] + each.cost)
+                    continue;
+                dist[each.next] = dist[temp.next] + each.cost;
+                PQ.offer(new adjV(each.next, dist[each.next]));
+            }
+        }
+        if (start == 1) {
+            distList.offer(dist[haveTov1]);
+            distList.offer(dist[haveTov2]);
+            distList.offer(dist[V]);
+        } else if (start == V) {
+            distList.offer(dist[haveTov1]);
+            distList.offer(dist[haveTov2]);
+        } else
+            distList.offer(dist[haveTov2]);
+
+        System.out.println(Arrays.toString(dist));
     }
 }
+
+/*
+ * for (adjV each : graph.get(temp.next)) {
+ * if (visited[each.next]) continue;
+ * if (dist[each.next] <= dist[temp.next] + each.cost) continue;
+ * dist[each.next] = dist[temp.next] + each.cost;
+ * pq.offer(new adjV(each.next, dist[each.next]));
+ * }
+ * 3 5 4
+ * 4 1
+ * 3
+ * 1 1 v1 v2 N
+ * N 1 v1 v2 N
+ * v1 1 v1 v2 N
+ * 1 ~ v1 1 ~ v2 1 ~ N
+ */
