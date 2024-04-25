@@ -14,7 +14,6 @@ public class B1504_특정한최단경로_오화랑_Dijkstra {
 
     static ArrayList<ArrayList<adjV>> graph; // Adjacency List
     static int INF = 200_000_001; // from 200,000 * 1000
-    static PriorityQueue<Integer> distList = new PriorityQueue<>();
 
     public static void main(String[] args) throws IOException {
         BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
@@ -40,23 +39,20 @@ public class B1504_특정한최단경로_오화랑_Dijkstra {
         st = new StringTokenizer(input.readLine());
         int haveTov1 = Integer.parseInt(st.nextToken());
         int haveTov2 = Integer.parseInt(st.nextToken());
-        Dijkstra(1, V, haveTov1, haveTov2);
-        Dijkstra(V, V, haveTov1, haveTov2);
-        Dijkstra(haveTov1, V, haveTov1, haveTov2);
-        int size = 3;
-        int count = 0;
-        while (size > 0) {
-            if (distList.peek() == INF) {
-                count = -1;
-                break;
-            }
-            count += distList.poll();
-            size--;
-        }
-        System.out.println(count);
+
+        int[] path1_v1_v2 = Dijkstra(1, haveTov1, haveTov2, V);
+        int[] pathN_v1_v2 = Dijkstra(V, haveTov1, haveTov2, V);
+        int[] pathv1_v2 = Dijkstra(haveTov1, haveTov2, haveTov2, V);
+
+        int pathA = path1_v1_v2[0] + pathv1_v2[0] + pathN_v1_v2[1];
+        int pathB = path1_v1_v2[1] + pathv1_v2[0] + pathN_v1_v2[0];
+        if (pathA >= INF && pathB >= INF) {
+            System.out.println(-1);
+        } else
+            System.out.println(Math.min(pathA, pathB));
     }
 
-    public static void Dijkstra(int start, int V, int haveTov1, int haveTov2) {
+    public static int[] Dijkstra(int start, int end1, int end2, int V) {
         int[] dist = new int[V + 1];
         Arrays.fill(dist, INF);
         boolean[] visited = new boolean[V + 1];
@@ -85,32 +81,16 @@ public class B1504_특정한최단경로_오화랑_Dijkstra {
                 PQ.offer(new adjV(each.next, dist[each.next]));
             }
         }
-        if (start == 1) {
-            distList.offer(dist[haveTov1]);
-            distList.offer(dist[haveTov2]);
-            distList.offer(dist[V]);
-        } else if (start == V) {
-            distList.offer(dist[haveTov1]);
-            distList.offer(dist[haveTov2]);
-        } else
-            distList.offer(dist[haveTov2]);
-
-        System.out.println(Arrays.toString(dist));
+        return new int[] { dist[end1], dist[end2] };
     }
 }
 
 /*
- * for (adjV each : graph.get(temp.next)) {
- * if (visited[each.next]) continue;
- * if (dist[each.next] <= dist[temp.next] + each.cost) continue;
- * dist[each.next] = dist[temp.next] + each.cost;
- * pq.offer(new adjV(each.next, dist[each.next]));
- * }
- * 3 5 4
- * 4 1
- * 3
- * 1 1 v1 v2 N
- * N 1 v1 v2 N
- * v1 1 v1 v2 N
- * 1 ~ v1 1 ~ v2 1 ~ N
+ * 1 v1 v2 N
+ * 1 v1 N v2
+ * 1 N v1 v2
+ * 1 - v1 - v2 - N
+ * 1 - v2 - v1 - N
+ * 결국 1에서 시작해서 N으로 돌아와야 한다.
+ * 
  */
