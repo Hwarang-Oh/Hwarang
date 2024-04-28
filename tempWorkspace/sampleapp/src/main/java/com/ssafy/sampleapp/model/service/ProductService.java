@@ -6,15 +6,15 @@ import com.ssafy.sampleapp.model.dto.Product;
 
 public interface ProductService {
 
-    boolean register(Product product);
+    boolean register(Product product) throws Exception;
 
-    boolean modify(Product product);
+    boolean modify(Product product) throws Exception;
 
-    boolean remove(String code);
+    boolean remove(String code) throws Exception;
 
-    Product get(String code);
+    Product get(String code) throws Exception;
 
-    List<Product> getByDate(String date);
+    List<Product> getByDate(String date) throws Exception;
 
-    List<Product> getAll();
+    List<Product> getAll() throws Exception;
 }

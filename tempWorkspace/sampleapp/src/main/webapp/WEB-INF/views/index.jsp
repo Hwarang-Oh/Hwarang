@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%> <%@ taglib
 prefix="c" uri="jakarta.tags.core"%>
-<c:set var="root" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html lang="ko">
   <head>
@@ -43,24 +42,9 @@ prefix="c" uri="jakarta.tags.core"%>
       }
     </style>
   </head>
-  <body>
-    <div class="navbar">
-      <div>
-        <a href="${root }">상품 관리</a>
-      </div>
-      <div>
-        <c:if test="">
-          <a href="{root}">로그인</a>
-        </c:if>
-        <c:if test="">
-          님, 로그인 하였습니다.
-          <a href="{root}">로그아웃</a>
-        </c:if>
-        <a href="{root}">상품 목록</a>
-        <a href="{root}">상품 정보 등록</a>
-      </div>
-    </div>
 
+  <body>
+    <jsp:include page="/WEB-INF/views/common/menu.jsp" />
     <div class="container">
       <h1>안녕하세요, 상품 관리 사이트입니다.</h1>
       <p>

@@ -1,5 +1,9 @@
 package com.ssafy.sampleapp.model.service;
 
+import com.ssafy.sampleapp.model.dto.Member;
+
 public interface MemberService {
-    String logIn(String id, String password);
+    Member logIn(String id, String password) throws Exception;
+
+    boolean register(Member member) throws Exception;
 }

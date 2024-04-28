@@ -66,22 +66,7 @@ prefix="c" uri="jakarta.tags.core"%>
     </style>
   </head>
   <body>
-    <div class="navbar">
-      <div>
-        <a href="">상품 관리</a>
-      </div>
-      <div>
-        <c:if test="">
-          <a href="">로그인</a>
-        </c:if>
-        <c:if test="">
-          님, 로그인 하였습니다.
-          <a href="">로그아웃</a>
-        </c:if>
-        <a href="">상품 목록</a> <a href="">상품 정보 등록</a>
-      </div>
-    </div>
-
+    <jsp:include page="/WEB-INF/views/common/menu.jsp" />
     <div class="container">
       <h1>상품 목록</h1>
       <form method="get">
@@ -96,13 +81,14 @@ prefix="c" uri="jakarta.tags.core"%>
           <th>ID</th>
           <th>Regist Date</th>
         </tr>
-        <c:forEach var="" items="">
+        <c:forEach var="product" items="${products}">
           <tr>
             <td><a href=""></a></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>${product.code}</td>
+            <td>${product.model}</td>
+            <td>${product.price}</td>
+            <td>${product.id}</td>
+            <td>${product.regist_date}</td>
           </tr>
         </c:forEach>
       </table>

@@ -1,4 +1,4 @@
-package com.ssafy.sampleapp.listener;
+package com.ssafy.sampleapp.controller.listener;
 
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletContextEvent;

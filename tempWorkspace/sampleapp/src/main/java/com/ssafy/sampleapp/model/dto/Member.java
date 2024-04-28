@@ -1,5 +1,7 @@
 package com.ssafy.sampleapp.model.dto;
 
+import java.util.Date;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,12 +11,12 @@ public class Member {
     private String id;
     private String name;
     private String password;
-    private String join_date;
+    private Date join_date;
 
     public Member() {
     }
 
-    public Member(String id, String name, String password, String join_date) {
+    public Member(String id, String name, String password, Date join_date) {
         this.id = id;
         this.name = name;
         this.password = password;

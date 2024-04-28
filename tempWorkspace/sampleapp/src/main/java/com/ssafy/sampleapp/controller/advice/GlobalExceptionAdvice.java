@@ -1,4 +1,4 @@
-package com.ssafy.sampleapp.advice;
+package com.ssafy.sampleapp.controller.advice;
 
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;

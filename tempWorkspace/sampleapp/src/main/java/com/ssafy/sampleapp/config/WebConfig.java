@@ -8,7 +8,7 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import com.ssafy.sampleapp.listener.AppInitListener;
+import com.ssafy.sampleapp.controller.listener.AppInitListener;
 
 import jakarta.servlet.ServletContextListener;
 
@@ -18,9 +18,9 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/").setViewName("index");
-        // registry.addViewController("/dept/registerForm").setViewName("deptRegister");
-        // registry.addViewController("/user/loginForm").setViewName("user/login");
-        // registry.addViewController("/user/registerForm").setViewName("user/register");
+        registry.addViewController("/product/registerForm").setViewName("regist");
+        registry.addViewController("/member/loginForm").setViewName("member/login");
+        registry.addViewController("/member/registerForm").setViewName("member/register");
     }
 
     // @Override
