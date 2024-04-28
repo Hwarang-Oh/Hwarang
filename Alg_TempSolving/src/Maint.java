@@ -7,25 +7,19 @@ public class Maint {
     public static void main(String[] args) throws IOException {
         BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
         StringBuilder sb = new StringBuilder();
-        StringTokenizer st = new StringTokenizer(input.readLine());
-        for (int i = 0; i < 6; i++) {
-            switch (i) {
-                case 0:
-                case 1: {
-                    sb.append(1 - Integer.parseInt(st.nextToken())).append(" ");
-                    break;
-                }
-                case 2:
-                case 3:
-                case 4: {
-                    sb.append(2 - Integer.parseInt(st.nextToken())).append(" ");
-                    break;
-                }
-                case 5:
-                    sb.append(8 - Integer.parseInt(st.nextToken()));
-            }
+        StringTokenizer st = null;
+        int a, b;
+        while (true) {
+            st = new StringTokenizer(input.readLine());
+            a = Integer.parseInt(st.nextToken());
+            b = Integer.parseInt(st.nextToken());
+            if (a == b && a == 0)
+                break;
+            if (a > b)
+                sb.append("Yes").append("\n");
+            else
+                sb.append("No").append("\n");
         }
-        System.out.println(sb);
+        System.out.print(sb);
     }
-
 }
