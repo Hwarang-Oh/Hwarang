@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.sampleApp.model.dao.MemberDao">
+	<select id="login"> select * from where member_id = #{member_id} and password = #{password} </select>
+
+	<insert id="insert"> insert into member(member_id, member_name, password, email, mobile, is_admin)
+		values(#{member_id}, #{member_id}, #{member_id}, #{email}, #{mobile}, #{is_admin}) </insert>
+	<!-- 	
+	Movie 정보를 저장한다.
+	<insert id="insert" parameterType="Movie">
+		insert into movies(id, title, director, genre, runningTime, img)
+		values(#{id}, #{title}, #{director}, #{genre}, #{runningTime}, #{img})
+	</insert>
+
+	Movie를 ID로 검색하여 조회한다.
+	<sql id="basicSelectMoviesSQL">
+		select title, director, genre, runningtime, img from movies
+	</sql>
+	
+	<delete id="delete" parameterType="int">
+		delete from movies where id = #{id}
+	</delete>
+	
+	Movie를 제목으로 검색하여 조회한다.
+	<select id="search" parameterType="String" resultType="Movie">
+		<include refid="basicSelectMoviesSQL"></include>
+		where title = #{title}
+	</select>
+	
+	Movie에서 모든 정보를 검색한다.
+	<select id="selectAll">
+		<include refid="basicSelectMoviesSQL"></include>
+	</select> -->
+</mapper>
