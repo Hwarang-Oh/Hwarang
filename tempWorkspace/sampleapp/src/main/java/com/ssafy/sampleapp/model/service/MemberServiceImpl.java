@@ -17,6 +17,7 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
+<<<<<<< HEAD
     public Member logIn(String member_id, String password) {
         return memberDao.logIn(member_id, password);
     }
@@ -41,4 +42,15 @@ public class MemberServiceImpl implements MemberService {
     public boolean modify(Member member) {
         return memberDao.update(member) > 0;
     }
+=======
+    public Member logIn(String id, String password) throws Exception {
+        return memberDao.logIn(id, password);
+    }
+
+    @Override
+    public boolean register(Member member) throws Exception {
+        return memberDao.register(member) > 0;
+    }
+
+>>>>>>> ff04bcea937c4e1a9645d2bb90070137e914f1e0
 }

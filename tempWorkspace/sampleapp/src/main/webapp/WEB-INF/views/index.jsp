@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%> <%@ taglib
+<<<<<<< HEAD
 prefix="c" uri="jakarta.tags.core" %>
 <c:set var="root" value="${pageContext.request.contextPath}" />
+=======
+prefix="c" uri="jakarta.tags.core"%>
+>>>>>>> ff04bcea937c4e1a9645d2bb90070137e914f1e0
 <!DOCTYPE html>
 <html>
   <head>
@@ -62,7 +66,13 @@ prefix="c" uri="jakarta.tags.core" %>
       }
     </style>
   </head>
+<<<<<<< HEAD
   <body>
+=======
+
+  <body>
+    <jsp:include page="/WEB-INF/views/common/menu.jsp" />
+>>>>>>> ff04bcea937c4e1a9645d2bb90070137e914f1e0
     <div class="container">
       <h1>Main Page</h1>
       <c:choose>

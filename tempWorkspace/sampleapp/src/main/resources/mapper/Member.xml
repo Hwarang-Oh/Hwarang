@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<<<<<<< HEAD
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.ssafy.sampleApp.model.dao.MemberDao">
@@ -32,4 +33,13 @@
 	<select id="selectAll">
 		<include refid="basicSelectMoviesSQL"></include>
 	</select> -->
+=======
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.sampleapp.model.dao.MemberDao">
+	<select id="logIn" resultType="Member"> select * from members where id=#{id} and
+		password=#{password} </select>
+
+	<insert id="register"> insert into members values(#{id},#{name},#{password},NOW()) </insert>
+>>>>>>> ff04bcea937c4e1a9645d2bb90070137e914f1e0
 </mapper>
