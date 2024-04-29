@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button id="btn">클릭</button>
+    <script>
+      let btn = document.querySelector('#btn');
+      /*
+    btn.addEventListener("click",function() {
+      console.log(this)
+      console.log(this.innerText)
+    })
+    */
+      btn.addEventListener('click', () => {
+        console.log(this);
+        console.log(this.innerText);
+      });
+
+      // this의 상위 Scope
+      let p1 = {
+        // 객체를 표기하는 리터럴 표기 -> Block이 아니다
+        fullName: '카리나',
+        printInfo: function () {
+          // 여기는 식별자의 범위를 나타내는 Block 내부 -> fullName은 없다.
+          console.log(this);
+          console.log(this.fullName); // 객체 안에서 자신의 속성도 반드시 this로 접근해야 한다.
+        },
+      };
+      p1.printInfo();
+
+      let p2 = {
+        // 객체를 표기하는 리터럴 표기 -> Block이 아니다
+        fullName: '윈터',
+        printInfo: () => {
+          // 여기는 식별자의 범위를 나타내는 Block 내부 -> fullName은 없다.
+          console.log(this);
+          console.log(this.fullName); // Arrow function을 쓰는 순간, this의 의미가 달라졌다.
+        },
+      };
+      p2.printInfo();
+    </script>
+  </body>
+</html>
+
+<!--
+  EventHandler, 객체 Literal 안에서 this를 쓰고 싶다면 Arrow Function을 조심히 써라!!
+-->
+
+<!-- this의 의미?!-->
+<!-- 현재 실행하는 자기 자신을 의미하는 Java와는 다름 -->
+<!-- EventCallBack 함수는 처음부터 this는 EventSource 자기 자신이 될 수 있도록, 모두 Binding이 되어 있음 
+  ( this -> button이 되도록 -> 이벤트 핸들러 자기 자신이 되도록) Arrow Function은 this를 애초에 가지고 있지 않다고 생각하면 됨. 
+  -> 따라서 this를 찾기 위해 상위에 올라가 찾아가버림
+  => this는 결국 전역 Scope까지 가서 아무것도 없는 field 영역이 this가 되게 됨. 
+  -> Web영역에서는 가장 상위 Scope는 window!! -> 오류는 안나지만, 의도한 결과는 아닐 것이다.
+  => Arrow Function에서 this는 lexical scope를 따른다. 
+  이런 성질을 이용해서 일부러 상위 Scope를 찾아가도록 유도하는 경우가 있지만... 
+  그런 의도가 아니라면, 조심해야 한다. -->

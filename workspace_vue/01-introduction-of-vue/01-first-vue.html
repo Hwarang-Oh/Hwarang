@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vuejs</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  </head>
+  <body>
+    <div id="pop">
+      <h1>{{ message }}</h1>
+      메시지 : <input type="text" v-model="message" />
+    </div>
+    <script>
+      const { createApp, ref } = Vue; // Vue 객체 안에 createApp Method 존재
+      // const app = Vue.createApp({}) -> 구조 분해 할당
+
+      const app = createApp({
+        setup() {
+          // consice Method -> 주의점! 마지막에 객체로 Return을 해줘야 한다.
+          const message = ref('Hello Vue!!!'); // ref하면 Error가 남 -> Vue가 가지고 있는 요소 -> 데이터를 바꾸니까, 바로 화면 단이 바뀌게 된다.
+          return { message }; // Property ShortHand
+        },
+      });
+      app.mount('#app');
+    </script>
+  </body>
+</html>

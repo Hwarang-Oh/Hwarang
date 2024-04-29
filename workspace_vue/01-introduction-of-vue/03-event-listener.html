@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vuejs</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <button @click="increament">1증가!!!</button>
+      <!-- Naive JS로 하려면?? -->
+      <p>count의 값 : {{ count }}</p>
+    </div>
+    <script>
+      const { createApp, ref } = Vue; // ref 쓸 것이라고 해줘야 한다.
+      const app = createApp({
+        setup() {
+          const count = ref(0); // 이렇게 하면 안된다. 항상 반응형으로 만들어줘야 한다.
+          const increament = function () {
+            // 이것도 Return을 해야 사용이 가능하다!!
+            console.log('click');
+            count.value++; // 객체를 ++하는 것은 안된다. value를 Up 해줘야 한다
+          };
+          return {
+            increament,
+            count,
+          };
+        },
+      });
+      app.mount('#app');
+    </script>
+  </body>
+</html>
