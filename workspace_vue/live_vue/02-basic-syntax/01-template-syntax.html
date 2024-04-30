@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .my-id {
+        color: magenta;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="app">
+      <p>Message: {{ msg }}</p>
+      <div v-once>once : {{msg}}</div>
+      <div>{{ rawHtml }}</div>
+      <div v-text="rawHtml"></div>
+      <div v-html="rawHtml"></div>
+      <div v-bind:class="dynamicId">안녕하세요</div>
+      {{ number + 1 }} <br />
+      {{ seen ? 'YES' : 'NO' }}<br />
+      {{ msg.split('').reverse().join('') }}<br />
+      <div :id="`list-${id}`"></div>
+
+      <div>내가 만든 함수 호출 : {{ test() }}</div>
+
+      <div v-if="seen">if 내가 보이나요???</div>
+      <div v-show="seen">show 내가 보이나요???</div>
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+      const { createApp, ref } = Vue
+
+      const app = createApp({
+        setup() {
+          const msg = ref("Hello SSAFY!!!")
+          const rawHtml = ref('<span style="color:red">This should be red.</span>')
+          const seen = ref(false)
+          const dynamicId = ref("my-id")
+          // const dynamicId = ref(null);
+
+          const number = ref(10)
+
+          const test = () => "안녕 난 뷰야!!!"
+          return {
+            msg,
+            seen,
+            rawHtml,
+            dynamicId,
+            number,
+            test,
+          }
+        },
+      })
+
+      app.mount("#app")
+    </script>
+  </body>
+</html>

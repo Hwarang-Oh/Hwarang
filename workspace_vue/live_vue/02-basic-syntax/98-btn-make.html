@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vuejs</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+      .colorStyle {
+        background-color: salmon;
+        color: aqua;
+      }
+      .layoutStyle {
+        width: 200px;
+        height: 100px;
+        text-align: center;
+      }
+      .fontStyle {
+        font-size: 20px;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <h2>나만의 버튼 만들기</h2>
+      <button :class="classObj">나만의 버튼</button>
+      <h3>지정할 버튼 형식</h3>
+      <input type="checkbox" v-model="classObj.colorStyle" />색상지정<br />
+      <input type="checkbox" v-model="classObj.layoutStyle" />크기지정<br />
+      <input type="checkbox" v-model="classObj.fontStyle" />폰트지정<br />
+    </div>
+    <script>
+      const { createApp, ref } = Vue;
+
+      const app = createApp({
+        setup() {
+          const classObj = ref({
+            colorStyle: false,
+            layoutStyle: false,
+            fontStyle: false,
+          });
+          return {
+            classObj,
+          };
+        },
+      });
+
+      app.mount("#app");
+    </script>
+  </body>
+</html>

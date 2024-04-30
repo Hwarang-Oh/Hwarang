@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vuejs</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+      .view {
+        font-size: 20px;
+        font-weight: bold;
+      }
+      .success {
+        background-color: lime;
+        color: darkblue;
+      }
+      .warning {
+        background-color: yellow;
+        color: purple;
+      }
+      .fail {
+        background-color: red;
+        color: pink;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <h2>style &amp class binding</h2>
+      <label for="score">점수 입력 : </label>
+      <input type="text" id="score" v-model="score" />
+      <div class="view" :class="result" v-if="result.warning">점수를 0 ~ 100까지 입력하세요</div>
+      <div class="view" :class="result" v-if="result.success">
+        축하합니다!! {{score}}는 합격입니다.
+      </div>
+      <div class="view" :class="result" v-if="result.fail">다음에는 열심히!!!</div>
+    </div>
+    <script>
+      const { createApp, ref, computed } = Vue;
+
+      const app = createApp({
+        setup() {
+          const score = ref(100);
+
+          const result = computed(() => {
+            console.log("점수 계산중!!!!");
+            return {
+              warning: score.value < 0 || score.value > 100,
+              success: score.value >= 60 && score.value <= 100,
+              fail: score.value < 60 && score.value >= 0,
+            };
+          });
+
+          return {
+            score,
+            result,
+          };
+        },
+      });
+
+      app.mount("#app");
+    </script>
+  </body>
+</html>

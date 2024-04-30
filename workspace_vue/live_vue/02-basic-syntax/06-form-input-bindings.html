@@ -1,0 +1,59 @@
+<!-- form-input-bindings.html -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style></style>
+  </head>
+
+  <body>
+    <div id="app">
+      <p>{{ inputText1 }}</p>
+      <input :value="inputText1" @input="onInput" />
+
+      <p>{{ inputText2 }}</p>
+      <input v-model="inputText2" /><br />
+      <hr />
+
+      아이디<input type="text" name="userid" v-model="user.userId" /><br />
+      비밀번호<input type="text" name="userpwd" v-model="user.userPwd" /> <br />
+      <button @click="login">로그인</button>
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+      const { createApp, ref } = Vue
+
+      const app = createApp({
+        setup() {
+          const inputText1 = ref("")
+          const inputText2 = ref("")
+          const onInput = function (event) {
+            inputText1.value = event.currentTarget.value
+          }
+
+          // const userId = ref("");
+          // const userPwd = ref("");
+          const user = ref({})
+          const login = () => {
+            // POST, {userId: "ssafy", userPwd="1234"}
+            // let user = { userId, userPwd };
+            console.log(user.value)
+          }
+
+          return {
+            inputText1,
+            onInput,
+            inputText2,
+            login,
+            user,
+          }
+        },
+      })
+
+      app.mount("#app")
+    </script>
+  </body>
+</html>
