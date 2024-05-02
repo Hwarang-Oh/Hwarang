@@ -1,34 +1,48 @@
 <script setup>
 import { ref } from 'vue'
 
-// give each todo a unique id
+// 각 할 일에 고유한 ID 부여
 let id = 0
 
-const newTodo = ref('')
+// const newTodo = ref('')
 const todos = ref([
-  { id: id++, text: 'Learn HTML' },
-  { id: id++, text: 'Learn JavaScript' },
-  { id: id++, text: 'Learn Vue' }
+  { id: id++, text: 'HTML 배우기' },
+  { id: id++, text: 'JavaScript 배우기' },
+  { id: id++, text: 'Vue 배우기' }
 ])
+const newTodo = ref('')
 
-function addTodo() {
-  // ...
+const addTodo = () => {
+  todos.value.push({ id: id++, text: newTodo.value })
   newTodo.value = ''
 }
 
-function removeTodo(todo) {
-  // ...
+const removeTodo = (todo) => {
+  todos.value = todos.value.filter((item) => item != todo)
+
+  // for (let index = 0; index < todos.value.length; index++) {
+  //     const item = todos.value[index];
+  //     if(item == todo){
+  //         todos.value.splice(index,1) // index 위치로부터 1개 짤라내라
+  //         break;
+  //     }
+
+  // }
 }
 </script>
 
 <template>
-  <div>
-    <ul>
-      <li v-for="each in todos" :key="each.id">
-        {{ each.text }}
-      </li>
-    </ul>
-  </div>
+  <form @submit.prevent="addTodo">
+    <input input type="text" v-model="newTodo" />
+    <button>할 일 추가</button>
+  </form>
+
+  <ul>
+    <li v-for="todo in todos" :key="todo.id">
+      {{ todo.text }}
+      <button @click="removeTodo(todo)">X</button>
+    </li>
+  </ul>
 </template>
 
 <style scoped></style>

@@ -3,7 +3,7 @@ import HelloWorld from './components/HelloWorld.vue'
 // import TheWelcome from './components/TheWelcome.vue'
 // import Tutorial2 from './components/Tutorial2.vue'
 // import Tutorial2 from './components/Tutorial2_2.vue'
-import Tutorial from './components/Tutorial7.vue' // @의 위치 -> 반 절대 경로 느낌!! => jsconfig.JSON 파일 확인
+import Tutorial from './components/Tutorial9.vue' // @의 위치 -> 반 절대 경로 느낌!! => jsconfig.JSON 파일 확인
 </script>
 
 <template>
