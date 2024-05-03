@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 
 // ex3_1 ~ ex3_2
 const exhibitions = ref([
@@ -56,12 +56,23 @@ const filteredList = computed(() =>
 const addDesc = (price) => {
   if (price === 0) return '이 전시는 무료입니다'
 }
-// ex3_4
+// ex3_5
+const selectedList = ref([])
+const totalPrice = computed(() => selectedList.price)
+
+watch(
+  exhibitions,
+  () => {
+    selectedList.value = exhibitions.value.filter((item) => item.isSelected)
+  },
+  { deep: true }
+)
 </script>
 
 <template>
   <div>
     <h1>다양한 전시 정보</h1>
+
     <label>
       전시 중인 정보만 보기
       <input type="checkbox" v-model="isActive" />
