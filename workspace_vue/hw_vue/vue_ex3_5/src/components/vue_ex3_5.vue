@@ -58,7 +58,9 @@ const addDesc = (price) => {
 }
 // ex3_5
 const selectedList = ref([])
-const totalPrice = computed(() => selectedList.price)
+const totalPrice = computed(() => {
+  return selectedList.value.reduce((sum, item) => sum + item.price, 0)
+})
 
 watch(
   exhibitions,
@@ -72,7 +74,18 @@ watch(
 <template>
   <div>
     <h1>다양한 전시 정보</h1>
-
+    <h2>
+      관람 예정인 전시 :
+      <span
+        v-show="selectedList.length != 0"
+        v-for="(each, index) in selectedList"
+        :key="each.title"
+        >{{ each.title }}<span v-if="index < selectedList.length - 1">, </span>
+      </span>
+      <span v-show="selectedList.length == 0"> 관람 예정인 전시가 없습니다. </span>
+    </h2>
+    <p>예상 총 금액 : {{ totalPrice }}원</p>
+    <h2 v-show="selectedList.length == 0">관람 예정인 전시가 없습니다.</h2>
     <label>
       전시 중인 정보만 보기
       <input type="checkbox" v-model="isActive" />
