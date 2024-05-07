@@ -1,11 +1,14 @@
+Java가 Compile이 되는가? !! 
+
+
 maven download
-Oracle Java Download
+Oracle Java Download ->  완
 Tomcat Download
 
 Path : C:\Program Files\Common Files\Oracle\Java\javapath
 Path : C:\SSAFY\apache-maven-3.9.6\bin
 Path : C:\Program Files\Microsoft VS Code\bin
 Path : C:\Program Files\nodejs\
-JAVA_HOME : C:\Program Files\Java\jdk-17
+JAVA_HOME : C:\Program Files\Java\jdk-17 -> 완
 
 
