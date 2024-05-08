@@ -42,7 +42,7 @@ const modifyDept = (payload) => {
 
 const removeDept = (payload) => {
   deleteDeptno.value = payload
-  mode = null
+  mode.value = null
 }
 </script>
 

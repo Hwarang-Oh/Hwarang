@@ -1,49 +1,59 @@
 <script setup>
 import { reactive, ref, watch, watchEffect } from 'vue'
-const props = defineProps(['selectedDept'])
-// const dept = reactive({})
 
+const props = defineProps(['selectedDept'])
+const emit = defineEmits(['modifyDept', 'removeDept'])
+// const dept = reactive({})
 const dept = ref({})
+
+const modifyDept = () => {
+  emit('modifyDept', dept.value)
+}
+const removeDept = () => {
+  emit('removeDept', dept.value.deptno)
+}
 // const dept = ref({ deptno: 10, dname: '개발 1팀', loc: '서울' })
 // 수정이 없다면, 그냥 props 대신 바로 dept로 받고 뿌려도 된다.
-
 // selectedDept는 계속 바뀔 수 있다. 한번만 받아내는 것이 아닌, 여러번 받아낼 수 있기 때문에, 계속 받아내는 데이터가 달라진다.
 // 이런 경우에는 watch를 써서 관찰하면서, 바꿔줘야 한다.
 // 한번만 바뀌는거면 그냥 한번만 clone따면 되지만, 지금 상황은 조금 더 복잡하다.
 
-// ref Version
+// ref Version : watcher
 watch(
   // selectedDept가 바뀔 때 마다 새로운 dept를 만들어내자!!
   props.selectedDept,
   (n) => {
     console.log(dept.value)
-    // 아래처럼 반응형 객체의 속성을 바꾸려면, reactive로 설계하는 것이 더 좋다.
-    /*
+    /* // 아래처럼 반응형 객체의 속성을 바꾸려면, reactive로 설계하는 것이 더 좋다.
     dept.value.deptno = n.deptno
     dept.value.dname = n.dname
     dept.value.loc = n.loc
     */
     // 반응형 객체 ref의 value 속성을 아예 바꿈 => {...n} 에서 spread 연산자를 통해서 달성함.
-    dept.value = { ...n } // ref 객체에서만 가능한 것!! -> value값을 바꾼 것, dept 자체를 바꾼 것이 아니다!!
+    // ref 객체에서만 가능한 것!! -> value값을 바꾼 것, dept 자체를 바꾼 것이 아니다!!
+    dept.value = { ...n }
   },
   {
     immediate: true
   }
 )
 
-// watch(
-//   // selectedDept가 바뀔 때 마다 새로운 dept를 만들어내자!!
-//   props.selectedDept,
-//   (n) => {
-//     dept.deptno = n.deptno
-//     dept.dname = n.dname
-//     dept.loc = n.loc
-//   },
-//   {
-//     immediate: true
-//   }
-// )
-/*
+/* reactive Version : watcher
+watch(
+  // selectedDept가 바뀔 때 마다 새로운 dept를 만들어내자!!
+  props.selectedDept,
+  (n) => {
+    dept.deptno = n.deptno
+    dept.dname = n.dname
+    dept.loc = n.loc
+  },
+  {
+    immediate: true
+  }
+)
+*/
+
+/* watchEffect Version
 watchEffect(() => {
   // immediate : true를 기본으로 가지고 있고, Computed와 같이 여러개를 watch하고 변경을 탐지하고, 자연스럽게 CallBack된다.
   // 또한 다수의 값을 보고 있기 때문에, Old Value에 대한 값을 가지고 있을 수 없다. ( 무엇이 바뀔지 모르기 때문이다.)
@@ -52,14 +62,6 @@ watchEffect(() => {
   dept.loc = props.selectedDept.loc
 })
 */
-
-const emit = defineEmits(['modifyDept', 'removeDept'])
-const modifyDept = () => {
-  emit('modifyDept', dept.value)
-}
-const removeDept = () => {
-  emit('removeDept', dept.value)
-}
 </script>
 
 <template>
