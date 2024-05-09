@@ -1,5 +1,12 @@
 <script setup>
 import { RouterLink } from 'vue-router'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+
+const startQuiz = () => {
+  router.push('quiz/solve')
+}
 </script>
 
 <template>

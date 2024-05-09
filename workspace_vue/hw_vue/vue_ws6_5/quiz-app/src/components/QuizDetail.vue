@@ -10,9 +10,7 @@ watch(
   (n) => {
     quiz.value = { ...n }
   },
-  {
-    immediate: true
-  }
+  { immediate: true }
 )
 </script>
 

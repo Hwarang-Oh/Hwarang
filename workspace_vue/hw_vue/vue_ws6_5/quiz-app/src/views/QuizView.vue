@@ -1,12 +1,10 @@
 <script setup>
-import { ref, reactive, provide, readonly } from 'vue'
+import { reactive, provide, readonly } from 'vue'
 import { useRouter, RouterView } from 'vue-router'
 
 const router = useRouter()
 const selectedQuiz = reactive({})
 const quiz = reactive({})
-const deleteQuizPk = ref(0)
-const type = ref('')
 
 const quizList = reactive([
   {
@@ -39,34 +37,45 @@ const quizList = reactive([
 ])
 
 provide('res', {
-  quiz: readonly(quiz),
+  quiz: quiz,
   quizList: readonly(quizList),
-  selectedQuiz: readonly(selectedQuiz),
-  deleteQuizPk: readonly(deleteQuizPk),
-  type: readonly(type)
+  selectedQuiz: readonly(selectedQuiz)
 })
 
+const restoreQuizPk = () => {
+  for (const idx in quizList) {
+    quizList[idx].pk = parseInt(idx) + 1
+  }
+}
+
 const createQuiz = (payload) => {
-  type.value = 'create'
-  quiz.pk = payload.pk
+  quiz.pk = quizList.length + 1
   quiz.question = payload.question
   quiz.answer = payload.answer
+  quizList.push({ ...quiz })
   router.push('/quiz/list')
 }
 
 const modifyQuiz = (payload) => {
-  type.value = 'modify'
-  quiz.pk = payload.pk
-  quiz.question = payload.question
-  quiz.answer = payload.answer
+  for (const idx in quizList) {
+    if (quizList[idx].pk == payload.pk) {
+      quizList[idx].question = payload.question
+      quizList[idx].answer = payload.answer
+      break
+    }
+  }
   router.push('/quiz/list')
 }
 
 const deleteQuiz = (payload) => {
-  console.log(payload)
-  deleteQuizPk.value = payload
-  console.log(deleteQuizPk)
-  router.push('/quiz/list')
+  for (const idx in quizList) {
+    if (quizList[idx].pk === payload) {
+      quizList.splice(idx, 1)
+      restoreQuizPk()
+      break
+    }
+  }
+  router.replace('/quiz/list')
 }
 
 const getDetail = (payload) => {

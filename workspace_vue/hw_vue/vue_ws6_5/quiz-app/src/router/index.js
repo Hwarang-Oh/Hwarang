@@ -32,6 +32,11 @@ const router = createRouter({
           path: 'detail/:pk',
           name: 'quiz_detail',
           component: () => import('@/components/QuizDetail.vue')
+        },
+        {
+          path: 'solve',
+          name: 'quiz_solve',
+          component: () => import('@/components/QuizSolve.vue')
         }
       ]
     }

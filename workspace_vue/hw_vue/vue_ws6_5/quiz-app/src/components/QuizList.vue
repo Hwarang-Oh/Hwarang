@@ -1,15 +1,15 @@
 <script setup>
 import Quiz from './Quiz.vue'
-import { computed, inject, ref, watch } from 'vue'
-import { useRouter } from 'vue-router'
+import { ref, watch, inject } from 'vue'
+import { useRouter, RouterLink } from 'vue-router'
 
 const router = useRouter()
-const newQuizPk = computed(() => quizList.length + 1)
+const { deleteQuizPk, quizList } = inject('res')
 const { getDetail } = inject('service')
-const { quiz, deleteQuizPk, type, quizList } = inject('res')
 const currentQuizList = ref([])
 
 watch(
+  // quizList를 복사하는 과정
   quizList,
   (n) => {
     currentQuizList.value = n
@@ -23,33 +23,6 @@ const pickQuiz = (index) => {
   getDetail({ data: currentQuizList.value[index] })
   router.push(`/quiz/detail/${currentQuizList.value[index].pk}`)
 }
-
-watch(
-  quiz,
-  (n) => {
-    if (type.value === 'create') {
-      n.pk = newQuizPk
-      quizList.push({ ...n })
-    } else {
-      for (const idx in quizList) {
-        if (quizList[idx].pk == n.pk) {
-          quizList[idx].question = n.question
-          quizList[idx].answer = n.answer
-          break
-        }
-      }
-    }
-  },
-  {
-    immediate: true
-  }
-)
-watch(deleteQuizPk, (n) => {
-  const index = quizList.findIndex((item) => item.pk === n)
-  if (index !== -1) {
-    quizList.splice(index, 1)
-  }
-})
 </script>
 
 <template>
@@ -59,6 +32,15 @@ watch(deleteQuizPk, (n) => {
       <header class="bg-orange-500 text-white text-center p-4 rounded-t-lg">
         <h1 class="font-bold text-2xl">Quiz List</h1>
       </header>
+      <footer class="bg-gray-800 text-white text-center p-2 mt-4 rounded-md">
+        <nav class="flex justify-center space-x-2">
+          <router-link to="/" class="hover:underline">Home</router-link>
+          <span>|</span>
+          <router-link to="/quiz/list" class="hover:underline">Quiz List</router-link>
+          <span>|</span>
+          <router-link to="/quiz/create" class="hover:underline">Quiz Create</router-link>
+        </nav>
+      </footer>
 
       <!-- Quiz List Section -->
       <Quiz
@@ -71,7 +53,7 @@ watch(deleteQuizPk, (n) => {
       <!-- Footer Section -->
       <footer class="bg-gray-800 text-white text-center p-2 mt-4 rounded-md shadow-md">
         <nav class="flex justify-center space-x-2">
-          <a href="#" class="hover:underline">Home</a>
+          <router-link to="/">Home</router-link>
           <span>|</span>
           <a href="#" class="hover:underline">Contact</a>
         </nav>
