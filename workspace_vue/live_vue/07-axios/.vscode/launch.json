@@ -1,0 +1,25 @@
+{
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Spring Boot-VueApiApplication<vue>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "com.ssafy.vue.VueApiApplication",
+      "projectName": "vue",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env",
+      "vmArgs": " -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=51372 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dspring.jmx.enabled=true -Djava.rmi.server.hostname=localhost -Dspring.application.admin.enabled=true -Dspring.boot.project.name=vue"
+    },
+    {
+      "type": "java",
+      "name": "Spring Boot-WordCloudApplication<WordCloud>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "com.ssafy.word.WordCloudApplication",
+      "projectName": "WordCloud",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
+    }
+  ]
+}

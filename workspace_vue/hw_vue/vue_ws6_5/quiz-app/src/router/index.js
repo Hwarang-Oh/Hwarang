@@ -10,12 +10,30 @@ const router = createRouter({
       component: HomeView
     },
     {
-      path: '/about',
-      name: 'about',
+      path: '/quiz',
+      name: 'quiz',
+      redirect: 'quiz/list',
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import('../views/AboutView.vue')
+      component: () => import('@/views/QuizView.vue'),
+      children: [
+        {
+          path: 'list',
+          name: 'quiz_list',
+          component: () => import('@/components/QuizList.vue')
+        },
+        {
+          path: 'create',
+          name: 'quiz_create',
+          component: () => import('@/components/QuizCreate.vue')
+        },
+        {
+          path: 'detail/:pk',
+          name: 'quiz_detail',
+          component: () => import('@/components/QuizDetail.vue')
+        }
+      ]
     }
   ]
 })
