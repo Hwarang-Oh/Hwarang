@@ -1,3 +1,5 @@
+package tempDone;
+
 import java.io.*;
 
 public class B18921_비요뜨의징검다리건너기_오화랑 {
