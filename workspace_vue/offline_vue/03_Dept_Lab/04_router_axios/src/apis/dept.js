@@ -15,5 +15,17 @@ const register = (dept, success, fail) => {
 
 // 수정, 삭제, 상세조회
 
+const getDetail = (deptno, success, fail) => {
+  deptAPI.get(`/api/depts/${deptno}`, deptno).then(success).catch(fail)
+}
+
+const modify = (dept, success, fail) => {
+  deptAPI.put(`/api/depts/${dept.deptno}`, dept).then(success).catch(fail)
+}
+
+const remove = (deptno, success, fail) => {
+  deptAPI.delete(`/api/depts/${deptno}`, deptno).then(success).catch(fail)
+}
+
 // 항상 기능은 내보내야지, 외부에서 import가 가능하다. => import with 구조분해할당 or dot Operator
-export default { getList, register }
+export default { getList, register, getDetail, modify, remove }

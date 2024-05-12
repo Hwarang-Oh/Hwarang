@@ -5,7 +5,6 @@ const { selectedDept } = inject('res')
 // const res = inject('res') => 객체 자체를 받아내서 dot 연산자로 접근해야 한다.
 const { modifyDept, removeDept } = inject('service')
 const dept = ref({})
-
 watch(
   selectedDept,
   (n) => {

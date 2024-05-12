@@ -1,5 +1,5 @@
 <script setup>
-import { reactive, ref, watch, inject } from 'vue'
+import { ref, watch, inject } from 'vue'
 import { useRouter } from 'vue-router'
 import deptAPI from '@/apis/dept'
 
@@ -15,16 +15,15 @@ const changeForm = () => {
   router.push('/dept/form')
   // 왜 /dept도 함께 push하는 것일까?
 }
-
-const pickDept = (index) => {
-  changeMode({ data: depts[index] })
-  router.push(`/dept/detail/${depts[index].deptno}`)
-}
-
 // 240509 추가
-
 // API 호출 -> getList ( success callBack, fail CallBack )
 // 한 번만 일어나는 형태가 아님 -> 여러번 일어나기에, Method화 and watch에 넣어주기!!
+
+const pickDept = (index) => {
+  // changeMode({ data: depts[index] })
+  router.push(`/dept/detail/${depts.value[index].deptno}`)
+}
+
 const getDepts = () => {
   deptAPI.getList(
     ({ data }) => (depts.value = data),
