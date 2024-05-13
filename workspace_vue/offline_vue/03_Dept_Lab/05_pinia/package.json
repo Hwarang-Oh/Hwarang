@@ -1,5 +1,5 @@
 {
-  "name": "04_router_axios",
+  "name": "05_pinia",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -13,6 +13,7 @@
   "dependencies": {
     "axios": "^1.6.8",
     "bootstrap": "^5.3.3",
+    "pinia": "^2.1.7",
     "vue": "^3.4.21",
     "vue-router": "^4.3.0"
   },
