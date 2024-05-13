@@ -9,8 +9,10 @@ export const useDeptStore = defineStore('dept', () => {
 
   const getDepts = (success, fail) => {
     // BackEnd에서 List를 가져와야함. API를 호출해서 사용하자!
-    deptAPI.getList(({ response }) => {
-      orgDepts.value = response
+    deptAPI.getList(({ data }) => {
+      console.log('deptStore getDepts success......')
+      orgDepts.value = data
+      console.log(orgDepts.value)
       if (success) success()
     }, fail)
   }

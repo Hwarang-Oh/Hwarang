@@ -1,15 +1,14 @@
 <script setup>
-import { ref, watch, inject } from 'vue'
 import { useRouter } from 'vue-router'
-import deptAPI from '@/apis/dept'
 
 // 240513
 import { useDeptStore } from '@/stores/dept'
+import { storeToRefs } from 'pinia'
 const deptStore = useDeptStore()
+const { depts } = storeToRefs(deptStore)
+// Store가 Return하는 반응형 대상을 구조 분해 할당으로 얻어내면 된다.
 
 // 240513 End
-const { isReload } = inject('res')
-const depts = ref([])
 
 // Assignment
 const router = useRouter()
@@ -20,14 +19,6 @@ const changeForm = () => {
 const pickDept = (index) => {
   router.push(`/dept/detail/${depts.value[index].deptno}`)
 }
-
-const getDepts = () => {
-  deptAPI.getList(
-    ({ data }) => (depts.value = data),
-    () => console.log('목록 조회 실패!!')
-  )
-}
-watch(isReload, () => getDepts(), { immediate: true })
 </script>
 
 <template>

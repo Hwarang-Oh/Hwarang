@@ -18,7 +18,7 @@ import HelloWorld from './components/HelloWorld.vue'
     <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
 
     <div class="wrapper">
-      <HelloWorld msg="Ver3. Provide & Inject & Router" />
+      <HelloWorld msg="Ver4. Router & Axios" />
 
       <nav>
         <RouterLink to="/">Home</RouterLink>

@@ -1,0 +1,10 @@
+houseDeal
+deal_code, deal_amount, deal_year, deal_day, area, floor, cancel_deal_type, apt_code
+
+houseInfo
+apt_code, build_year, road_name, road_name_bobun, road_name_bubun, road_name_seq,
+road_name_basement_code, road_name_code, dong, bonbun, bubun, si_gun_gu_code,
+eub_myun_dong_code, dong_code, land_code, apartment_name, jibun, lng, lat
+
+Dong
+dong_code, si_do_name, gu_gun_Name, dong_name

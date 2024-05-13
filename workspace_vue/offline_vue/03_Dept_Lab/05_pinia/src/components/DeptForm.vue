@@ -1,16 +1,16 @@
 <script setup>
 import deptAPI from '@/apis/dept' // for Backend 통신
 import { reactive, inject } from 'vue'
+import { useDeptStore } from '@/stores/dept'
 const dept = reactive({ deptno: '', dname: '', loc: '' })
-// const emit = defineEmits(['registerDept'])
-const { reloadDepts } = inject('service')
+const { getDepts } = useDeptStore()
 
 const submit = () => {
   deptAPI.register(
     dept,
     () => {
       reset()
-      reloadDepts()
+      getDepts()
       // register에 성공하면 => Post 요청에 대해 성공 응답이 옴 -> 갱신이 되면서 List가 watch하고 있는 isReload가 바뀜 => 그에 따라 목록을 가져오는 요청을 다시 보냄
     },
     () => {
