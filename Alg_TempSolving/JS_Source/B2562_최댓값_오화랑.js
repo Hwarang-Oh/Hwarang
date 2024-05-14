@@ -1,13 +1,19 @@
-const meetingList = require('fs')
+const numList = require('fs')
   .readFileSync(process.platform === 'linux' ? '/dev/stdin' : './input.txt')
   .toString()
   .trim()
   .split('\n')
-  .map((eachLine) => eachLine.split(' ').map(Number));
+  .map(Number);
 
-const size = parseInt(meetingList[0], 10);
-console.log(size);
-meetingList.forEach((meeting) => console.log(meeting));
+let currentMax = Number.MIN_VALUE;
+let currentMaxIdx = 0;
+numList.forEach((num, index) => {
+  if (num > currentMax) {
+    currentMax = num;
+    currentMaxIdx = index + 1;
+  }
+});
+console.log(currentMax + '\n' + currentMaxIdx);
 
 // 1. 회의실 시간을 끝나는 시간을 기준으로 정렬한다.
 // 2. 끝나는 시간보다 시작하는 시간이 같거나 뒤에 있다면, 채택한다.
