@@ -1,7 +1,9 @@
+package tempDone;
+
 import java.io.*;
 import java.util.*;
 
-public class B13418_힉교탐방하기_오화랑 {
+public class B13418_힉교탐방하기_오화랑_Union_Find_Study {
     static class Edge {
         int from, to, isDown;
 

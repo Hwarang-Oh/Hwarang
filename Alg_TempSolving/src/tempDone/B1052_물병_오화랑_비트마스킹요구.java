@@ -1,7 +1,9 @@
+package tempDone;
+
 import java.io.*;
 import java.util.*;
 
-public class B1052_물병_오화랑 {
+public class B1052_물병_오화랑_비트마스킹요구 {
     static class Solution {
         int N, K, B;
         Stack<Integer> madeList = new Stack<>();
