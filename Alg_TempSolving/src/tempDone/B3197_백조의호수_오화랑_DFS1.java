@@ -1,8 +1,10 @@
+package tempDone;
+
 import java.io.*;
 import java.util.*;
 
 // https://www.acmicpc.net/problem/3197
-public class B3197_백조의호수_오화랑_DFS {
+public class B3197_백조의호수_오화랑_DFS1 {
     static class ice {
         int x, y;
 
