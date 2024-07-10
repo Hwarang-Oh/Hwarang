@@ -1,17 +1,17 @@
-import java.util.*;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int a = sc.nextInt();
-        int[] cnt = new int[10];
-        for (int i = 1; i <= a; i++) {
-            String temp = String.valueOf(i);
+        Scanner scanner = new Scanner(System.in);
+        String num = scanner.next();
 
-            for (int t = 0; t < temp.length(); t++) {
-                cnt[Character.getNumericValue(temp.charAt(t))]++;
-            }
+        long remainder = 0;
+        for (int i = 0; i < num.length(); i++) {
+            remainder = (remainder * 10 + (num.charAt(i) - '0')) % 20000303;
         }
-        System.out.println(Arrays.toString(cnt));
+
+        System.out.println(remainder);
+
+        scanner.close();
     }
 }
