@@ -16,9 +16,17 @@ import java.util.*;
 
 // https://www.acmicpc.net/problem/16566
 public class B16566_카드게임_오화랑 {
+    static class pair {
+        int idx, val;
+
+        public pair(int idx, int val) {
+            this.idx = idx;
+            this.val = val;
+        }
+    }
+
     static class Solution {
         int N, M, K;
-        boolean[] visited;
         TreeSet<Integer> cardList = new TreeSet<>();
 
         void run() throws IOException {
@@ -28,7 +36,7 @@ public class B16566_카드게임_오화랑 {
             this.N = Integer.parseInt(st.nextToken());
             this.M = Integer.parseInt(st.nextToken());
             this.K = Integer.parseInt(st.nextToken());
-            this.visited = new boolean[this.N];
+            pair upperB = new pair(0, 0);
 
             st = new StringTokenizer(input.readLine());
             for (int i = 0; i < this.M; i++)
@@ -38,17 +46,16 @@ public class B16566_카드게임_오화랑 {
             st = new StringTokenizer(input.readLine());
             for (int i = 0; i < this.K; i++) {
                 target = Integer.parseInt(st.nextToken());
-                if (cardList.last() > target) {
-                    choose = cardList.higher(target);
-                    while (visited[choose]) {
-                        choose = cardList.higher(choose);
+                if (target > upperB)
+
+                    if (cardList.last() > target) {
+                        choose = cardList.higher(target);
+
+                        sb.append(choose).append("\n");
+                    } else {
+                        choose = cardList.pollFirst();
+                        sb.append(choose).append("\n");
                     }
-                    sb.append(choose).append("\n");
-                    visited[choose] = true;
-                } else {
-                    choose = cardList.pollFirst();
-                    sb.append(choose).append("\n");
-                }
             }
             System.out.print(sb);
         }

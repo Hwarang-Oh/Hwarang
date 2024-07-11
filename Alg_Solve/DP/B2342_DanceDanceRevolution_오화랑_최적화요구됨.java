@@ -1,5 +1,3 @@
-package tempDone;
-
 import java.io.*;
 import java.util.*;
 // DDR -> 하나의 중점을 기준으로 위 / 아래 / 왼쪽 / 오른쪽으로 연결되어 있음
@@ -12,7 +10,7 @@ import java.util.*;
 // 2 : (2, 0, 5), (1, 2, 4), (2, 1, 4), (2, 0, 5) => 
 // 3 : (2, 0, 6), (2, 2, 7) ... 
 
-public class B2342_DanceDanceRevolution_오화랑_최적화요구됨 {
+public class B2342_DanceDanceRevolution_오화랑 {
     static class pair {
         int x, y, z;
 
