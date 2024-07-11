@@ -1,11 +1,25 @@
-const input = require('fs')
-  .readFileSync(process.platform === 'linux' ? '/dev/stdin' : './input.txt')
-  .toString()
-  .trim();
+const fs = require('fs');
 
-const N = parseInt(input);
-let sum1 = (N * (N + 1)) / 2;
-let sum2 = Math.pow(sum1, 2);
-let sum3 = sum2;
-let a = [sum1, sum2, sum3];
-console.log(a.join('\n'));
+// 데이터 생성
+const fline = [1000000, 20000, 10000];
+const arr = [];
+const arr2 = [];
+
+for (let index = 1; index <= 20000; index++) {
+  arr.push(index);
+}
+for (let index = 1; index <= 5000; index++) {
+  arr2.push(4);
+  arr2.push(1);
+  arr2.push(1);
+  arr2.push(3);
+  arr2.push(8);
+}
+
+// 결과 문자열 생성
+const result = [fline.join(' '), arr.join(' '), arr2.join(' ')].join('\n');
+
+// 파일에 저장
+fs.writeFileSync('output.txt', result);
+
+console.log('Data has been written to output.txt');
