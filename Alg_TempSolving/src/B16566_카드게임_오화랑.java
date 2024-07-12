@@ -53,7 +53,7 @@ public class B16566_카드게임_오화랑 {
 
                         sb.append(choose).append("\n");
                     } else {
-                        choose = cardList.pollFirst();
+                        choose = cardList.first();
                         sb.append(choose).append("\n");
                     }
             }
