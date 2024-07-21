@@ -15,8 +15,21 @@
 출력
 1행: N의 올바른 값입니다.
 */
+// 14 -> 1110 , 112
+// 1110 -> 0110, 1010, 1100, 1111 => 6, 8, 12, 15 ( 14 )
+// 112 (14)-> 212, 122, 111 -> 14,
+// 0 1 2, 10, 11, 12, 20, 21, 22, 100, 101, 102, 110, 111 ( 13 ), 112 ( 14 ), 120, 121, 122 (17), 200, 201, 202, 210, 211, 212 ( 23 ), 220, 221, 222, 300
+// => 13 14 17 23
+// 6, 8, 12, 15, 14
+// 13, 14 17, 23
+// => 14가 선택되어야 함.
 const target = require('fs')
   .readFileSync(process.platform === 'linux' ? '/dev/stdin' : './input.txt')
   .toString()
   .trim()
-  .split(' ');
+  .split('\n');
+
+console.log(target);
+let twoDigit = input[0];
+let threeDigit = input[1];
+for (let i = 0; i < twoDigit.length; i++) String.fromCodePoint;
