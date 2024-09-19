@@ -17,6 +17,17 @@ const br = readline.createInterface({
   output: process.stdout,
 });
 
+/**
+ * IMP : JavaScript reduce() 함수
+ * * JavaScript의 reduce() 함수는 배열의 각 요소에 대해 콜백 함수를 실행하여, 배열을 하나의 값으로 줄이는 역할
+ */
+
+const numbers = [1, 2, 3, 4, 5];
+const sum = numbers.reduce((accumulator, currentValue) => {
+  return accumulator + currentValue;
+}, 0);
+console.log(sum); // 출력: 15
+
 let n = 0;
 let lineCount = -1;
 br.on('line', (line) => {
