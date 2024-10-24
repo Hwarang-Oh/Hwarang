@@ -18,59 +18,57 @@ import java.util.*;
  */
 
 public class B1325_효율적인해킹_오화랑 {
-    static class relationState {
-        HashSet<Integer> trustToList;
-        HashSet<Integer> trustFromList;
-
-        public relationState(int i) {
-            this.trustToList = new HashSet<>();
-            this.trustToList.add(i);
-            this.trustFromList = new HashSet<>();
-        }
-
-        public String toString() {
-            return "trustToList : " + trustToList.toString() + ", trustFromList : " + trustFromList.toString();
-        }
-    }
-
     static class Solution {
         int N, M, MAX;
-        ArrayList<Integer> resultList = new ArrayList<>();
-        ArrayList<relationState> network = new ArrayList<>();
+        boolean[] visited;
+        Queue<Integer> result = new ArrayDeque<>();
+        Queue<Integer> queue = new ArrayDeque<>();
+        ArrayList<Integer>[] network;
 
         void run() throws IOException {
             BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
             StringTokenizer st = new StringTokenizer(input.readLine());
+            StringBuilder sb = new StringBuilder();
             N = Integer.parseInt(st.nextToken());
             M = Integer.parseInt(st.nextToken());
-            for (int i = 0; i <= N; i++)
-                network.add(new relationState(i));
+            network = new ArrayList[N + 1];
+            for (int i = 1; i <= N; i++)
+                network[i] = new ArrayList<>();
 
-            int from, to, currentSize;
+            int from, to;
             for (int i = 0; i < M; i++) {
                 st = new StringTokenizer(input.readLine());
                 from = Integer.parseInt(st.nextToken());
                 to = Integer.parseInt(st.nextToken());
-                if (!network.get(to).trustFromList.contains(from)) {
-                    // 3 -> 1 ( 3이 1을 신뢰한다 )
-                    // x - > 3 ( x가 3을 신뢰한다 => x -> 1을 신뢰하는 셈 )
-                    network.get(to).trustFromList.addAll(network.get(from).trustFromList);
-                }
+                network[to].add(from);
             }
 
-            for (relationState each : network)
-                System.out.println(each);
-
-            // int from, to;
-            // for (int i = 0; i < M; i++) {
-            // st = new StringTokenizer(input.readLine());
-            // from = Integer.parseInt(st.nextToken());
-            // to = Integer.parseInt(st.nextToken());
-            // if (!network.get(to).bList.contains(from)) {
-            // network.get(to).bList.add(from);
-            // network.get(from).canHackNum += network.get
-            // }
-            // }
+            for (int i = 1; i <= N; i++) {
+                visited = new boolean[N + 1];
+                int eachResult = 1;
+                visited[i] = true;
+                queue.offer(i);
+                while (!queue.isEmpty()) {
+                    int current = queue.poll();
+                    for (int next : network[current]) {
+                        if (visited[next])
+                            continue;
+                        eachResult++;
+                        visited[next] = true;
+                        queue.offer(next);
+                    }
+                }
+                if (eachResult == MAX)
+                    result.offer(i);
+                else if (eachResult > MAX) {
+                    MAX = eachResult;
+                    result.clear();
+                    result.offer(i);
+                }
+            }
+            while (!result.isEmpty())
+                sb.append(result.poll() + " ");
+            System.out.println(sb);
         }
     }
 
