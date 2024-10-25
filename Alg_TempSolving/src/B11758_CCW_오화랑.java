@@ -11,9 +11,9 @@ import java.util.*;
 
 public class B11758_CCW_오화랑 {
     static class Pair {
-        int x, y;
+        double x, y;
 
-        public Pair(int x, int y) {
+        public Pair(double x, double y) {
             this.x = x;
             this.y = y;
         }
@@ -25,11 +25,11 @@ public class B11758_CCW_오화랑 {
 
         void run() throws IOException {
             BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
-            int eachX, eachY;
+            double eachX, eachY;
             for (int i = 1; i <= 3; i++) {
                 st = new StringTokenizer(input.readLine());
-                eachX = Integer.parseInt(st.nextToken());
-                eachY = Integer.parseInt(st.nextToken());
+                eachX = Double.parseDouble(st.nextToken());
+                eachY = Double.parseDouble(st.nextToken());
                 if (i == 1)
                     p1 = new Pair(eachX, eachY);
                 else if (i == 2)
@@ -41,23 +41,42 @@ public class B11758_CCW_오화랑 {
         }
 
         int getClockValue(Pair p1, Pair p2, Pair p3) {
-            if ((p2.x - p1.x) == 0) {
-                if (p1.x > p3.x)
+            if (p1.x == p2.x) {
+                if (p1.y > p2.y) {
+                    if (p3.x > p1.x)
+                        return 1;
+                    else if (p3.x == p1.x)
+                        return 0;
+                    else
+                        return -1;
+                } else {
+                    if (p3.x > p1.x)
+                        return -1;
+                    else if (p3.x == p1.x)
+                        return 0;
+                    else
+                        return 1;
+                }
+            }
+
+            double deg = (p2.y - p1.y) / (p2.x - p1.x);
+            double stand = deg * p3.x - deg * p1.x + p1.y;
+
+            if (p1.x > p2.x) {
+                if (stand > p3.y)
                     return 1;
-                else if (p1.x == p3.x)
+                else if (stand == p3.y)
                     return 0;
                 else
                     return -1;
+            } else {
+                if (stand > p3.y)
+                    return -1;
+                else if (stand == p3.y)
+                    return 0;
+                else
+                    return 1;
             }
-
-            int deg = (p2.y - p1.y) / (p2.x - p1.x);
-            int stand = deg * p3.x - deg * p1.x + p1.y;
-            if (stand > p3.y)
-                return -1;
-            else if (stand == p3.y)
-                return 0;
-            else
-                return 1;
         }
     }
 
