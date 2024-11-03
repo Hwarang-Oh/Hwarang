@@ -20,62 +20,62 @@ import java.util.*;
  */
 
 public class B1325_효율적인해킹_오화랑 {
-
     static class Solution {
-        int N, M, MAXHACK;
-        ArrayList<ArrayList<Integer>> graph = new ArrayList<>();
-        Queue<Integer> queue = new ArrayDeque<>();
-        int[] howMuch, result;
+        int N, M, MAX;
         boolean[] visited;
+        Queue<Integer> result = new ArrayDeque<>();
+        Queue<Integer> queue = new ArrayDeque<>();
+        ArrayList<Integer>[] network;
 
         void run() throws IOException {
             BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
             StringTokenizer st = new StringTokenizer(input.readLine());
+            StringBuilder sb = new StringBuilder();
             N = Integer.parseInt(st.nextToken());
             M = Integer.parseInt(st.nextToken());
-            howMuch = new int[N + 1];
-            result = new int[N + 1];
-            visited = new boolean[N + 1];
-
-            for (int i = 0; i <= N; i++) {
-                graph.add(new ArrayList<>());
-            }
+            network = new ArrayList[N + 1];
+            for (int i = 1; i <= N; i++)
+                network[i] = new ArrayList<>();
 
             int from, to;
             for (int i = 0; i < M; i++) {
                 st = new StringTokenizer(input.readLine());
                 from = Integer.parseInt(st.nextToken());
                 to = Integer.parseInt(st.nextToken());
-                graph.get(to).add(from);
+                network[to].add(from);
             }
 
             for (int i = 1; i <= N; i++) {
-                if (visited[i])
-                    continue;
-                int count = 0;
-                queue.offer(i);
+                visited = new boolean[N + 1];
+                int eachResult = 1;
                 visited[i] = true;
+                queue.offer(i);
                 while (!queue.isEmpty()) {
                     int current = queue.poll();
-                    count++;
-                    for (int next : graph.get(current)) {
-                        if (visited[next] && howMuch[next] > howMuch[current])
+                    for (int next : network[current]) {
+                        if (visited[next])
                             continue;
-                        queue.offer(next);
-                        howMuch[next] = howMuch[current] + 1;
+                        eachResult++;
                         visited[next] = true;
+                        queue.offer(next);
                     }
                 }
-                result[i] = count;
+                if (eachResult == MAX)
+                    result.offer(i);
+                else if (eachResult > MAX) {
+                    MAX = eachResult;
+                    result.clear();
+                    result.offer(i);
+                }
             }
-            for (int i = 0; i <= N; i++) {
-                System.out.println("i : " + i + " , result :" + result[i]);
-            }
+            while (!result.isEmpty())
+                sb.append(result.poll() + " ");
+            System.out.println(sb);
         }
     }
 
     public static void main(String[] args) throws IOException {
-        Solution solution = new Solution();
-        solution.run();
+        Solution Solution = new Solution();
+        Solution.run();
     }
 }
