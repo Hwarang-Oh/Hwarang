@@ -37,16 +37,78 @@ public class B15686_치킨배달_오화랑 {
 
     static class Solution {
         int N, M;
-        int[][] Map;
+        int totalGlobalDist = Integer.MAX_VALUE;
+        ArrayList<Home> homeList = new ArrayList<>();
+        ArrayList<Chicken> chickenList = new ArrayList<>();
 
         void run() throws IOException {
             BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
             StringTokenizer st = new StringTokenizer(input.readLine());
             N = Integer.parseInt(st.nextToken());
             M = Integer.parseInt(st.nextToken());
-            Map = new int[N][M];
 
-            for 
+            int target;
+            int chickenNum = 0;
+            for (int i = 0; i < N; i++) {
+                st = new StringTokenizer(input.readLine());
+                for (int j = 0; j < N; j++) {
+                    target = Integer.parseInt(st.nextToken());
+                    if (target == 1)
+                        homeList.add(new Home(i, j));
+                    else if (target == 2) {
+                        chickenList.add(new Chicken(i, j, false));
+                        chickenNum++;
+                    }
+                }
+            }
+            selectChicken(0, 0, chickenNum);
+            System.out.println(totalGlobalDist);
+        }
+
+        /**
+         * IMP : Combination으로 Chicken 집을 선택합니다. M개 선택
+         * ! : 최대 M개인데 왜 M개를 선택하는가? => 최소 Dist가 M개 미만에서 결정 나도, M개 선택에서 Dist가 늘어나는 것은
+         * 불가능하기 때문에 가능함.
+         * 
+         * @param sIndex
+         * @param count
+         * @param chickenNum
+         */
+        void selectChicken(int sIndex, int count, int chickenNum) {
+            if (count == M) {
+                totalGlobalDist = Math.min(totalGlobalDist, getChickenDistance());
+            }
+
+            Chicken each;
+            for (int i = sIndex; i < chickenNum; i++) {
+                each = chickenList.get(i);
+                if (each.selected)
+                    continue;
+                each.selected = true;
+                selectChicken(i + 1, count + 1, chickenNum);
+                each.selected = false;
+            }
+        }
+
+        /**
+         * IMP : 선택된 Chicken 집에 대한 Dist를 구한다.
+         * 
+         * @return totalMin
+         */
+        int getChickenDistance() {
+            int totalMin = 0;
+            int currentMin, currentDist;
+            for (Home eachHome : homeList) {
+                currentMin = Integer.MAX_VALUE;
+                for (Chicken eachChicken : chickenList) {
+                    if (!eachChicken.selected)
+                        continue;
+                    currentDist = Math.abs(eachHome.x - eachChicken.x) + Math.abs(eachHome.y - eachChicken.y);
+                    currentMin = Math.min(currentMin, currentDist);
+                }
+                totalMin += currentMin;
+            }
+            return totalMin;
         }
     }
 
